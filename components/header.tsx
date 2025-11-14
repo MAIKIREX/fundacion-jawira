@@ -25,11 +25,15 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <div className="relative w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center overflow-hidden flex-shrink-0">
-              <svg viewBox="0 0 100 100" className="w-8 h-8">
-                <path d="M30 40 Q50 50 30 60 Q50 65 70 55" fill="none" stroke="#0066cc" strokeWidth="3" />
-                <path d="M50 35 Q60 45 50 55 Q70 48 75 35" fill="none" stroke="#00aa66" strokeWidth="3" />
-              </svg>
+            <div className="relative w-16 h-16 flex-shrink-0">
+              <Image
+                src="/logo/logo.jpeg"
+                alt="Logotipo de Fundación Jawira"
+                fill
+                sizes="64px"
+                className="object-contain"
+                priority
+              />
             </div>
             <div className="hidden sm:flex flex-col">
               <span className="text-sm font-bold text-primary">Fundación</span>
