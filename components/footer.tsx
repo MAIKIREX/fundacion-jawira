@@ -76,12 +76,12 @@ export default function Footer() {
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <a href="mailto:info@fundacionjawira.org" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
-                  info@fundacionjawira.org
+                  fundacion.jawira@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span className="text-primary-foreground/80">+591 (2) XXXX XXXX</span>
+                <span className="text-primary-foreground/80">+591 64208172</span>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
