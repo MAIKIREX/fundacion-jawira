@@ -1,14 +1,25 @@
+import Image from 'next/image'
+
 import { Card } from '@/components/ui/card'
 import { Users, Building2, Briefcase } from 'lucide-react'
 
 export default function EquipoAliadosSection() {
   const teamMembers = [
-    { nombre: 'Miembro 1', rol: 'Dirección Ejecutiva', area: 'Gestión' },
-    { nombre: 'Miembro 2', rol: 'Coordinación de Educación', area: 'Educación' },
-    { nombre: 'Miembro 3', rol: 'Coordinación de Salud', area: 'Salud' },
-    { nombre: 'Miembro 4', rol: 'Coordinación de Tecnología', area: 'Tecnología' },
+    { nombre: 'Lic. Jose Tambo', rol: 'Director', area: 'Presidente Ejecutivo', image: '/images/jose_tambo.png' },
+    { nombre: 'Ing. Tupac Lima Chuquimia', rol: 'Coordinador de Proyectos', area: 'Tecnologia', image: '/images/tupac_lima.png' },
+    { nombre: 'Dr. Henrry Patty', rol: 'Coordinador de Proyectos', area: 'Salud', image: '/images/henrry_patty.png' },
+    { nombre: 'Abg. Angel Quispe', rol: 'Coordinador Juridico', area: 'Secretario General', image: '/images/angel_quispe.png' },
     { nombre: 'Miembro 5', rol: 'Responsable de Investigación', area: 'Investigación' },
     { nombre: 'Miembro 6', rol: 'Coordinador Territorial', area: 'Territorio' },
+  ]
+
+  const allies = [
+    { nombre: 'Fundación Qamañani Arka', image: '/images/logo_1.png' },
+    { nombre: 'Logo Aliado 2' },
+    { nombre: 'Logo Aliado 3' },
+    { nombre: 'Logo Aliado 4' },
+    { nombre: 'Logo Aliado 5' },
+    { nombre: 'Logo Aliado 6' },
   ]
 
   return (
@@ -40,13 +51,23 @@ export default function EquipoAliadosSection() {
                 key={member.nombre}
                 className="p-6 hover:shadow-lg transition-all text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-primary to-emerald-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Briefcase className="w-8 h-8 text-white" />
-                </div>
+                {member.image ? (
+                  <Image
+                    src={member.image}
+                    alt={`Foto de ${member.nombre}`}
+                    width={96}
+                    height={96}
+                    className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border border-primary/10 shadow-sm"
+                  />
+                ) : (
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-emerald-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <Briefcase className="w-8 h-8 text-white" />
+                  </div>
+                )}
                 <h3 className="font-bold text-primary mb-1">
                   {member.nombre}
                 </h3>
-                <p className="text-sm font-medium text-muted-foreground mb-2">
+                <p className="text-sm font-medium text-muted-foreground mb-1">
                   {member.rol}
                 </p>
                 <span className="inline-block text-xs bg-primary/10 text-primary px-3 py-1 rounded-full">
@@ -84,17 +105,27 @@ export default function EquipoAliadosSection() {
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((index) => (
+            {allies.map((ally, index) => (
               <Card
-                key={index}
+                key={ally.nombre}
                 className="h-32 flex items-center justify-center bg-muted/50 hover:bg-muted transition-colors"
               >
                 <div className="text-center">
-                  <div className="p-3 bg-primary/10 rounded-lg w-fit mx-auto mb-3">
-                    <Building2 className="w-6 h-6 text-primary" />
-                  </div>
+                  {ally.image ? (
+                    <Image
+                      src={ally.image}
+                      alt={ally.nombre}
+                      width={140}
+                      height={80}
+                      className="mx-auto mb-3 h-16 w-auto object-contain"
+                    />
+                  ) : (
+                    <div className="p-3 bg-primary/10 rounded-lg w-fit mx-auto mb-3">
+                      <Building2 className="w-6 h-6 text-primary" />
+                    </div>
+                  )}
                   <p className="text-sm text-muted-foreground font-medium">
-                    Logo Aliado {index}
+                    {ally.nombre || `Logo Aliado ${index + 1}`}
                   </p>
                 </div>
               </Card>
