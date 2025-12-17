@@ -1,45 +1,47 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Check } from 'lucide-react'
+import Image from "next/image"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Check } from "lucide-react"
 
 const features = [
-  'Laboratorios de innovación tecnológica',
-  'Aulas TIC y programas de alfabetización digital',
-  'Telemedicina y programas de salud preventiva',
-  'Formación para comunidades vulnerables',
-  'Atención integral a niñas, niños y adolescentes',
-  'Servicios especializados en salud comunitaria'
+  "Laboratorios de innovación tecnológica",
+  "Aulas TIC y programas de alfabetización digital",
+  "Telemedicina y programas de salud preventiva",
+  "Formación para comunidades vulnerables",
+  "Atención integral a niñas, niños y adolescentes",
+  "Servicios especializados en salud comunitaria",
 ]
 
 export default function IntegralCenterSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-yellow-50">
+    <section className="py-20 md:py-28 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left: Content */}
           <div className="space-y-6">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">
-                Centro Integral JAWIRA
-              </h2>
-              <p className="text-lg text-foreground/70">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">Centro Integral JAWIRA</h2>
+              <p className="text-lg md:text-xl text-muted-foreground">
                 Un espacio transformador que integra servicios de tecnología, educación y salud
               </p>
             </div>
 
-            <p className="text-foreground/80 leading-relaxed">
-              El Centro Integral JAWIRA será un proyecto piloto ubicado en La Paz que integrará de manera holística servicios de tecnología productiva, educación de calidad y atención en salud. Este modelo se diseña como replicable para expandir su impacto a otras regiones, generando oportunidades de desarrollo para comunidades vulnerables, especialmente en zonas urbanas, periurbanas y rurales.
+            <p className="text-base md:text-lg text-foreground/80 leading-relaxed">
+              El Centro Integral JAWIRA será un proyecto piloto ubicado en La Paz que integrará de manera holística
+              servicios de tecnología productiva, educación de calidad y atención en salud. Este modelo se diseña como
+              replicable para expandir su impacto a otras regiones, generando oportunidades de desarrollo para
+              comunidades vulnerables, especialmente en zonas urbanas, periurbanas y rurales.
             </p>
 
-            <div className="space-y-3">
-              <p className="font-semibold text-primary mb-4">Servicios principales:</p>
+            <div className="space-y-4">
+              <p className="font-semibold text-lg text-primary">Servicios principales:</p>
               <ul className="grid grid-cols-1 gap-3">
                 {features.map((feature, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 text-white" />
+                    <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                      <Check className="w-4 h-4 text-secondary-foreground" />
                     </div>
                     <span className="text-foreground/80">{feature}</span>
                   </li>
@@ -47,22 +49,32 @@ export default function IntegralCenterSection() {
               </ul>
             </div>
 
-            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg mt-6">
+            <Button
+              asChild
+              className="bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold rounded-xl shadow-md hover:shadow-lg transition-all mt-6"
+            >
               <Link href="/centro-integral">Conoce el Centro Integral</Link>
             </Button>
           </div>
 
           {/* Right: Visual */}
           <div className="relative">
-            <div className="bg-gradient-to-br from-blue-100 via-green-100 to-yellow-100 rounded-2xl p-8 md:p-12 shadow-lg border-2 border-yellow-300 h-96 flex items-center justify-center">
-              <div className="text-center space-y-6">
-                <div className="text-5xl font-bold text-gradient bg-gradient-to-r from-primary via-teal-500 to-green-600 bg-clip-text text-transparent">
-                  CENTRO<br />INTEGRAL
+            <div className="relative rounded-3xl overflow-hidden shadow-xl border-2 border-muted h-[480px]">
+              <Image
+                src="/integrated-center-facility-services-building-modern.png"
+                alt="Centro Integral JAWIRA"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <div className="text-3xl md:text-4xl font-bold leading-tight mb-3">
+                  CENTRO
+                  <br />
+                  INTEGRAL
                 </div>
-                <div className="text-yellow-600 font-semibold text-lg">JAWIRA</div>
-                <p className="text-sm text-foreground/70 max-w-xs mx-auto">
-                  Tecnología · Educación · Salud
-                </p>
+                <div className="text-secondary font-bold text-xl mb-2">JAWIRA</div>
+                <p className="text-sm text-white/90 font-medium">Tecnología · Educación · Salud</p>
               </div>
             </div>
           </div>

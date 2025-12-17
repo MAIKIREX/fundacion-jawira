@@ -1,47 +1,47 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { Mail, MapPin, Phone } from 'lucide-react'
+import Link from "next/link"
+import { Mail, MapPin, Phone } from "lucide-react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
     about: [
-      { label: 'La Fundación', href: '/fundacion' },
-      { label: 'Áreas de trabajo', href: '/areas-de-trabajo' },
-      { label: 'Centro Integral', href: '/centro-integral' },
+      { label: "La Fundación", href: "/fundacion" },
+      { label: "Áreas de trabajo", href: "/areas-de-trabajo" },
+      { label: "Centro Integral", href: "/centro-integral" },
     ],
     resources: [
-      { label: 'Transparencia', href: '/transparencia' },
-      { label: 'Contacto', href: '/contacto' },
-      { label: 'Términos de uso', href: '/terminos' },
-    ]
+      { label: "Transparencia", href: "/transparencia" },
+      { label: "Contacto", href: "/contacto" },
+      { label: "Términos de uso", href: "/terminos" },
+    ],
   }
 
   return (
-    <footer className="bg-gradient-to-r from-primary to-primary/90 text-primary-foreground">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <footer className="bg-primary text-primary-foreground">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         {/* Main Footer Content */}
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-4 gap-10 mb-10">
           {/* Column 1: Branding */}
           <div className="space-y-4">
             <div>
-              <h3 className="text-xl font-bold">Fundación JAWIRA</h3>
-              <p className="text-sm text-primary-foreground/80 mt-1">Río de oportunidades</p>
+              <h3 className="text-2xl font-bold">Fundación JAWIRA</h3>
+              <p className="text-sm text-primary-foreground/80 mt-2">Río de oportunidades</p>
             </div>
-            <div className="text-sm text-primary-foreground/80 space-y-2">
-              <p>La Paz, Bolivia</p>
+            <div className="text-sm text-primary-foreground/80 space-y-1">
+              <p className="font-medium">La Paz, Bolivia</p>
             </div>
           </div>
 
           {/* Column 2: About Links */}
           <div>
-            <h4 className="font-semibold mb-4">Sobre nosotros</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold text-lg mb-4">Sobre nosotros</h4>
+            <ul className="space-y-3">
               {footerLinks.about.map((link) => (
                 <li key={link.href}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
@@ -54,11 +54,11 @@ export default function Footer() {
 
           {/* Column 3: Resources */}
           <div>
-            <h4 className="font-semibold mb-4">Recursos</h4>
-            <ul className="space-y-2">
+            <h4 className="font-semibold text-lg mb-4">Recursos</h4>
+            <ul className="space-y-3">
               {footerLinks.resources.map((link) => (
                 <li key={link.href}>
-                  <Link 
+                  <Link
                     href={link.href}
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
@@ -71,21 +71,28 @@ export default function Footer() {
 
           {/* Column 4: Contact */}
           <div>
-            <h4 className="font-semibold mb-4">Contacto</h4>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2">
-                <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@fundacionjawira.org" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+            <h4 className="font-semibold text-lg mb-4">Contacto</h4>
+            <ul className="space-y-4 text-sm">
+              <li className="flex items-start gap-3">
+                <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <a
+                  href="mailto:fundacion.jawira@gmail.com"
+                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+                >
                   fundacion.jawira@gmail.com
                 </a>
               </li>
-              <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <li className="flex items-start gap-3">
+                <Phone className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <span className="text-primary-foreground/80">+591 64208172</span>
               </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span className="text-primary-foreground/80">La Paz, Zona Gran Poder<br />Bolivia</span>
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
+                <span className="text-primary-foreground/80">
+                  La Paz, Zona Gran Poder
+                  <br />
+                  Bolivia
+                </span>
               </li>
             </ul>
           </div>
@@ -97,10 +104,16 @@ export default function Footer() {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-primary-foreground/80">
           <p>© {currentYear} Fundación JAWIRA. Todos los derechos reservados.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <a href="#" className="hover:text-primary-foreground transition-colors">Facebook</a>
-            <a href="#" className="hover:text-primary-foreground transition-colors">Instagram</a>
-            <a href="#" className="hover:text-primary-foreground transition-colors">LinkedIn</a>
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <a href="#" className="hover:text-primary-foreground transition-colors">
+              Facebook
+            </a>
+            <a href="#" className="hover:text-primary-foreground transition-colors">
+              Instagram
+            </a>
+            <a href="#" className="hover:text-primary-foreground transition-colors">
+              LinkedIn
+            </a>
           </div>
         </div>
       </div>
