@@ -1,13 +1,28 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { Outfit } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
+})
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+})
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  weight: ["400", "500", "600", "700", "800"],
+})
 
 export const metadata: Metadata = {
-  title: 'Fundación JAWIRA - Tecnología, Educación y Salud',
+  title: 'Fundación JAWIRA — Tecnología, Educación y Salud',
   description: 'Fundación sin fines de lucro en La Paz, Bolivia dedicada al desarrollo integral mediante tecnología productiva, educación y salud',
   generator: 'v0.app',
   icons: {
@@ -35,10 +50,17 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es">
-      <body className={`font-sans antialiased`}>
-        {children}
-        <Analytics />
+    <html lang="es" className="scroll-smooth">
+      <body className={`${geist.variable} ${geistMono.variable} ${outfit.variable} font-sans antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )

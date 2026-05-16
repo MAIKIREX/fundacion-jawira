@@ -4,30 +4,38 @@ import { ArrowRight } from 'lucide-react'
 
 export default function AreasCtaSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-r from-blue-50 via-green-50 to-orange-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-          ¿Te gustaría colaborar en alguna de estas áreas?
-        </h2>
+    <section className="py-24 md:py-32 bg-background border-t border-border">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10">
         
-        <p className="text-lg text-foreground/70 mb-8 max-w-2xl mx-auto">
-          Somos una organización abierta a colaboración. Si eres voluntario/a, aliado institucional o donante interesado en apoyar alguno de nuestros ejes, nos encantaría conocerte.
+        <div className="space-y-4">
+          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            Colaboración
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-tight leading-[1.08]">
+            ¿Te gustaría sumarte <br className="hidden sm:block" />
+            a nuestra misión?
+          </h2>
+        </div>
+        
+        <p className="text-lg md:text-xl text-foreground/60 max-w-2xl mx-auto leading-relaxed font-light">
+          Somos una organización abierta a la colaboración. Si eres voluntario, aliado institucional o donante interesado en potenciar alguno de estos ejes, conversemos.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/contacto">
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-base rounded-lg inline-flex items-center gap-2 w-full sm:w-auto">
-              Quiero apoyar
-              <ArrowRight className="w-4 h-4" />
-            </Button>
-          </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <Button asChild variant="cta" size="lg">
+            <Link href="/contacto">
+              Contactar ahora
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
           
-          <Link href="/fundacion">
-            <Button variant="outline" className="border-2 border-primary text-primary hover:bg-primary/5 font-semibold px-8 py-6 text-base rounded-lg w-full sm:w-auto">
-              Conocer más sobre la Fundación
-            </Button>
-          </Link>
+          <Button asChild variant="outline" size="lg" className="border-2">
+            <Link href="/fundacion">
+              Conocer la fundación
+            </Link>
+          </Button>
         </div>
+        
       </div>
     </section>
   )

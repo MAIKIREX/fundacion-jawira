@@ -1,134 +1,122 @@
-'use client'
-
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Shield, Users, Heart } from 'lucide-react'
 
+const valores = [
+  { title: 'Integridad', descripcion: 'Actuar con honestidad, transparencia y coherencia en nuestras decisiones y acciones.' },
+  { title: 'Responsabilidad social', descripcion: 'Comprometerse con el bienestar de las comunidades y la sostenibilidad del planeta.' },
+  { title: 'Servicio', descripcion: 'Poner el bien común y las necesidades comunitarias al centro de nuestro trabajo.' },
+  { title: 'Respeto', descripcion: 'Reconocer la dignidad, derechos y diversidad de todas las personas.' },
+]
+
+const politicas = [
+  {
+    icon: Shield,
+    titulo: 'Política de protección de datos',
+    descripcion: 'Protección de información personal y confidencial de beneficiarios, aliados y colaboradores.',
+  },
+  {
+    icon: Users,
+    titulo: 'Política de prevención de violencia y acoso',
+    descripcion: 'Compromiso con espacios seguros, libres de violencia y discriminación en todas nuestras iniciativas.',
+  },
+  {
+    icon: Heart,
+    titulo: 'Código de ética institucional',
+    descripcion: 'Marco de principios y valores que guían el comportamiento y toma de decisiones de toda la organización.',
+  },
+]
+
+const principios = [
+  { title: 'No discriminación', descripcion: 'Acceso equitativo a nuestros servicios sin importar género, raza, religión u origen.' },
+  { title: 'Equidad de género', descripcion: 'Compromiso con la igualdad de derechos y oportunidades entre hombres y mujeres.' },
+  { title: 'Respeto a derechos humanos', descripcion: 'Protección y promoción de derechos fundamentales en todas nuestras iniciativas.' },
+  { title: 'Interculturalidad', descripcion: 'Reconocimiento y valoración de la diversidad cultural en La Paz y el Departamento.' },
+]
+
 export default function PoliticasPrincipiosSection() {
-  const politicas = [
-    {
-      icon: Shield,
-      titulo: 'Política de protección de datos',
-      descripcion: 'Protección de información personal y confidencial de beneficiarios, aliados y colaboradores.',
-      estado: 'En desarrollo',
-      badgeColor: 'bg-blue-100 text-blue-800'
-    },
-    {
-      icon: Users,
-      titulo: 'Política de prevención de violencia y acoso',
-      descripcion: 'Compromiso con espacios seguros, libres de violencia, discriminación y acoso en todas nuestras iniciativas.',
-      estado: 'En desarrollo',
-      badgeColor: 'bg-orange-100 text-orange-800'
-    },
-    {
-      icon: Heart,
-      titulo: 'Código de ética institucional',
-      descripcion: 'Marco de principios y valores que guían el comportamiento y toma de decisiones de toda la organización.',
-      estado: 'En desarrollo',
-      badgeColor: 'bg-green-100 text-green-800'
-    },
-  ]
-
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
+    <section className="py-24 md:py-32 bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-12">
-          {/* Header */}
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Políticas y principios relacionados con la transparencia
-            </h2>
-            <p className="text-lg text-foreground/70">
-              La transparencia de JAWIRA se apoya en sus valores institucionales y principios de no discriminación, equidad e inclusión.
-            </p>
-          </div>
 
-          {/* Valores Institucionales */}
-          <Card className="p-6 md:p-8 bg-gradient-to-r from-green-50 to-blue-50 border-2 border-green-200">
-            <h3 className="text-xl font-semibold text-primary mb-4">
-              Nuestros valores institucionales
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <p className="font-semibold text-foreground mb-2">✓ Integridad</p>
-                <p className="text-sm text-foreground/70">Actuar con honestidad, transparencia y coherencia en nuestras decisiones y acciones.</p>
-              </div>
-              <div>
-                <p className="font-semibold text-foreground mb-2">✓ Responsabilidad social</p>
-                <p className="text-sm text-foreground/70">Comprometerse con el bienestar de las comunidades y la sostenibilidad del planeta.</p>
-              </div>
-              <div>
-                <p className="font-semibold text-foreground mb-2">✓ Servicio</p>
-                <p className="text-sm text-foreground/70">Poner el bien común y las necesidades comunitarias al centro de nuestro trabajo.</p>
-              </div>
-              <div>
-                <p className="font-semibold text-foreground mb-2">✓ Respeto</p>
-                <p className="text-sm text-foreground/70">Reconocer la dignidad, derechos y diversidad de todas las personas.</p>
-              </div>
-            </div>
-          </Card>
-
-          {/* Políticas Futuras */}
-          <div className="space-y-6">
-            <h3 className="text-2xl font-bold text-primary text-center">
-              Políticas en desarrollo
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {politicas.map((politica, idx) => {
-                const Icon = politica.icon
-                return (
-                  <Card
-                    key={idx}
-                    className="p-6 bg-white border-2 border-gray-200 hover:shadow-md transition-all"
-                  >
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <Icon className="w-8 h-8 text-primary" />
-                        <Badge className={politica.badgeColor} variant="secondary">
-                          {politica.estado}
-                        </Badge>
-                      </div>
-
-                      <div>
-                        <h3 className="text-lg font-semibold text-foreground mb-2">
-                          {politica.titulo}
-                        </h3>
-                        <p className="text-sm text-foreground/70">
-                          {politica.descripcion}
-                        </p>
-                      </div>
-                    </div>
-                  </Card>
-                )
-              })}
-            </div>
-          </div>
-
-          {/* Principios */}
-          <Card className="p-6 md:p-8 bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-orange-200">
-            <h3 className="text-xl font-semibold text-primary mb-4">
-              Principios relacionados
-            </h3>
-            <ul className="space-y-2 text-foreground/70">
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-primary rounded-full"></span>
-                <span className="text-sm"><span className="font-semibold">No discriminación:</span> Acceso equitativo a nuestros servicios sin importar género, raza, religión u origen.</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-primary rounded-full"></span>
-                <span className="text-sm"><span className="font-semibold">Equidad de género:</span> Compromiso con la igualdad de derechos y oportunidades entre hombres y mujeres.</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-primary rounded-full"></span>
-                <span className="text-sm"><span className="font-semibold">Respeto a derechos humanos:</span> Protección y promoción de derechos fundamentales en todas nuestras iniciativas.</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-primary rounded-full"></span>
-                <span className="text-sm"><span className="font-semibold">Interculturalidad:</span> Reconocimiento y valoración de la diversidad cultural en La Paz y el Departamento.</span>
-              </li>
-            </ul>
-          </Card>
+        {/* Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            Marco ético
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight leading-tight mt-3">
+            Políticas y principios
+          </h2>
+          <p className="text-base text-primary-foreground/50 mt-4 max-w-xl mx-auto leading-relaxed">
+            La transparencia de JAWIRA se apoya en sus valores institucionales y principios de no discriminación, equidad e inclusión.
+          </p>
         </div>
+
+        {/* Values — gap-px grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-primary-foreground/10 rounded-2xl overflow-hidden mb-16">
+          {valores.map((valor, i) => (
+            <div key={i} className="bg-primary p-7 md:p-8 space-y-3">
+              <h3 className="text-base font-bold text-primary-foreground tracking-tight">
+                {valor.title}
+              </h3>
+              <p className="text-sm text-primary-foreground/45 leading-relaxed">
+                {valor.descripcion}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Policies in development */}
+        <div className="mb-16">
+          <h3 className="text-xs font-bold tracking-widest uppercase text-primary-foreground/30 mb-8">
+            Políticas en desarrollo
+          </h3>
+          <div className="grid md:grid-cols-3 gap-px bg-primary-foreground/10 rounded-2xl overflow-hidden">
+            {politicas.map((pol, i) => {
+              const Icon = pol.icon
+              return (
+                <div key={i} className="bg-primary p-7 md:p-8 space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-primary-foreground/8 flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-primary-foreground/70" />
+                    </div>
+                    <span className="text-[10px] font-bold tracking-widest uppercase text-primary-foreground/25">
+                      En desarrollo
+                    </span>
+                  </div>
+                  <h3 className="text-base font-bold text-primary-foreground tracking-tight">
+                    {pol.titulo}
+                  </h3>
+                  <p className="text-sm text-primary-foreground/45 leading-relaxed">
+                    {pol.descripcion}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Related principles */}
+        <div className="max-w-3xl">
+          <h3 className="text-xs font-bold tracking-widest uppercase text-primary-foreground/30 mb-6">
+            Principios relacionados
+          </h3>
+          <div className="space-y-0">
+            {principios.map((p, i) => (
+              <div
+                key={i}
+                className={`flex items-start gap-4 py-5 ${
+                  i !== 0 ? 'border-t border-primary-foreground/8' : ''
+                }`}
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0" />
+                <div>
+                  <span className="text-sm font-semibold text-primary-foreground">{p.title}: </span>
+                  <span className="text-sm text-primary-foreground/50">{p.descripcion}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   )

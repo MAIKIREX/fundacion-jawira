@@ -1,7 +1,5 @@
 "use client"
 
-import Image from "next/image"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, MapPin, Calendar } from "lucide-react"
 
 const stats = [
@@ -9,74 +7,69 @@ const stats = [
     icon: Users,
     value: "+2.800.000",
     label: "Población objetivo",
-    description: "En el Departamento de La Paz",
-    color: "text-primary",
-    bgColor: "bg-primary/10",
-    borderColor: "border-primary/20",
-    image: "/diverse-community-people-bolivia-population-group.png",
+    description: "Habitantes en el Departamento de La Paz con potencial de beneficiarse de nuestros programas.",
+    accentColor: "text-primary",
+    borderColor: "border-primary/30",
   },
   {
     icon: MapPin,
-    value: "3",
+    value: "3 zonas",
     label: "Áreas de cobertura",
-    description: "Urbana, periurbana y rural",
-    color: "text-secondary",
-    bgColor: "bg-secondary/10",
-    borderColor: "border-secondary/20",
-    image: "/urban-rural-landscape-bolivia-coverage-areas-map.png",
+    description: "Alcance en zonas urbanas, periurbanas y rurales del departamento para impacto integral.",
+    accentColor: "text-secondary",
+    borderColor: "border-secondary/30",
   },
   {
     icon: Calendar,
-    value: "2026-2034",
+    value: "2026–2034",
     label: "Horizonte de impacto",
-    description: "Fase inicial (2026-2028) y consolidación (2029-2034)",
-    color: "text-accent",
-    bgColor: "bg-accent/10",
-    borderColor: "border-accent/20",
-    image: "/timeline-planning-future-vision-growth-progress.png",
+    description: "Fase inicial de implementación (2026-2028) seguida de consolidación y expansión (2029-2034).",
+    accentColor: "text-accent",
+    borderColor: "border-accent/30",
   },
 ]
 
 export default function ImpactSection() {
   return (
-    <section className="py-20 md:py-28 bg-white">
+    <section className="py-24 md:py-32 bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">Impacto y alcance</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Números que reflejan nuestro compromiso con el desarrollo sostenible
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            Nuestro alcance
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight leading-tight mt-3">
+            Impacto y alcance
+          </h2>
+          <p className="text-base text-primary-foreground/50 mt-4 max-w-xl mx-auto leading-relaxed">
+            Números que reflejan nuestro compromiso con el desarrollo sostenible en Bolivia
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        {/* Stats Grid */}
+        <div className="grid md:grid-cols-3 gap-px bg-primary-foreground/10 rounded-2xl overflow-hidden">
           {stats.map((stat, i) => {
             const Icon = stat.icon
             return (
-              <Card
+              <div
                 key={i}
-                className={`border-2 ${stat.borderColor} hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white rounded-2xl overflow-hidden group`}
+                className="bg-primary p-8 md:p-10 flex flex-col items-center text-center space-y-4"
               >
-                <div className="relative h-32 overflow-hidden bg-muted">
-                  <Image src={stat.image || "/placeholder.svg"} alt={stat.label} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
-                  <div
-                    className={`absolute bottom-3 left-3 w-12 h-12 rounded-lg ${stat.bgColor} border-2 ${stat.borderColor} flex items-center justify-center bg-white/95 backdrop-blur-sm`}
-                  >
-                    <Icon className={`w-6 h-6 ${stat.color}`} />
-                  </div>
+                <div className={`w-12 h-12 rounded-xl bg-primary-foreground/8 flex items-center justify-center`}>
+                  <Icon className={`w-6 h-6 ${stat.accentColor === "text-primary" ? "text-primary-foreground" : stat.accentColor}`} />
                 </div>
-
-                <CardHeader className="space-y-3 pt-6">
-                  <div>
-                    <CardTitle className="text-3xl md:text-4xl text-primary mb-2">{stat.value}</CardTitle>
-                    <p className="text-base font-semibold text-foreground">{stat.label}</p>
-                  </div>
-                </CardHeader>
-
-                <CardContent>
-                  <p className="text-sm text-foreground/75 leading-relaxed">{stat.description}</p>
-                </CardContent>
-              </Card>
+                <div className="space-y-2">
+                  <p className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight">
+                    {stat.value}
+                  </p>
+                  <p className="text-sm font-semibold text-primary-foreground/80 tracking-wide">
+                    {stat.label}
+                  </p>
+                </div>
+                <p className="text-sm text-primary-foreground/45 leading-relaxed max-w-[32ch]">
+                  {stat.description}
+                </p>
+              </div>
             )
           })}
         </div>

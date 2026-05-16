@@ -8,20 +8,48 @@ import SupportSection from "@/components/support-section"
 import QuieroApoyarSection from "@/components/quiero-apoyar-section"
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
+import { ScrollReveal } from "@/components/ui/scroll-reveal"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <HeroSection />
-      <AboutSection />
-      <AxesSection />
-      <IntegralCenterSection />
-      <ImpactSection />
-      <SupportSection />
-      <QuieroApoyarSection />
-      <ContactSection />
-      <Footer />
+      
+      <ScrollReveal yOffset={20}>
+        <HeroSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <AboutSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <AxesSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <IntegralCenterSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <ImpactSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <SupportSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <QuieroApoyarSection />
+      </ScrollReveal>
+      
+      <ScrollReveal>
+        <ContactSection />
+      </ScrollReveal>
+
+      <ScrollReveal yOffset={20}>
+        <Footer />
+      </ScrollReveal>
     </main>
   )
 }

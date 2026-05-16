@@ -1,76 +1,80 @@
-'use client'
-
-import { Card } from '@/components/ui/card'
-import { CheckCircle } from 'lucide-react'
+const fases = [
+  {
+    periodo: '2026 – 2028',
+    titulo: 'Fase inicial y piloto',
+    objetivos: [
+      'Implementación del Centro Integral JAWIRA en La Paz',
+      'Puesta en marcha de programas en tecnología, educación y salud',
+      'Validación de metodologías y modelos de intervención',
+      'Construcción de alianzas iniciales con instituciones locales',
+      'Establecimiento de sistemas de monitoreo y evaluación',
+    ],
+  },
+  {
+    periodo: '2029 – 2034',
+    titulo: 'Fase de consolidación y expansión',
+    objetivos: [
+      'Ampliación de cobertura a más municipios del Departamento',
+      'Fortalecimiento y réplica del modelo del Centro Integral',
+      'Escalamiento de programas con resultados comprobados',
+      'Búsqueda de alianzas nacionales e internacionales',
+      'Consolidación como referencia de innovación social en la región',
+    ],
+  },
+]
 
 export default function HorizonteTemporalSection() {
-  const fases = [
-    {
-      periodo: '2026–2028',
-      titulo: 'Fase inicial y piloto',
-      objetivos: [
-        'Implementación del Centro Integral JAWIRA en La Paz',
-        'Puesta en marcha de programas en tecnología, educación y salud',
-        'Validación de metodologías y modelos de intervención',
-        'Construcción de alianzas iniciales con instituciones locales',
-        'Establecimiento de sistemas de monitoreo y evaluación',
-      ],
-    },
-    {
-      periodo: '2029–2034',
-      titulo: 'Fase de consolidación y expansión',
-      objetivos: [
-        'Ampliación de cobertura a más municipios del Departamento',
-        'Fortalecimiento y réplica del modelo del Centro Integral',
-        'Escalamiento de programas con resultados comprobados',
-        'Búsqueda de alianzas nacionales e internacionales',
-        'Consolidación como referencia de innovación social en la región',
-      ],
-    },
-  ]
-
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-blue-50/30 to-white">
+    <section className="py-24 md:py-32 bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-12">
-          {/* Header */}
-          <div className="space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Horizonte temporal 2026–2034
-            </h2>
-            <p className="text-lg text-foreground/70 max-w-2xl">
-              La Fundación JAWIRA planifica su trabajo en dos fases estratégicas que permiten crecer de manera ordenada y sostenible.
-            </p>
-          </div>
 
-          {/* Timeline */}
-          <div className="grid md:grid-cols-2 gap-8">
-            {fases.map((fase, index) => (
-              <Card
-                key={index}
-                className="border-2 border-primary/20 p-8 hover:shadow-lg transition-shadow"
-              >
-                <div className="space-y-6">
-                  <div>
-                    <span className="inline-block px-4 py-2 bg-yellow-100 text-primary font-semibold rounded-full text-sm mb-4">
-                      {fase.periodo}
-                    </span>
-                    <h3 className="text-2xl font-bold text-primary">{fase.titulo}</h3>
-                  </div>
-
-                  <div className="space-y-3">
-                    {fase.objetivos.map((objetivo, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                        <p className="text-foreground/80">{objetivo}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
+        {/* Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            Planificación estratégica
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight leading-tight mt-3">
+            Horizonte temporal 2026 – 2034
+          </h2>
+          <p className="text-base text-primary-foreground/50 mt-4 max-w-xl mx-auto leading-relaxed">
+            Dos fases estratégicas que permiten crecer de manera ordenada y sostenible.
+          </p>
         </div>
+
+        {/* Two phases — gap-px split */}
+        <div className="grid md:grid-cols-2 gap-px bg-primary-foreground/10 rounded-2xl overflow-hidden">
+          {fases.map((fase, index) => (
+            <div key={index} className="bg-primary p-8 md:p-10 space-y-8">
+              <div className="space-y-3">
+                <span className="text-xs font-bold tracking-widest text-secondary">
+                  {fase.periodo}
+                </span>
+                <h3 className="text-xl font-bold text-primary-foreground tracking-tight">
+                  {fase.titulo}
+                </h3>
+              </div>
+
+              <div className="space-y-4">
+                {fase.objetivos.map((objetivo, i) => (
+                  <div
+                    key={i}
+                    className={`flex items-start gap-4 py-3 ${
+                      i !== 0 ? 'border-t border-primary-foreground/8' : ''
+                    }`}
+                  >
+                    <span className="text-xs font-bold text-primary-foreground/25 mt-0.5 w-5 flex-shrink-0">
+                      0{i + 1}
+                    </span>
+                    <span className="text-sm text-primary-foreground/70 leading-relaxed">
+                      {objetivo}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   )

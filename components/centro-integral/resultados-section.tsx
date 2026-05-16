@@ -1,71 +1,76 @@
-'use client'
-
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { TrendingUp, Users, Lightbulb, Award } from 'lucide-react'
+import { TrendingUp, Lightbulb, Award, Users } from 'lucide-react'
 
 const resultados = [
   {
     icon: TrendingUp,
-    titulo: 'Mayor Acceso a Servicios de Salud',
-    descripcion: 'Ampliación del acceso a servicios de salud preventiva y telemedicina para comunidades urbanas, periurbanas y rurales'
+    titulo: 'Mayor acceso a servicios de salud',
+    descripcion: 'Ampliación del acceso a servicios de salud preventiva y telemedicina para comunidades urbanas, periurbanas y rurales.',
   },
   {
     icon: Lightbulb,
-    titulo: 'Reducción de Brechas Digitales y Educativas',
-    descripcion: 'Disminución de la brecha digital y educativa mediante programas de alfabetización y formación continua'
+    titulo: 'Reducción de brechas digitales',
+    descripcion: 'Disminución de la brecha digital y educativa mediante programas de alfabetización y formación continua.',
   },
   {
     icon: Award,
-    titulo: 'Soluciones Tecnológicas Adaptadas',
-    descripcion: 'Implementación y validación de tecnologías diseñadas específicamente para contextos locales'
+    titulo: 'Soluciones tecnológicas adaptadas',
+    descripcion: 'Implementación y validación de tecnologías diseñadas específicamente para contextos locales.',
   },
   {
     icon: Users,
-    titulo: 'Fortalecimiento de Capacidades',
-    descripcion: 'Desarrollo del capital humano y fortalecimiento de capacidades en tecnología, educación y salud'
+    titulo: 'Fortalecimiento de capacidades',
+    descripcion: 'Desarrollo del capital humano y fortalecimiento de capacidades en tecnología, educación y salud.',
   },
 ]
 
 export default function ResultadosSection() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-24 md:py-32 bg-primary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Resultados Esperados
+
+        {/* Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            Impacto proyectado
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight leading-tight mt-3">
+            Resultados esperados
           </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-            Impactos concretos que generará el Centro Integral JAWIRA
+          <p className="text-base text-primary-foreground/50 mt-4 max-w-xl mx-auto leading-relaxed">
+            Impactos concretos que generará el Centro Integral JAWIRA.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Results grid — gap-px dividers */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-primary-foreground/10 rounded-2xl overflow-hidden">
           {resultados.map((resultado, i) => {
             const Icon = resultado.icon
             return (
-              <Card key={i} className="border-2 hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-primary/10">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-lg text-primary">{resultado.titulo}</CardTitle>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-foreground/70">{resultado.descripcion}</p>
-                </CardContent>
-              </Card>
+              <div key={i} className="bg-primary p-8 md:p-10 space-y-4">
+                <div className="w-11 h-11 rounded-xl bg-primary-foreground/8 flex items-center justify-center">
+                  <Icon className="w-5 h-5 text-primary-foreground/80" />
+                </div>
+                <h3 className="text-base font-bold text-primary-foreground tracking-tight">
+                  {resultado.titulo}
+                </h3>
+                <p className="text-sm text-primary-foreground/45 leading-relaxed">
+                  {resultado.descripcion}
+                </p>
+              </div>
             )
           })}
         </div>
 
-        <div className="mt-12 p-8 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border-l-4 border-green-500">
-          <h3 className="font-semibold text-primary mb-3">Modelo Replicable</h3>
-          <p className="text-foreground/80">
-            El Centro Integral JAWIRA se diseña como un modelo replicable que puede implementarse en otros municipios y departamentos del país, multiplicando su impacto y generando oportunidades de desarrollo sostenible a nivel nacional.
+        {/* Replicable model callout */}
+        <div className="mt-16 md:mt-20 max-w-3xl mx-auto text-center">
+          <p className="text-base text-primary-foreground/60 leading-relaxed">
+            El Centro Integral JAWIRA se diseña como un{" "}
+            <span className="font-semibold text-primary-foreground">modelo replicable</span> que puede
+            implementarse en otros municipios y departamentos del país, multiplicando su impacto y generando
+            oportunidades de desarrollo sostenible a nivel nacional.
           </p>
         </div>
+
       </div>
     </section>
   )

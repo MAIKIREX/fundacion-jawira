@@ -1,94 +1,110 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Heart, Handshake, Users } from "lucide-react"
+import { Heart, Users, Handshake, ArrowRight } from "lucide-react"
 
-const supportWays = [
+const supportOptions = [
   {
     icon: Heart,
-    title: "Donaciones",
-    description: "Contribuye económicamente para financiar nuestros programas y proyectos de impacto.",
-    iconColor: "text-accent",
-    iconBg: "bg-accent/10",
-    borderColor: "border-accent/20",
+    title: "Donar",
+    description:
+      "Tu aporte económico nos permite continuar desarrollando proyectos que transforman vidas y comunidades.",
+    details:
+      "Cada donación, sin importar su monto, contribuye directamente a financiar tecnología, educación y salud en comunidades vulnerables.",
+    image: "/people-donating-helping-charity-hands.png",
+    accentColor: "bg-accent",
   },
   {
     icon: Users,
     title: "Voluntariado",
-    description: "Únete a nuestro equipo con tus habilidades y conocimientos para apoyar en terreno.",
-    iconColor: "text-secondary",
-    iconBg: "bg-secondary/10",
-    borderColor: "border-secondary/20",
+    description:
+      "Comparte tus conocimientos, tiempo y habilidades para apoyar nuestras iniciativas en terreno.",
+    details:
+      "Buscamos profesionales, estudiantes y personas comprometidas que quieran aportar desde sus áreas de experiencia.",
+    image: "/volunteers-working-together-community-teamwork.png",
+    accentColor: "bg-secondary",
   },
   {
     icon: Handshake,
     title: "Alianzas",
-    description: "Colabora con nosotros como institución o empresa para generar sinergia de impacto.",
-    iconColor: "text-primary",
-    iconBg: "bg-primary/10",
-    borderColor: "border-primary/20",
+    description:
+      "Establece alianzas estratégicas con tu organización o empresa para co-crear soluciones de impacto.",
+    details:
+      "Trabajamos con instituciones públicas, privadas y organizaciones sociales que comparten nuestra visión de desarrollo integral.",
+    image: "/business-partnership-handshake-collaboration-profe.png",
+    accentColor: "bg-primary",
   },
 ]
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0 },
-}
-
 export default function SupportSection() {
   return (
-    <section className="py-20 md:py-28 bg-muted/30">
+    <section className="py-24 md:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">Cómo puedes apoyar</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Hay múltiples formas de ser parte del cambio en Fundación JAWIRA
+        {/* Section Header */}
+        <div className="mb-16 max-w-2xl">
+          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            Súmate a nuestra misión
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
+            Cómo puedes apoyar
+          </h2>
+          <p className="text-base text-muted-foreground mt-4 leading-relaxed">
+            Tu apoyo es fundamental para seguir impulsando el desarrollo de comunidades a través de la tecnología, la educación y la salud.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {supportWays.map((way, i) => {
-            const Icon = way.icon
+        {/* Support Options */}
+        <div className="space-y-12 md:space-y-0 md:grid md:grid-cols-3 md:gap-8">
+          {supportOptions.map((option, i) => {
+            const Icon = option.icon
             return (
-              <motion.div
-                key={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: i * 0.08, ease: "easeOut" }}
-                whileHover={{ y: -8, scale: 1.01 }}
-              >
-                <Card
-                  className={`border-2 ${way.borderColor} hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white rounded-2xl`}
-                >
-                  <CardHeader className="space-y-4">
-                    <div
-                      className={`w-14 h-14 rounded-xl ${way.iconBg} border-2 ${way.borderColor} flex items-center justify-center`}
-                    >
-                      <Icon className={`w-7 h-7 ${way.iconColor}`} />
-                    </div>
-                    <CardTitle className="text-xl text-primary">{way.title}</CardTitle>
-                  </CardHeader>
+              <div key={i} className="group">
+                {/* Image */}
+                <div className="relative rounded-2xl overflow-hidden h-[220px] mb-6">
+                  <Image
+                    src={option.image}
+                    alt={option.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
+                  <div className={`absolute top-4 left-4 w-10 h-10 rounded-xl ${option.accentColor} flex items-center justify-center`}>
+                    <Icon className="w-5 h-5 text-white" />
+                  </div>
+                </div>
 
-                  <CardContent className="space-y-4">
-                    <CardDescription className="text-foreground/75 leading-relaxed">{way.description}</CardDescription>
+                {/* Content */}
+                <div className="space-y-3">
+                  <h3 className="text-xl font-bold text-primary tracking-tight">{option.title}</h3>
+                  <p className="text-sm text-foreground/70 leading-relaxed">{option.description}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{option.details}</p>
 
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="w-full border-2 border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground rounded-xl transition-all font-semibold bg-transparent"
-                    >
-                      <Link href="/contacto">Quiero saber más</Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                  <Link
+                    href="/contacto"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:gap-3 transition-all pt-2 group/link"
+                  >
+                    Quiero {option.title.toLowerCase()}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5" />
+                  </Link>
+                </div>
+              </div>
             )
           })}
+        </div>
+
+        {/* Trust message */}
+        <div className="mt-16 md:mt-20 pt-10 border-t border-border">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
+            <p className="text-base text-foreground/70 leading-relaxed max-w-2xl">
+              Con tu apoyo, más de <span className="font-semibold text-primary">500 familias</span> han accedido a servicios
+              de tecnología, educación y salud. Juntos podemos multiplicar este impacto.
+            </p>
+            <Button asChild variant="cta" size="lg" className="flex-shrink-0">
+              <Link href="/quiero-apoyar">Quiero apoyar</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

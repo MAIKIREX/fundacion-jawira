@@ -1,10 +1,9 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Heart, Users, Handshake, GraduationCap, Activity, Cpu, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Heart, Users, Handshake, Cpu, GraduationCap, Activity, ArrowRight } from "lucide-react"
 
 export const metadata = {
   title: "Quiero Apoyar | Fundación JAWIRA",
@@ -12,220 +11,226 @@ export const metadata = {
     "Descubre cómo puedes apoyar la misión de la Fundación JAWIRA. Donaciones, voluntariado y alianzas estratégicas.",
 }
 
+const formasDeApoyo = [
+  {
+    icon: Heart,
+    titulo: "Donar",
+    descripcion:
+      "Tu aporte económico nos permite financiar equipamiento, capacitaciones, atención médica y programas educativos para comunidades vulnerables.",
+    imagen: "/people-donating-helping-charity-hands.png",
+    alt: "Personas donando y apoyando causas benéficas",
+    cta: "Hacer una donación",
+  },
+  {
+    icon: Users,
+    titulo: "Voluntariado",
+    descripcion:
+      "Comparte tu tiempo, conocimientos y habilidades. Únete a nuestro equipo de voluntarios en actividades de campo, talleres y eventos.",
+    imagen: "/volunteers-working-together-community-teamwork.png",
+    alt: "Voluntarios trabajando juntos en proyectos comunitarios",
+    cta: "Ser voluntario",
+  },
+  {
+    icon: Handshake,
+    titulo: "Alianzas / Patrocinios",
+    descripcion:
+      "Si representas a una empresa, institución u organización, podemos crear alianzas estratégicas de impacto social compartido.",
+    imagen: "/business-partnership-handshake-collaboration-profe.png",
+    alt: "Alianzas estratégicas y colaboración empresarial",
+    cta: "Crear alianza",
+  },
+]
+
+const destinos = [
+  { icon: Cpu, titulo: "Tecnología", descripcion: "Equipamiento, capacitación digital y acceso a herramientas productivas." },
+  { icon: GraduationCap, titulo: "Educación", descripcion: "Talleres, materiales educativos y programas de formación continua." },
+  { icon: Activity, titulo: "Salud", descripcion: "Atención preventiva, campañas de salud y acceso a servicios médicos." },
+  { icon: Heart, titulo: "Operación", descripcion: "Gestión sostenible y eficiente de proyectos e infraestructura." },
+]
+
 export default function QuieroApoyarPage() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary to-primary/90 text-primary-foreground py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">Quiero apoyar</h1>
-            <p className="text-lg md:text-xl text-primary-foreground/90 text-pretty leading-relaxed">
-              Tu apoyo hace posible que transformemos vidas a través de la tecnología, educación y salud. Juntos
-              construimos un futuro mejor para las comunidades de Bolivia.
+      <section className="relative py-24 md:py-32 bg-muted/40 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <svg
+            className="absolute top-0 right-0 w-80 h-80 text-primary opacity-[0.03]"
+            viewBox="0 0 200 200"
+            fill="none"
+          >
+            <path
+              d="M60 40 Q100 80 80 120 Q90 160 70 180"
+              stroke="currentColor"
+              strokeWidth="6"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+              Colabora con nosotros
+            </span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-tight leading-[1.08] mt-4">
+              Quiero apoyar
+            </h1>
+            <p className="text-lg text-muted-foreground mt-5 leading-relaxed max-w-2xl">
+              Tu apoyo hace posible que transformemos vidas a través de la tecnología, educación y
+              salud. Juntos construimos un futuro mejor para las comunidades de Bolivia.
             </p>
           </div>
         </div>
       </section>
 
       {/* Support Methods Section */}
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-24 md:py-32 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 text-balance">
+          <div className="mb-16 max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+              Formas de participar
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
               Formas de apoyar nuestra misión
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+            <p className="text-base text-muted-foreground mt-4 leading-relaxed">
               Existen múltiples maneras de contribuir a nuestro trabajo. Elige la que mejor se adapte a ti.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Donar Card */}
-            <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src="/people-donating-helping-charity-hands.png"
-                  alt="Personas donando y apoyando causas benéficas"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="p-3 bg-secondary rounded-xl">
-                    <Heart size={24} className="text-white" />
-                  </div>
-                </div>
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold text-primary mb-3">Donar</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Tu aporte económico nos permite financiar equipamiento, capacitaciones, atención médica y programas
-                  educativos para comunidades vulnerables.
-                </p>
-                <Button className="w-full bg-secondary hover:bg-secondary/90 text-secondary-foreground font-semibold rounded-xl group/btn">
-                  Hacer una donación
-                  <ArrowRight size={18} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Voluntariado Card */}
-            <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src="/volunteers-working-together-community-teamwork.png"
-                  alt="Voluntarios trabajando juntos en proyectos comunitarios"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="p-3 bg-accent rounded-xl">
-                    <Users size={24} className="text-white" />
-                  </div>
-                </div>
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold text-primary mb-3">Voluntariado</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Comparte tu tiempo, conocimientos y habilidades. Únete a nuestro equipo de voluntarios en actividades
-                  de campo, talleres y eventos.
-                </p>
-                <Button
-                  variant="outline"
-                  className="w-full border-2 border-accent text-accent hover:bg-accent hover:text-white font-semibold rounded-xl group/btn bg-transparent"
+          {/* Three support methods — editorial vertical stack */}
+          <div className="space-y-0">
+            {formasDeApoyo.map((forma, i) => {
+              const Icon = forma.icon
+              return (
+                <div
+                  key={i}
+                  className={`grid lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-16 items-center py-12 ${
+                    i !== 0 ? "border-t border-border/60" : ""
+                  }`}
                 >
-                  Ser voluntario
-                  <ArrowRight size={18} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
+                  {/* Image */}
+                  <div className={`relative rounded-2xl overflow-hidden h-[260px] lg:h-[300px] ${i % 2 !== 0 ? "lg:order-2" : ""}`}>
+                    <Image
+                      src={forma.imagen}
+                      alt={forma.alt}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/50 via-transparent to-transparent" />
+                  </div>
 
-            {/* Alianzas Card */}
-            <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src="/business-partnership-handshake-collaboration-profe.png"
-                  alt="Alianzas estratégicas y colaboración empresarial"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute bottom-4 left-4">
-                  <div className="p-3 bg-primary rounded-xl">
-                    <Handshake size={24} className="text-white" />
+                  {/* Content */}
+                  <div className={`space-y-5 ${i % 2 !== 0 ? "lg:order-1" : ""}`}>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-primary/6 flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-5 h-5 text-primary/70" />
+                      </div>
+                      <span className="text-xs font-bold tracking-widest uppercase text-muted-foreground/50">
+                        0{i + 1}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-primary tracking-tight">
+                      {forma.titulo}
+                    </h3>
+                    <p className="text-base text-foreground/70 leading-relaxed max-w-md">
+                      {forma.descripcion}
+                    </p>
+                    <Button asChild variant="cta" size="lg">
+                      <Link href="/contacto">
+                        {forma.cta}
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
+                    </Button>
                   </div>
                 </div>
-              </div>
-              <CardContent className="p-6">
-                <h3 className="text-2xl font-bold text-primary mb-3">Alianzas / Patrocinios</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  Si representas a una empresa, institución u organización, podemos crear alianzas estratégicas de
-                  impacto social compartido.
-                </p>
-                <Button
-                  variant="outline"
-                  className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold rounded-xl group/btn bg-transparent"
-                >
-                  Crear alianza
-                  <ArrowRight size={18} className="ml-2 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
+              )
+            })}
           </div>
         </div>
       </section>
 
       {/* Impact Transparency Section */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-24 md:py-32 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 text-balance">¿En qué se usa tu apoyo?</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              Trabajamos con total transparencia. Cada aporte se destina directamente a nuestras tres áreas de trabajo
-              fundamentales.
+          <div className="mb-16 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="max-w-2xl">
+              <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+                Transparencia
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
+                ¿En qué se usa tu apoyo?
+              </h2>
+            </div>
+            <p className="text-base text-muted-foreground leading-relaxed max-w-md md:pb-1">
+              Trabajamos con total transparencia. Cada aporte se destina a nuestras áreas de trabajo.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <div className="p-4 bg-secondary/10 rounded-2xl w-fit mx-auto mb-4">
-                <Cpu size={32} className="text-secondary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-primary">Tecnología</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Equipamiento, capacitación digital y acceso a herramientas productivas
-              </p>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <div className="p-4 bg-secondary/10 rounded-2xl w-fit mx-auto mb-4">
-                <GraduationCap size={32} className="text-secondary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-primary">Educación</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Talleres, materiales educativos y programas de formación continua
-              </p>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <div className="p-4 bg-secondary/10 rounded-2xl w-fit mx-auto mb-4">
-                <Activity size={32} className="text-secondary" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-primary">Salud</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Atención preventiva, campañas de salud y acceso a servicios médicos
-              </p>
-            </Card>
-
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <div className="p-4 bg-accent/10 rounded-2xl w-fit mx-auto mb-4">
-                <Heart size={32} className="text-accent" />
-              </div>
-              <h3 className="font-bold text-lg mb-2 text-primary">Operación</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Gestión sostenible y eficiente de proyectos e infraestructura
-              </p>
-            </Card>
+          {/* Destinations — gap-px grid */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/40 rounded-2xl overflow-hidden">
+            {destinos.map((destino, i) => {
+              const Icon = destino.icon
+              return (
+                <div key={i} className="bg-background p-7 md:p-8 space-y-4 group hover:bg-muted/20 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-primary/6 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                    <Icon className="w-5 h-5 text-primary/70" />
+                  </div>
+                  <h3 className="text-base font-bold text-primary tracking-tight">
+                    {destino.titulo}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {destino.descripcion}
+                  </p>
+                </div>
+              )
+            })}
           </div>
 
-          <div className="mt-8 text-center">
-            <Link href="/transparencia">
-              <Button variant="link" className="text-secondary font-semibold text-lg">
-                Ver más sobre transparencia →
-              </Button>
+          <div className="mt-10 pt-6 border-t border-border">
+            <Link
+              href="/transparencia"
+              className="text-sm font-semibold text-secondary hover:text-secondary/80 transition-colors inline-flex items-center gap-2"
+            >
+              Ver más sobre transparencia
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Final CTA Banner */}
-      <section className="py-16 md:py-20 bg-gradient-to-r from-primary via-primary/95 to-secondary/90">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4 text-balance">
-            Apoya nuestra misión hoy
-          </h2>
-          <p className="text-lg text-primary-foreground/90 mb-8 text-pretty leading-relaxed">
-            Cada contribución, sin importar su tamaño, genera un impacto real y medible en la vida de las personas y
-            comunidades que servimos.
+      {/* Final CTA */}
+      <section className="py-24 md:py-32 bg-primary">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10">
+          <div className="space-y-4">
+            <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+              Haz la diferencia
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground tracking-tight leading-[1.08]">
+              Apoya nuestra <br className="hidden sm:block" />
+              misión hoy
+            </h2>
+          </div>
+
+          <p className="text-lg md:text-xl text-primary-foreground/50 max-w-2xl mx-auto leading-relaxed font-light">
+            Cada contribución, sin importar su tamaño, genera un impacto real y medible en la vida
+            de las personas y comunidades que servimos.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contacto">
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90 font-semibold rounded-xl px-8 py-6 shadow-xl"
-              >
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
+            <Button asChild variant="cta" size="lg">
+              <Link href="/contacto">
                 Contactar
-              </Button>
-            </Link>
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-white font-semibold rounded-xl px-8 py-6 shadow-xl"
-            >
-              Donar ahora
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="border-2 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
+              <Link href="/contacto">
+                Donar ahora
+              </Link>
             </Button>
           </div>
         </div>

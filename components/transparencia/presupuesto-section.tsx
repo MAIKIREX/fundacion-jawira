@@ -1,90 +1,104 @@
 'use client'
 
-import { Card } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { DollarSign } from 'lucide-react'
+import { useState } from 'react'
+
+const presupuestoCategorias = [
+  { nombre: 'Alquiler de oficina y espacios', porcentaje: 30 },
+  { nombre: 'Servicios básicos (luz, agua, internet)', porcentaje: 15 },
+  { nombre: 'Materiales y suministros de oficina', porcentaje: 12 },
+  { nombre: 'Insumos médicos básicos', porcentaje: 15 },
+  { nombre: 'Transporte y movilidad', porcentaje: 12 },
+  { nombre: 'Comunicación y difusión', porcentaje: 10 },
+  { nombre: 'Otros gastos operativos', porcentaje: 6 },
+]
+
+const presupuestoTotal = 20000
+const years = ['2024', '2025']
 
 export default function PresupuestoSection() {
-  const presupuestoCategorias = [
-    { nombre: 'Alquiler de oficina y espacios', porcentaje: 30 },
-    { nombre: 'Servicios básicos (luz, agua, internet)', porcentaje: 15 },
-    { nombre: 'Materiales y suministros de oficina', porcentaje: 12 },
-    { nombre: 'Insumos médicos básicos', porcentaje: 15 },
-    { nombre: 'Transporte y movilidad', porcentaje: 12 },
-    { nombre: 'Comunicación y difusión', porcentaje: 10 },
-    { nombre: 'Otros gastos operativos y administrativos', porcentaje: 6 },
-  ]
-
-  const presupuestoTotal = 20000
+  const [activeYear, setActiveYear] = useState('2024')
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
+    <section className="py-24 md:py-32 bg-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-12">
-          {/* Header */}
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary">
-              Presupuesto inicial de la Fundación
+
+        {/* Header */}
+        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+              Información financiera
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
+              Presupuesto inicial
             </h2>
-            <p className="text-lg text-foreground/70">
-              En su etapa inicial, JAWIRA cuenta con un presupuesto base de <span className="font-bold text-primary">Bs. 20.000,00</span> por año, destinado a sostener actividades administrativas y operativas mientras se consolidan alianzas y proyectos.
+            <p className="text-base text-muted-foreground mt-4 leading-relaxed">
+              En su etapa inicial, JAWIRA cuenta con un presupuesto base de{" "}
+              <span className="font-medium text-foreground">Bs. 20.000,00</span> por año.
             </p>
           </div>
 
-          {/* Tabs */}
-          <Tabs defaultValue="2024" className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-              <TabsTrigger value="2024">2024</TabsTrigger>
-              <TabsTrigger value="2025">2025</TabsTrigger>
-            </TabsList>
-
-            {['2024', '2025'].map((year) => (
-              <TabsContent key={year} value={year} className="space-y-6 mt-8">
-                {/* Categorías */}
-                <div className="grid gap-4">
-                  {presupuestoCategorias.map((categoria, idx) => {
-                    const monto = (presupuestoTotal * categoria.porcentaje) / 100
-                    return (
-                      <Card key={idx} className="p-4 border-l-4 border-l-blue-500 hover:shadow-md transition-shadow">
-                        <div className="space-y-3">
-                          <div className="flex justify-between items-start">
-                            <h4 className="font-semibold text-foreground">{categoria.nombre}</h4>
-                            <span className="text-sm font-bold text-primary">Bs. {monto.toLocaleString('es-ES')}</span>
-                          </div>
-                          {/* Progress bar */}
-                          <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                            <div
-                              className="bg-gradient-to-r from-blue-500 to-green-500 h-full"
-                              style={{ width: `${categoria.porcentaje}%` }}
-                            />
-                          </div>
-                          <p className="text-xs text-muted-foreground">{categoria.porcentaje}% del presupuesto</p>
-                        </div>
-                      </Card>
-                    )
-                  })}
-                </div>
-
-                {/* Total */}
-                <Card className="p-6 bg-gradient-to-r from-primary to-primary/80 text-primary-foreground border-0">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <DollarSign className="w-8 h-8" />
-                      <div>
-                        <p className="text-sm opacity-90">Presupuesto total anual {year}</p>
-                        <p className="text-2xl font-bold">Bs. {presupuestoTotal.toLocaleString('es-ES')}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm opacity-90">Gastos estimados</p>
-                      <p className="text-xl font-bold">Bs. {presupuestoTotal.toLocaleString('es-ES')}</p>
-                    </div>
-                  </div>
-                </Card>
-              </TabsContent>
+          {/* Year Switcher */}
+          <div className="flex gap-2">
+            {years.map((year) => (
+              <button
+                key={year}
+                onClick={() => setActiveYear(year)}
+                className={`px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
+                  activeYear === year
+                    ? 'bg-primary text-primary-foreground shadow-sm'
+                    : 'bg-background text-muted-foreground hover:bg-background/80 border border-border/60'
+                }`}
+              >
+                {year}
+              </button>
             ))}
-          </Tabs>
+          </div>
         </div>
+
+        {/* Budget Table */}
+        <div className="rounded-2xl border border-border/60 overflow-hidden bg-background">
+          {/* Header Row */}
+          <div className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 md:px-8 py-4 bg-muted/40 text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+            <span>Categoría</span>
+            <span className="w-20 text-right">Monto</span>
+            <span className="w-16 text-right">%</span>
+          </div>
+
+          {/* Rows */}
+          {presupuestoCategorias.map((cat, i) => {
+            const monto = (presupuestoTotal * cat.porcentaje) / 100
+            return (
+              <div
+                key={i}
+                className={`grid grid-cols-[1fr_auto_auto] gap-4 px-6 md:px-8 py-5 items-center ${
+                  i !== 0 ? 'border-t border-border/40' : ''
+                }`}
+              >
+                <span className="text-sm text-foreground/80">{cat.nombre}</span>
+                <span className="text-sm font-semibold text-primary w-20 text-right">
+                  Bs. {monto.toLocaleString('es-ES')}
+                </span>
+                <span className="text-xs text-muted-foreground w-16 text-right">
+                  {cat.porcentaje}%
+                </span>
+              </div>
+            )
+          })}
+
+          {/* Total Row */}
+          <div className="grid grid-cols-[1fr_auto_auto] gap-4 px-6 md:px-8 py-5 bg-primary items-center border-t border-primary-foreground/10">
+            <span className="text-sm font-bold text-primary-foreground">
+              Presupuesto total anual {activeYear}
+            </span>
+            <span className="text-base font-bold text-primary-foreground w-20 text-right">
+              Bs. {presupuestoTotal.toLocaleString('es-ES')}
+            </span>
+            <span className="text-xs font-semibold text-primary-foreground/60 w-16 text-right">
+              100%
+            </span>
+          </div>
+        </div>
+
       </div>
     </section>
   )

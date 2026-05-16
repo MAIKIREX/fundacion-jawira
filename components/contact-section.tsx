@@ -1,6 +1,5 @@
 "use client"
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -11,136 +10,122 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Dirección",
-    info: "Z. Gran POder, C. Jose Astete, n° 104",
+    info: "Z. Gran Poder, C. Jose Astete, n° 104",
     subInfo: "La Paz, Bolivia",
-    iconColor: "text-primary",
-    iconBg: "bg-primary/10",
-    borderColor: "border-primary/20",
   },
   {
     icon: Phone,
     title: "Teléfono / WhatsApp",
     info: "+591 64208172",
-    subInfo: "+591 64208172",
-    iconColor: "text-secondary",
-    iconBg: "bg-secondary/10",
-    borderColor: "border-secondary/20",
+    subInfo: "Mensajes y llamadas",
   },
   {
     icon: Mail,
     title: "Correo electrónico",
     info: "fundacion.jawira@gmail.com",
-    subInfo: "fundacion.jawira@gmail.com",
-    iconColor: "text-accent",
-    iconBg: "bg-accent/10",
-    borderColor: "border-accent/20",
+    subInfo: "Respuesta en 24-48 horas",
   },
   {
     icon: Clock,
     title: "Horarios de atención",
-    info: "Lunes a Viernes: 9:00 - 18:00",
-    subInfo: "Sábados: 9:00 - 13:00",
-    iconColor: "text-primary",
-    iconBg: "bg-primary/10",
-    borderColor: "border-primary/20",
+    info: "Lunes a Viernes: 9:00 – 18:00",
+    subInfo: "Sábados: 9:00 – 13:00",
   },
 ]
 
 export default function ContactSection() {
   return (
-    <section className="py-20 md:py-28 bg-muted/30">
+    <section className="py-24 md:py-32 bg-muted/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4 text-balance">Contacto</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Estamos aquí para escucharte y responder tus consultas. Contáctanos y conversemos sobre cómo trabajar juntos
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+            Hablemos
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
+            Contacto
+          </h2>
+          <p className="text-base text-muted-foreground mt-4 max-w-lg mx-auto leading-relaxed">
+            Estamos aquí para escucharte. Contáctanos y conversemos sobre cómo trabajar juntos.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left side: Contact information cards */}
+        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-16">
+          {/* Left: Contact Information */}
           <div className="space-y-6">
+            <h3 className="text-lg font-semibold text-primary tracking-tight">
+              Información de contacto
+            </h3>
+
+            <div className="space-y-1">
+              {contactInfo.map((item, i) => {
+                const Icon = item.icon
+                return (
+                  <div
+                    key={i}
+                    className="flex items-start gap-4 p-4 rounded-xl hover:bg-background transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/6 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Icon className="w-5 h-5 text-primary/70" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-medium text-muted-foreground tracking-wide uppercase mb-1">
+                        {item.title}
+                      </p>
+                      <p className="text-sm font-medium text-foreground">{item.info}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{item.subInfo}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Right: Contact Form */}
+          <div className="bg-background rounded-2xl border border-border/60 p-8 md:p-10 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)]">
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-primary mb-2">Información de contacto</h3>
-              <p className="text-muted-foreground">
-                Puedes comunicarte con nosotros a través de cualquiera de estos medios
+              <h3 className="text-lg font-semibold text-primary tracking-tight">
+                Envíanos un mensaje
+              </h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Completa el formulario y te responderemos a la brevedad
               </p>
             </div>
 
-            {contactInfo.map((item, i) => {
-              const Icon = item.icon
-              return (
-                <Card
-                  key={i}
-                  className={`border-2 ${item.borderColor} hover:shadow-lg transition-all duration-300 bg-white rounded-xl`}
-                >
-                  <CardHeader className="pb-3">
-                    <div className="flex items-start gap-4">
-                      <div
-                        className={`w-12 h-12 rounded-lg ${item.iconBg} border-2 ${item.borderColor} flex items-center justify-center flex-shrink-0`}
-                      >
-                        <Icon className={`w-6 h-6 ${item.iconColor}`} />
-                      </div>
-                      <div className="flex-1">
-                        <CardTitle className="text-base text-primary mb-2">{item.title}</CardTitle>
-                        <p className="text-sm font-medium text-foreground">{item.info}</p>
-                        <p className="text-sm text-muted-foreground">{item.subInfo}</p>
-                      </div>
-                    </div>
-                  </CardHeader>
-                </Card>
-              )
-            })}
-          </div>
+            <form className="space-y-5">
+              <div className="space-y-2">
+                <Label htmlFor="contact-name" className="text-sm font-medium">Nombre completo</Label>
+                <Input id="contact-name" placeholder="Tu nombre" className="rounded-xl h-11" />
+              </div>
 
-          {/* Right side: Contact form */}
-          <div>
-            <Card className="bg-white rounded-2xl shadow-lg border-2 border-primary/10">
-              <CardHeader>
-                <CardTitle className="text-2xl text-primary">Envíanos un mensaje</CardTitle>
-                <p className="text-sm text-muted-foreground">Completa el formulario y te responderemos a la brevedad</p>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Nombre completo</Label>
-                    <Input id="name" placeholder="Tu nombre" className="rounded-lg" />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="contact-email" className="text-sm font-medium">Correo electrónico</Label>
+                <Input id="contact-email" type="email" placeholder="tu.correo@ejemplo.com" className="rounded-xl h-11" />
+              </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Correo electrónico</Label>
-                    <Input id="email" type="email" placeholder="tu.correo@ejemplo.com" className="rounded-lg" />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="contact-subject" className="text-sm font-medium">Asunto</Label>
+                <Input id="contact-subject" placeholder="Tema de tu consulta" className="rounded-xl h-11" />
+              </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">Asunto</Label>
-                    <Input id="subject" placeholder="¿En qué podemos ayudarte?" className="rounded-lg" />
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="contact-message" className="text-sm font-medium">Mensaje</Label>
+                <Textarea
+                  id="contact-message"
+                  placeholder="Escribe tu consulta o mensaje..."
+                  rows={5}
+                  className="rounded-xl resize-none"
+                />
+              </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Mensaje</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Escribe tu consulta o mensaje aquí..."
-                      rows={5}
-                      className="rounded-lg resize-none"
-                    />
-                  </div>
+              <Button type="submit" variant="cta" className="w-full" size="lg">
+                Enviar mensaje
+              </Button>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-secondary hover:bg-secondary/90 text-white rounded-xl h-11 font-semibold"
-                  >
-                    Enviar mensaje
-                  </Button>
-
-                  <p className="text-xs text-center text-muted-foreground">
-                    Tiempo de respuesta: 24-48 horas hábiles. Tus datos serán tratados con confidencialidad conforme a
-                    nuestras políticas de privacidad.
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
+              <p className="text-xs text-center text-muted-foreground pt-1">
+                Tus datos serán tratados con confidencialidad conforme a nuestras políticas de privacidad.
+              </p>
+            </form>
           </div>
         </div>
       </div>

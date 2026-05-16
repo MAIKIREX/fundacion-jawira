@@ -1,76 +1,75 @@
-'use client'
-
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Mail, MessageSquare } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export default function CtaTransparenciaSection() {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-primary/10 via-white to-green-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-8">
-          {/* Main CTA */}
-          <Card className="p-8 md:p-12 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground border-0 text-center space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">
+    <section className="py-24 md:py-32 bg-background border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-start">
+
+          {/* Left: Main CTA */}
+          <div className="space-y-6">
+            <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+              Diálogo abierto
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight">
               ¿Tienes dudas o quieres saber más?
             </h2>
-
-            <p className="text-lg opacity-90 max-w-2xl mx-auto">
-              La transparencia también es diálogo. Cualquier persona, institución o donante interesado en conocer más sobre la información financiera, programática o de impacto de la Fundación JAWIRA puede contactarnos para solicitar detalles o aclaraciones.
+            <p className="text-base text-foreground/70 leading-relaxed max-w-lg">
+              La transparencia también es diálogo. Cualquier persona, institución o donante
+              interesado en conocer más sobre la información financiera, programática o de impacto
+              puede contactarnos para solicitar detalles o aclaraciones.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link href="/contacto">
-                <Button
-                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold px-8 h-12"
-                >
-                  <Mail className="w-5 h-5 mr-2" />
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+              <Button asChild variant="cta" size="lg">
+                <Link href="/contacto">
                   Contactar a la Fundación
-                </Button>
-              </Link>
-
-              <Link href="/impacto">
-                <Button
-                  variant="outline"
-                  className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/20 font-semibold px-8 h-12"
-                >
-                  <MessageSquare className="w-5 h-5 mr-2" />
-                  Conocer más sobre nuestro impacto
-                </Button>
-              </Link>
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="border-2">
+                <Link href="/impacto">
+                  Ver nuestro impacto
+                </Link>
+              </Button>
             </div>
-          </Card>
+          </div>
 
-          {/* Contact Info */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <Card className="p-6 bg-white border-2 border-blue-200">
-              <h3 className="text-lg font-semibold text-primary mb-3">
-                ✉️ Por correo
-              </h3>
-              <p className="text-sm text-foreground/70 mb-4">
+          {/* Right: Contact info */}
+          <div className="space-y-0">
+            <div className="py-8">
+              <span className="text-xs font-bold tracking-widest uppercase text-muted-foreground/50 block mb-3">
+                Por correo
+              </span>
+              <p className="text-sm text-foreground/60 mb-3">
                 Envíanos tus preguntas o solicitudes de información a:
               </p>
               <a
                 href="mailto:info@fundacionjawira.org"
-                className="text-primary font-semibold hover:underline"
+                className="text-base font-semibold text-primary hover:text-secondary transition-colors"
               >
                 info@fundacionjawira.org
               </a>
-            </Card>
+            </div>
 
-            <Card className="p-6 bg-white border-2 border-green-200">
-              <h3 className="text-lg font-semibold text-primary mb-3">
-                🤝 Colaborar o donar
-              </h3>
-              <p className="text-sm text-foreground/70 mb-4">
+            <div className="py-8 border-t border-border/60">
+              <span className="text-xs font-bold tracking-widest uppercase text-muted-foreground/50 block mb-3">
+                Colaborar o donar
+              </span>
+              <p className="text-sm text-foreground/60 mb-3">
                 Si deseas conocer opciones para apoyar nuestro trabajo:
               </p>
-              <Link href="/" className="text-primary font-semibold hover:underline">
-                Ver opciones de apoyo →
+              <Link
+                href="/quiero-apoyar"
+                className="text-base font-semibold text-primary hover:text-secondary transition-colors inline-flex items-center gap-2"
+              >
+                Ver opciones de apoyo
+                <ArrowRight className="w-4 h-4" />
               </Link>
-            </Card>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
