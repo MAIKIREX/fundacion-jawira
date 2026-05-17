@@ -8,48 +8,46 @@ import SupportSection from "@/components/support-section"
 import QuieroApoyarSection from "@/components/quiero-apoyar-section"
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
-import { ScrollReveal } from "@/components/ui/scroll-reveal"
+import { PinnedSection } from "@/components/ui/pinned-section"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      
-      <ScrollReveal yOffset={20}>
-        <HeroSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <AboutSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <AxesSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <IntegralCenterSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <ImpactSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <SupportSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <QuieroApoyarSection />
-      </ScrollReveal>
-      
-      <ScrollReveal>
-        <ContactSection />
-      </ScrollReveal>
 
-      <ScrollReveal yOffset={20}>
+      <PinnedSection zIndex={1}>
+        <HeroSection />
+      </PinnedSection>
+
+      <PinnedSection zIndex={2}>
+        <AboutSection />
+      </PinnedSection>
+
+      <AxesSection />
+
+      <PinnedSection zIndex={4}>
+        <IntegralCenterSection />
+      </PinnedSection>
+
+      <PinnedSection zIndex={5}>
+        <ImpactSection />
+      </PinnedSection>
+
+      <PinnedSection zIndex={6}>
+        <SupportSection />
+      </PinnedSection>
+
+      <PinnedSection zIndex={7}>
+        <QuieroApoyarSection />
+      </PinnedSection>
+
+      <PinnedSection zIndex={8}>
+        <ContactSection />
+      </PinnedSection>
+
+      <div style={{ position: "relative", zIndex: 9 }}>
         <Footer />
-      </ScrollReveal>
+      </div>
     </main>
   )
 }

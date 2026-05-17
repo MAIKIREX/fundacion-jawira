@@ -10,9 +10,9 @@ export function ModeToggle() {
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="icon"
-      className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground transition-colors"
+      className="rounded-full bg-transparent border-border text-foreground hover:bg-accent hover:text-accent-foreground transition-all"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       title="Cambiar tema"
     >

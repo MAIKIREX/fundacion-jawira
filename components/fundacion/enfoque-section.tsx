@@ -1,4 +1,12 @@
+'use client'
+
+import { useRef } from 'react'
 import { Zap, Lightbulb, Users, TrendingUp, Heart } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
+
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const enfoques = [
   {
@@ -34,29 +42,106 @@ const enfoques = [
 ]
 
 export default function EnfoqueSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useGSAP(() => {
+    const mm = gsap.matchMedia()
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // --- Header reveal ---
+      const headerTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.enfoque-header',
+          start: 'top 85%',
+          toggleActions: 'play reverse play reverse',
+        },
+      })
+
+      headerTl
+        .from('.enfoque-subtitle', {
+          y: 20,
+          autoAlpha: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+        })
+        .from('.enfoque-title', {
+          y: 30,
+          autoAlpha: 0,
+          duration: 0.6,
+          ease: 'power3.out',
+        }, '-=0.3')
+        .from('.enfoque-desc', {
+          y: 20,
+          autoAlpha: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+        }, '-=0.2')
+
+      // --- Enfoque items staggered reveal ---
+      gsap.from('.enfoque-item', {
+        x: -30,
+        autoAlpha: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: '.enfoque-grid',
+          start: 'top 80%',
+          toggleActions: 'play reverse play reverse',
+        },
+      })
+
+      // --- Icon entrance ---
+      gsap.from('.enfoque-icon', {
+        scale: 0,
+        duration: 0.5,
+        ease: 'back.out(1.7)',
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: '.enfoque-grid',
+          start: 'top 78%',
+          toggleActions: 'play reverse play reverse',
+        },
+      })
+
+      // --- Territorial callout slide-up ---
+      gsap.from('.enfoque-callout', {
+        y: 40,
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.enfoque-callout',
+          start: 'top 88%',
+          toggleActions: 'play reverse play reverse',
+        },
+      })
+    })
+  }, { scope: sectionRef })
+
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-16 max-w-2xl">
-          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+        <div className="enfoque-header mb-16 max-w-2xl">
+          <span className="enfoque-subtitle text-xs font-semibold tracking-widest uppercase text-secondary">
             Metodología
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
+          <h2 className="enfoque-title text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
             Nuestro enfoque
           </h2>
-          <p className="text-base text-muted-foreground mt-4 leading-relaxed">
+          <p className="enfoque-desc text-base text-muted-foreground mt-4 leading-relaxed">
             La metodología y principios que guían el diseño e implementación de nuestros proyectos.
           </p>
         </div>
 
-        {/* Enfoque items — zig-zag 2-col list instead of 3-col cards */}
-        <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
-          {enfoques.map((enfoque, i) => {
+        {/* Enfoque items */}
+        <div className="enfoque-grid grid md:grid-cols-2 gap-x-16 gap-y-10">
+          {enfoques.map((enfoque) => {
             const IconComponent = enfoque.icon
             return (
-              <div key={enfoque.title} className="flex items-start gap-5 group">
-                <div className="w-10 h-10 rounded-xl bg-primary/6 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/10 transition-colors">
+              <div key={enfoque.title} className="enfoque-item flex items-start gap-5 group">
+                <div className="enfoque-icon w-10 h-10 rounded-xl bg-primary/6 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-primary/10 transition-colors" style={{ willChange: 'transform' }}>
                   <IconComponent className="w-5 h-5 text-primary/70" />
                 </div>
                 <div className="space-y-2">
@@ -73,7 +158,7 @@ export default function EnfoqueSection() {
         </div>
 
         {/* Territorial focus callout */}
-        <div className="mt-16 pt-10 border-t border-border">
+        <div className="enfoque-callout mt-16 pt-10 border-t border-border">
           <div className="grid lg:grid-cols-[auto_1fr] gap-6 items-start">
             <span className="text-xs font-semibold tracking-widest uppercase text-accent whitespace-nowrap pt-1">
               Enfoque territorial

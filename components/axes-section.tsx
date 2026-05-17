@@ -1,8 +1,7 @@
-"use client"
-
 import Image from "next/image"
 import Link from "next/link"
 import { BookOpen, Zap, Heart, ArrowRight } from "lucide-react"
+import { HorizontalScrollWrapper } from "@/components/ui/horizontal-scroll-wrapper"
 
 const axes = [
   {
@@ -42,78 +41,105 @@ const axes = [
 
 export default function AxesSection() {
   return (
-    <section className="py-24 md:py-32 bg-muted/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header — Left aligned */}
-        <div className="mb-16 max-w-2xl">
-          <span className="text-xs font-semibold tracking-widest uppercase text-secondary">
+    <HorizontalScrollWrapper 
+      zIndex={3} 
+      className="bg-muted"
+      contentClassName="px-6 md:px-16 lg:px-24 gap-20 md:gap-40"
+    >
+      {/* Slide 1: Section Header */}
+      <div data-horizontal-group className="w-[85vw] md:w-[45vw] max-w-2xl shrink-0">
+        <div className="overflow-hidden">
+          <span data-horizontal-reveal="fade-up" className="block text-xs md:text-sm font-semibold tracking-widest uppercase text-secondary">
             Nuestros ejes
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
-            Tres áreas clave para el
-            <br className="hidden sm:block" />
-            desarrollo integral
+        </div>
+        <div className="overflow-hidden mt-4">
+          <h2 data-horizontal-reveal="fade-up" className="block text-4xl md:text-5xl lg:text-7xl font-bold text-primary tracking-tight leading-[1.05]">
+            Tres áreas
+            <br />
+            clave para el
+            <br />
+            desarrollo.
           </h2>
-          <p className="text-base text-muted-foreground mt-4 leading-relaxed">
+        </div>
+        <div className="overflow-hidden mt-8">
+          <p data-horizontal-reveal="fade-up" className="block text-base md:text-xl text-muted-foreground leading-relaxed max-w-[40ch]">
             Articulamos tecnología, educación y salud para generar impacto sostenible en las comunidades del Departamento de La Paz.
           </p>
         </div>
+      </div>
 
-        {/* Axes — Zig-zag layout */}
-        <div className="space-y-16 md:space-y-24">
-          {axes.map((axis, i) => {
-            const Icon = axis.icon
-            const isReversed = i % 2 === 1
-            return (
-              <div
-                key={axis.id}
-                className={`grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${
-                  isReversed ? "lg:direction-rtl" : ""
-                }`}
-                style={isReversed ? { direction: "rtl" } : undefined}
-              >
-                {/* Image */}
-                <div className="relative rounded-2xl overflow-hidden h-[320px] md:h-[380px]" style={{ direction: "ltr" }}>
-                  <Image
-                    src={axis.image}
-                    alt={axis.title}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-[1.03]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
-                  <div className={`absolute top-5 left-5 w-11 h-11 rounded-xl ${axis.accentColor} flex items-center justify-center`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
+      {/* Slides 2-4: Axes Layout */}
+      {axes.map((axis, i) => {
+        const Icon = axis.icon
+        // Alternating layouts for visual interest in horizontal scroll
+        const isReversed = i % 2 === 1
+        
+        return (
+          <div
+            key={axis.id}
+            data-horizontal-group
+            className={`w-[85vw] md:w-[70vw] max-w-6xl shrink-0 flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-10 lg:gap-20 items-center justify-center`}
+          >
+            {/* Image */}
+            <div 
+              data-horizontal-reveal="clip-image"
+              className="w-full lg:w-1/2 relative rounded-2xl md:rounded-3xl overflow-hidden h-[300px] md:h-[500px] shadow-2xl" 
+              style={{ willChange: "transform, opacity, clip-path" }}
+            >
+              <div className="axis-img-inner absolute inset-0 will-change-transform">
+                <Image
+                  src={axis.image}
+                  alt={axis.title}
+                  fill
+                  className="object-cover transition-transform duration-700 hover:scale-[1.05]"
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent mix-blend-multiply" />
+              
+              <div data-horizontal-reveal="scale-up" className={`absolute top-6 left-6 md:top-8 md:left-8 w-14 h-14 md:w-16 md:h-16 rounded-2xl ${axis.accentColor} shadow-xl flex items-center justify-center`}>
+                <Icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="w-full lg:w-1/2 space-y-6 md:space-y-8">
+              <div className="space-y-3">
+                <div className="overflow-hidden">
+                  <span data-horizontal-reveal="fade-up" className="block text-sm md:text-base font-bold tracking-widest uppercase text-muted-foreground">
+                    {axis.subtitle}
+                  </span>
                 </div>
-
-                {/* Content */}
-                <div className="space-y-5" style={{ direction: "ltr" }}>
-                  <div className="space-y-2">
-                    <span className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">
-                      {axis.subtitle}
-                    </span>
-                    <h3 className="text-2xl md:text-3xl font-bold text-primary tracking-tight">
-                      {axis.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-base text-foreground/70 leading-relaxed max-w-[52ch]">
-                    {axis.description}
-                  </p>
-
-                  <Link
-                    href="/areas-de-trabajo"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-secondary hover:gap-3 transition-all group"
-                  >
-                    Conocer más
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
+                <div className="overflow-hidden pb-2">
+                  <h3 data-horizontal-reveal="fade-up" className="block text-3xl md:text-5xl font-bold text-primary tracking-tight leading-[1.1]">
+                    {axis.title}
+                  </h3>
                 </div>
               </div>
-            )
-          })}
-        </div>
-      </div>
-    </section>
+
+              <div className="overflow-hidden">
+                <p data-horizontal-reveal="fade-up" className="block text-lg md:text-xl text-foreground/70 leading-relaxed max-w-[45ch]">
+                  {axis.description}
+                </p>
+              </div>
+
+              <div className="overflow-hidden pt-4">
+                <Link
+                  data-horizontal-reveal="fade-up"
+                  href="/areas-de-trabajo"
+                  className="inline-flex items-center gap-3 text-base font-semibold text-secondary hover:text-secondary/80 hover:gap-4 transition-all group"
+                >
+                  Conocer más
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+
+      {/* Ending Spacer - gives breathing room before the section unpins */}
+      <div className="w-[10vw] shrink-0" />
+    </HorizontalScrollWrapper>
   )
 }

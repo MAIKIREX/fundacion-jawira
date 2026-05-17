@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 
 export default function QuieroApoyarSection() {
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden">
+    <section className="relative py-20 md:py-28 overflow-hidden bg-primary">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <Image

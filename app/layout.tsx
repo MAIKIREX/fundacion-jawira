@@ -22,9 +22,47 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: 'Fundación JAWIRA — Tecnología, Educación y Salud',
-  description: 'Fundación sin fines de lucro en La Paz, Bolivia dedicada al desarrollo integral mediante tecnología productiva, educación y salud',
-  generator: 'v0.app',
+  title: {
+    default: 'Fundación JAWIRA | Tecnología, Educación y Salud',
+    template: '%s | Fundación JAWIRA'
+  },
+  description: 'Fundación sin fines de lucro en La Paz, Bolivia dedicada al desarrollo integral mediante tecnología productiva, educación y salud para comunidades vulnerables.',
+  keywords: ['Fundación', 'JAWIRA', 'Bolivia', 'La Paz', 'Educación', 'Salud', 'Tecnología Productiva', 'ONG', 'Desarrollo Integral', 'Ayuda Social'],
+  authors: [{ name: 'Fundación JAWIRA' }],
+  creator: 'Fundación JAWIRA',
+  openGraph: {
+    type: 'website',
+    locale: 'es_BO',
+    url: 'https://fundacionjawira.org',
+    title: 'Fundación JAWIRA | Tecnología, Educación y Salud',
+    description: 'Fundación sin fines de lucro en La Paz, Bolivia dedicada al desarrollo integral de comunidades vulnerables.',
+    siteName: 'Fundación JAWIRA',
+    images: [
+      {
+        url: '/logo/logo.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'Logotipo de Fundación JAWIRA',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fundación JAWIRA | Tecnología, Educación y Salud',
+    description: 'ONG en La Paz, Bolivia dedicada al desarrollo integral.',
+    images: ['/logo/logo.jpeg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: [
       {
@@ -50,8 +88,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className="scroll-smooth">
-      <body className={`${geist.variable} ${geistMono.variable} ${outfit.variable} font-sans antialiased`}>
+    <html lang="es" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`${geist.variable} ${geistMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
