@@ -5,6 +5,7 @@ import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useGSAP } from "@gsap/react"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { Map, MapMarker, MarkerContent, MarkerPopup } from "@/components/ui/map"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -126,18 +127,29 @@ export default function ContactoInfo() {
         })}
       </div>
 
-      {/* Map placeholder */}
+      {/* Map */}
       <div className="info-map-container rounded-[2rem] overflow-hidden bg-muted/30 h-[250px] relative border border-border/40 group">
-        <div className="info-map absolute inset-0 flex items-center justify-center scale-110">
-          <div className="text-center space-y-3">
-            <div className="w-12 h-12 rounded-full bg-background shadow-[0_8px_16px_-6px_rgba(0,0,0,0.1)] flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-500 ease-out">
-              <MapPin className="w-5 h-5 text-primary" strokeWidth={1.5} />
-            </div>
-            <p className="text-xs text-muted-foreground/60 font-medium tracking-wide">
-              La Paz, Bolivia
-            </p>
-          </div>
-        </div>
+        <Map
+          viewport={{
+            center: [-68.14210001210378, -16.50149341510601],
+            zoom: 15,
+          }}
+          className="absolute inset-0"
+        >
+          <MapMarker
+            longitude={-68.14210001210378}
+            latitude={-16.50149341510601}
+          >
+            <MarkerContent>
+              <div className="w-12 h-12 rounded-full bg-background shadow-[0_8px_16px_-6px_rgba(0,0,0,0.1)] flex items-center justify-center mx-auto hover:scale-110 transition-transform duration-500 ease-out">
+                <MapPin className="w-5 h-5 text-primary" strokeWidth={1.5} />
+              </div>
+            </MarkerContent>
+            <MarkerPopup className="bg-background text-foreground border-border/40 w-max shadow-xl rounded-xl">
+              <p className="text-xs font-semibold">Fundación Jawira<br/><span className="text-muted-foreground font-medium">Z. Gran Poder, C. Jose Astete, nº 104</span></p>
+            </MarkerPopup>
+          </MapMarker>
+        </Map>
       </div>
     </div>
   )
