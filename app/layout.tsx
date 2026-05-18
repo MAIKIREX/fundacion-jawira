@@ -22,6 +22,7 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://fundacionjawira.org'),
   title: {
     default: 'Fundación JAWIRA | Tecnología, Educación y Salud',
     template: '%s | Fundación JAWIRA'
@@ -64,21 +65,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/logo/logo.jpeg',
+    apple: '/logo/logo.jpeg',
   },
 }
 
