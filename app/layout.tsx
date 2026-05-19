@@ -64,10 +64,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/logo/logo.jpeg',
-    apple: '/logo/logo.jpeg',
-  },
 }
 
 export default function RootLayout({
@@ -77,6 +73,36 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://fundacionjawira.org/#website",
+                  "url": "https://fundacionjawira.org",
+                  "name": "Fundación JAWIRA",
+                  "description": "Tecnología, Educación y Salud en Bolivia",
+                  "publisher": {
+                    "@id": "https://fundacionjawira.org/#organization"
+                  }
+                },
+                {
+                  "@type": "Organization",
+                  "@id": "https://fundacionjawira.org/#organization",
+                  "name": "Fundación JAWIRA",
+                  "url": "https://fundacionjawira.org",
+                  "logo": "https://fundacionjawira.org/icon.png",
+                  "sameAs": []
+                }
+              ]
+            })
+          }}
+        />
+      </head>
       <body className={`${geist.variable} ${geistMono.variable} ${outfit.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
