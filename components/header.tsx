@@ -67,6 +67,7 @@ export default function Header() {
     { label: "Áreas", href: "/areas-de-trabajo" },
     { label: "Centro\nIntegral", href: "/centro-integral" },
     { label: "Impacto", href: "/impacto" },
+    { label: "Actividades", href: "/actividades" },
     { label: "Transparencia", href: "/transparencia" },
     { label: "Contacto", href: "/contacto" },
   ]
