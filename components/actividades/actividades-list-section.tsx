@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
-import { Calendar, Clock, MapPin, Users, CheckCircle } from 'lucide-react'
+import { Calendar, Clock, MapPin, Users, CheckCircle, ExternalLink } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -23,6 +23,8 @@ interface Actividad {
   incluye?: string[]
   imagen: string
   estado: 'proximo' | 'en-curso' | 'finalizado'
+  registroUrl?: string
+  ubicacionUrl?: string
 }
 
 const actividades: Actividad[] = [
@@ -52,6 +54,29 @@ const actividades: Actividad[] = [
     incluye: ['Certificado de participación', 'Material de apoyo', '¡Cupo limitado!'],
     imagen: '/actividades/uno/703105150_122104516274339138_6484863401707773038_n.jpg',
     estado: 'proximo',
+  },
+  {
+    id: 'encuentro-tus-valores-democraticos',
+    tipo: 'Encuentro',
+    titulo: 'Encuentro:',
+    subtitulo: 'Tú con tus valores democráticos',
+    descripcion:
+      'Un espacio de diálogo y reflexión ciudadana orientado a fortalecer los valores democráticos, la participación activa y el compromiso con la sociedad.',
+    fecha: '29 de mayo de 2026',
+    hora: '18:00 – 21:00',
+    lugar: 'Sede Social de Natividad (Lado Monopol, Villa Fátima)',
+    temas: [
+      'Participación ciudadana',
+      'Procesos electorales',
+      'Lucha contra la desinformación',
+      'Espacios de diálogo',
+      'Control social e incidencia pública',
+    ],
+    incluye: ['Certificado de participación', 'Material de apoyo'],
+    imagen: '/actividades/uno/dos.jpg',
+    estado: 'proximo',
+    registroUrl: 'https://forms.gle/JPCq6pG9uXyDoM3z6',
+    ubicacionUrl: 'https://maps.app.goo.gl/KuM5s6335zC4Sv616',
   },
 ]
 
@@ -201,6 +226,37 @@ export default function ActividadesListSection() {
                           </li>
                         ))}
                       </ul>
+                    </div>
+                  )}
+
+                  {/* Links */}
+                  {(actividad.registroUrl || actividad.ubicacionUrl) && (
+                    <div className="pt-6 border-t border-border">
+                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Enlaces</p>
+                      <div className="flex flex-wrap gap-3">
+                        {actividad.registroUrl && (
+                          <a
+                            href={actividad.registroUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Registro al evento
+                          </a>
+                        )}
+                        {actividad.ubicacionUrl && (
+                          <a
+                            href={actividad.ubicacionUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-secondary/10 text-secondary text-sm font-semibold border border-secondary/20 hover:bg-secondary/20 transition-colors"
+                          >
+                            <MapPin className="w-4 h-4" />
+                            Ubicación del lugar
+                          </a>
+                        )}
+                      </div>
                     </div>
                   )}
                 </div>
