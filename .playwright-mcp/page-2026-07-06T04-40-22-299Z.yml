@@ -1,0 +1,401 @@
+- main [ref=e2]:
+  - navigation [ref=e4]:
+    - generic [ref=e5]:
+      - link "Logotipo de Fundación Jawira Fundación JAWIRA" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Logotipo de Fundación Jawira" [ref=e8]
+        - generic [ref=e9]:
+          - generic [ref=e10]: Fundación
+          - generic [ref=e11]: JAWIRA
+      - generic [ref=e12]:
+        - link "Inicio" [ref=e13] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e14]: Inicio
+        - link "La Fundación" [ref=e15] [cursor=pointer]:
+          - /url: /fundacion
+          - generic [ref=e16]: La
+          - generic [ref=e17]: Fundación
+        - link "Áreas" [ref=e18] [cursor=pointer]:
+          - /url: /areas-de-trabajo
+          - generic [ref=e19]: Áreas
+        - link "Centro Integral" [ref=e20] [cursor=pointer]:
+          - /url: /centro-integral
+          - generic [ref=e21]: Centro
+          - generic [ref=e22]: Integral
+        - link "Impacto" [ref=e23] [cursor=pointer]:
+          - /url: /impacto
+          - generic [ref=e24]: Impacto
+        - link "Actividades" [ref=e25] [cursor=pointer]:
+          - /url: /actividades
+          - generic [ref=e26]: Actividades
+        - link "Transparencia" [ref=e27] [cursor=pointer]:
+          - /url: /transparencia
+          - generic [ref=e28]: Transparencia
+        - link "Contacto" [ref=e29] [cursor=pointer]:
+          - /url: /contacto
+          - generic [ref=e30]: Contacto
+      - generic [ref=e31]:
+        - button "Toggle theme" [ref=e33]:
+          - img
+          - img
+          - generic [ref=e34]: Toggle theme
+        - link "Apoyar" [ref=e35] [cursor=pointer]:
+          - /url: /quiero-apoyar
+          - button "Apoyar" [ref=e36]
+  - generic [ref=e38]:
+    - generic:
+      - img
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - generic [ref=e42]: Conócenos
+        - heading "La Fundación JAWIRA" [level=1] [ref=e43]:
+          - text: La Fundación
+          - text: JAWIRA
+        - paragraph [ref=e44]: Una fundación sin fines de lucro que articula tecnología productiva, educación y salud para el desarrollo integral en el Departamento de La Paz, Bolivia.
+        - generic [ref=e45]:
+          - img [ref=e46]
+          - text: Nuestra historia
+      - generic [ref=e49]:
+        - heading "Identidad institucional" [level=3] [ref=e50]
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - img [ref=e54]
+            - generic [ref=e58]:
+              - paragraph [ref=e59]: Sede Principal
+              - paragraph [ref=e60]: Zona Gran Poder, La Paz, Bolivia.
+          - generic [ref=e61]:
+            - img [ref=e63]
+            - generic [ref=e66]:
+              - paragraph [ref=e67]: Alcance Territorial
+              - paragraph [ref=e68]: Áreas urbanas, periurbanas y rurales del Departamento de La Paz.
+          - generic [ref=e69]:
+            - img [ref=e71]
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Estatus Legal
+              - paragraph [ref=e77]: Organización no gubernamental, sin fines de lucro, legalmente establecida.
+  - generic [ref=e81]:
+    - generic [ref=e82]:
+      - generic [ref=e83]:
+        - text: Nuestro nombre
+        - heading "¿Qué significa JAWIRA?" [level=2] [ref=e84]
+      - generic [ref=e85]:
+        - paragraph [ref=e86]: JAWIRA significa “río” en aymara, uno de los idiomas originarios de Bolivia. Esta palabra no es solo una etiqueta, sino una metáfora profunda de nuestra filosofía institucional.
+        - paragraph [ref=e87]: Un río representa el flujo de vida, la conexión continua entre diferentes espacios, y la capacidad de generar oportunidades a su paso. De la misma manera, la Fundación JAWIRA actúa como un cauce que canaliza tecnología productiva, educación y salud hacia comunidades vulnerables.
+        - paragraph [ref=e88]: Así como el río nutre la tierra y conecta ecosistemas, nuestra fundación busca nutrir el potencial humano, conectar actores institucionales y crear caminos hacia el desarrollo sostenible e integral.
+    - generic [ref=e89]:
+      - img [ref=e90]
+      - generic [ref=e101]:
+        - img [ref=e103]
+        - generic [ref=e105]:
+          - paragraph [ref=e106]: Tecnología
+          - paragraph [ref=e107]: Innovación digital
+      - generic [ref=e108]:
+        - img [ref=e110]
+        - generic [ref=e112]:
+          - paragraph [ref=e113]: Educación
+          - paragraph [ref=e114]: Formación integral
+      - generic [ref=e115]:
+        - img [ref=e117]
+        - generic [ref=e120]:
+          - paragraph [ref=e121]: Salud
+          - paragraph [ref=e122]: Prevención y bienestar
+  - generic [ref=e125]:
+    - generic [ref=e126]:
+      - text: Nuestra brújula
+      - heading "Misión y Visión" [level=2] [ref=e127]
+      - paragraph [ref=e128]: La brújula que guía nuestro trabajo y compromiso institucional.
+    - generic [ref=e129]:
+      - generic [ref=e130]:
+        - generic [ref=e131]:
+          - img [ref=e133]
+          - heading "Nuestra Misión" [level=3] [ref=e137]
+        - paragraph [ref=e138]: Promover el desarrollo integral y sostenible de comunidades vulnerables en el Departamento de La Paz, mediante la articulación de tecnología productiva, educación y salud. Buscamos generar oportunidades a través de la investigación, innovación y proyectos participativos que fomenten la equidad, inclusión y empoderamiento con un enfoque interdisciplinario.
+      - generic [ref=e139]:
+        - generic [ref=e140]:
+          - img [ref=e142]
+          - heading "Nuestra Visión" [level=3] [ref=e145]
+        - paragraph [ref=e146]: Ser una institución líder en el Departamento de La Paz, reconocida por su innovación integral, impacto social transformador y contribución a la equidad territorial. Aspiramos a ser un modelo de organización inclusiva que articule actores públicos, privados y comunitarios para construir una Bolivia más justa, equitativa y sostenible.
+  - generic [ref=e149]:
+    - generic [ref=e150]:
+      - text: Lo que nos define
+      - heading "Nuestros valores" [level=2] [ref=e151]
+      - paragraph [ref=e152]: Los principios fundamentales que guían cada decisión y acción en la Fundación JAWIRA.
+    - generic [ref=e153]:
+      - generic [ref=e154]:
+        - img [ref=e156]
+        - heading "Esperanza" [level=3] [ref=e158]
+        - paragraph [ref=e159]: Creemos en el potencial transformador de cada persona y comunidad.
+      - generic [ref=e160]:
+        - img [ref=e162]
+        - heading "Solidaridad" [level=3] [ref=e167]
+        - paragraph [ref=e168]: Trabajamos unidos en la construcción de un futuro compartido.
+      - generic [ref=e169]:
+        - img [ref=e171]
+        - heading "Empatía" [level=3] [ref=e174]
+        - paragraph [ref=e175]: Escuchamos y comprendemos las necesidades de las comunidades.
+      - generic [ref=e176]:
+        - img [ref=e178]
+        - heading "Compromiso" [level=3] [ref=e182]
+        - paragraph [ref=e183]: Nos responsabilizamos de nuestras acciones y resultados.
+      - generic [ref=e184]:
+        - img [ref=e186]
+        - heading "Integridad" [level=3] [ref=e190]
+        - paragraph [ref=e191]: Actuamos con transparencia, honestidad y coherencia ética.
+      - generic [ref=e192]:
+        - img [ref=e194]
+        - heading "Servicio" [level=3] [ref=e199]
+        - paragraph [ref=e200]: Ponemos al servicio de otros nuestros talentos y recursos.
+      - generic [ref=e201]:
+        - img [ref=e203]
+        - heading "Humildad" [level=3] [ref=e206]
+        - paragraph [ref=e207]: Reconocemos que tenemos mucho por aprender.
+      - generic [ref=e208]:
+        - img [ref=e210]
+        - heading "Innovación" [level=3] [ref=e212]
+        - paragraph [ref=e213]: Buscamos soluciones creativas a problemas complejos.
+      - generic [ref=e214]:
+        - img [ref=e216]
+        - heading "Inclusión" [level=3] [ref=e218]
+        - paragraph [ref=e219]: Valoramos la diversidad y garantizamos participación equitativa.
+      - generic [ref=e220]:
+        - img [ref=e222]
+        - heading "Colaboración" [level=3] [ref=e227]
+        - paragraph [ref=e228]: Reconocemos que los retos se resuelven en alianza.
+      - generic [ref=e229]:
+        - img [ref=e231]
+        - heading "Aprendizaje Continuo" [level=3] [ref=e233]
+        - paragraph [ref=e234]: Nos adaptamos y mejoramos constantemente.
+      - generic [ref=e235]:
+        - img [ref=e237]
+        - heading "Sostenibilidad" [level=3] [ref=e240]
+        - paragraph [ref=e241]: Pensamos en el impacto a largo plazo en personas y planeta.
+  - generic [ref=e244]:
+    - generic [ref=e245]:
+      - text: Marco normativo
+      - heading "Principios institucionales" [level=2] [ref=e246]
+      - paragraph [ref=e247]: Alineados con la normativa boliviana y el compromiso con los derechos humanos.
+    - generic [ref=e248]:
+      - button "Ley 045" [ref=e249]:
+        - img [ref=e250]
+        - text: Ley 045
+      - button "Ley 348" [ref=e252]:
+        - img [ref=e253]
+        - text: Ley 348
+    - generic [ref=e255]:
+      - heading "Ley Contra el Racismo y Toda Forma de Discriminación" [level=3] [ref=e257]
+      - generic [ref=e258]:
+        - generic [ref=e259]:
+          - heading "Igualdad" [level=4] [ref=e260]
+          - paragraph [ref=e261]: Garantizamos que todas las personas tienen iguales derechos y oportunidades, sin importar su origen étnico, género, edad o condición social.
+        - generic [ref=e262]:
+          - heading "No Discriminación" [level=4] [ref=e263]
+          - paragraph [ref=e264]: Rechazamos toda forma de discriminación y trabajamos activamente para eliminar barreras que afecten a poblaciones vulnerables.
+        - generic [ref=e265]:
+          - heading "Interculturalidad" [level=4] [ref=e266]
+          - paragraph [ref=e267]: Valoramos y respetamos la diversidad cultural, lingüística y de cosmovisiones de los pueblos originarios y comunidades.
+        - generic [ref=e268]:
+          - heading "Respeto a la Diversidad" [level=4] [ref=e269]
+          - paragraph [ref=e270]: Reconocemos que la diversidad es una fortaleza que enriquece nuestras acciones y visión institucional.
+  - generic [ref=e273]:
+    - generic [ref=e274]:
+      - text: Metodología
+      - heading "Nuestro enfoque" [level=2] [ref=e275]
+      - paragraph [ref=e276]: La metodología y principios que guían el diseño e implementación de nuestros proyectos.
+    - generic [ref=e277]:
+      - generic [ref=e278]:
+        - img [ref=e280]
+        - generic [ref=e282]:
+          - heading "Articulación Integral" [level=3] [ref=e283]
+          - paragraph [ref=e284]: Conectamos tecnología productiva, educación y salud para crear soluciones comprehensivas.
+      - generic [ref=e285]:
+        - img [ref=e287]
+        - generic [ref=e289]:
+          - heading "Investigación e Innovación" [level=3] [ref=e290]
+          - paragraph [ref=e291]: Diseñamos proyectos basados en diagnósticos rigurosos y soluciones innovadoras.
+      - generic [ref=e292]:
+        - img [ref=e294]
+        - generic [ref=e299]:
+          - heading "Comunidades Prioritarias" [level=3] [ref=e300]
+          - paragraph [ref=e301]: Priorizamos nuestro trabajo en poblaciones vulnerables y marginalizadas.
+      - generic [ref=e302]:
+        - img [ref=e304]
+        - generic [ref=e307]:
+          - heading "ODS Alineados" [level=3] [ref=e308]
+          - paragraph [ref=e309]: Contribuimos a los Objetivos de Desarrollo Sostenible 3 (Salud), 4 (Educación) y 9 (Innovación).
+      - generic [ref=e310]:
+        - img [ref=e312]
+        - generic [ref=e317]:
+          - heading "Enfoque Interdisciplinario" [level=3] [ref=e318]
+          - paragraph [ref=e319]: Trabajamos con profesionales de diversas disciplinas para abordar la complejidad de los desafíos sociales.
+      - generic [ref=e320]:
+        - img [ref=e322]
+        - generic [ref=e324]:
+          - heading "Participación Comunitaria" [level=3] [ref=e325]
+          - paragraph [ref=e326]: Las comunidades son protagonistas de las decisiones y procesos que las afectan.
+    - generic [ref=e328]:
+      - generic [ref=e329]: Enfoque territorial
+      - generic [ref=e330]:
+        - paragraph [ref=e331]: La Fundación JAWIRA tiene su principal foco de acción en el Departamento de La Paz, particularmente en sus zonas urbanas, periurbanas y rurales. Con sede en la ciudad de La Paz, en la Zona Gran Poder, somos una institución con raíces territoriales profundas y vocación de expansión nacional.
+        - paragraph [ref=e332]: Trabajamos en alianza con actores locales, gobiernos municipales, organizaciones comunitarias e instituciones educativas y de salud para generar impacto sostenible en la región.
+  - generic [ref=e335]:
+    - generic [ref=e336]:
+      - text: Presencia territorial
+      - heading "Dónde trabajamos" [level=2] [ref=e337]
+      - paragraph [ref=e338]: Una institución con presencia territorial comprometida con La Paz.
+    - generic [ref=e339]:
+      - generic [ref=e340]:
+        - generic [ref=e341]:
+          - img [ref=e343]
+          - generic [ref=e346]:
+            - 'heading "Foco principal: La Paz" [level=3] [ref=e347]'
+            - paragraph [ref=e348]: El Departamento de La Paz es nuestro territorio prioritario de acción, con énfasis en zonas urbanas, periurbanas y rurales donde existe mayor vulnerabilidad.
+        - generic [ref=e349]:
+          - img [ref=e351]
+          - generic [ref=e353]:
+            - heading "Sede institucional" [level=3] [ref=e354]
+            - paragraph [ref=e355]: Ubicada en la ciudad de La Paz, Zona Gran Poder. Desde aquí coordinamos nuestros programas y nos conectamos con actores locales e institucionales.
+        - generic [ref=e356]:
+          - img [ref=e358]
+          - generic [ref=e361]:
+            - heading "Vocación de expansión" [level=3] [ref=e362]
+            - paragraph [ref=e363]: Con aprendizajes sólidos en La Paz, aspiramos a expandir nuestro modelo a otras regiones del país, replicando nuestro enfoque integral de desarrollo.
+      - generic [ref=e364]:
+        - img "Mapa de cobertura territorial de Fundación JAWIRA" [ref=e366]
+        - generic [ref=e368]:
+          - paragraph [ref=e369]: Departamento de La Paz, Bolivia
+          - paragraph [ref=e370]: Zonas urbanas, periurbanas y rurales
+  - generic [ref=e373]:
+    - generic [ref=e374]:
+      - generic [ref=e375]:
+        - generic [ref=e376]:
+          - generic [ref=e377]: Directorio y Equipo
+          - heading "Profesionales que impulsan el cambio." [level=2] [ref=e378]:
+            - text: Profesionales que
+            - text: impulsan el cambio.
+        - paragraph [ref=e379]: La Fundación JAWIRA cuenta con un equipo interdisciplinario compuesto por expertos en salud, educación, tecnología e investigación.
+      - region [ref=e381]:
+        - generic [ref=e383]:
+          - group [ref=e384]:
+            - generic [ref=e385]:
+              - img "Lic. Jose Tambo" [ref=e387]
+              - generic [ref=e388]:
+                - generic [ref=e391]: Presidente Ejecutivo
+                - heading "Lic. Jose Tambo" [level=3] [ref=e392]
+                - paragraph [ref=e393]: Director
+          - group [ref=e394]:
+            - generic [ref=e395]:
+              - img "Ing. Tupac Lima Chuquimia" [ref=e397]
+              - generic [ref=e398]:
+                - generic [ref=e401]: Tecnología
+                - heading "Ing. Tupac Lima Chuquimia" [level=3] [ref=e402]
+                - paragraph [ref=e403]: Coordinador en Desarrollo Productivo
+          - group [ref=e404]:
+            - generic [ref=e405]:
+              - img "Dr. Henrry Patty" [ref=e407]
+              - generic [ref=e408]:
+                - generic [ref=e411]: Salud
+                - heading "Dr. Henrry Patty" [level=3] [ref=e412]
+                - paragraph [ref=e413]: Coordinador de Proyectos
+          - group [ref=e414]:
+            - generic [ref=e415]:
+              - img "Abg. Angel Quispe" [ref=e417]
+              - generic [ref=e418]:
+                - generic [ref=e421]: Secretario General
+                - heading "Abg. Angel Quispe" [level=3] [ref=e422]
+                - paragraph [ref=e423]: Coordinador Jurídico
+          - group [ref=e424]:
+            - generic [ref=e425]:
+              - generic [ref=e427]:
+                - img [ref=e428]
+                - generic [ref=e431]: Fotografía pendiente
+              - generic [ref=e432]:
+                - generic [ref=e435]: Investigación
+                - heading "Dra. Ana Ramos" [level=3] [ref=e436]
+                - paragraph [ref=e437]: Responsable de Investigación
+          - group [ref=e438]:
+            - generic [ref=e439]:
+              - generic [ref=e441]:
+                - img [ref=e442]
+                - generic [ref=e445]: Fotografía pendiente
+              - generic [ref=e446]:
+                - generic [ref=e449]: Territorio
+                - heading "Lic. Carlos Pinto" [level=3] [ref=e450]
+                - paragraph [ref=e451]: Coordinador Territorial
+    - generic [ref=e452]:
+      - generic [ref=e453]:
+        - generic [ref=e454]: Red de colaboración
+        - heading "Aliados institucionales" [level=2] [ref=e455]
+        - paragraph [ref=e456]: La Fundación JAWIRA trabaja en alianza estratégica con instituciones públicas, privadas y comunitarias para amplificar nuestro impacto.
+      - generic [ref=e458]:
+        - img "Fundación Qamañani Arka" [ref=e461]
+        - img "Aliado 1" [ref=e464]
+        - img "Aliado 2" [ref=e467]
+        - img "Aliado 3" [ref=e470]
+        - img "Aliado 4" [ref=e473]
+        - img "Fundación Qamañani Arka" [ref=e476]
+        - img "Aliado 1" [ref=e479]
+        - img "Aliado 2" [ref=e482]
+        - img "Aliado 3" [ref=e485]
+        - img "Aliado 4" [ref=e488]
+      - link "Explorar oportunidades de colaboración" [ref=e490] [cursor=pointer]:
+        - /url: /contacto
+        - text: Explorar oportunidades de colaboración
+        - img [ref=e491]
+  - generic [ref=e494]:
+    - generic [ref=e496]:
+      - generic [ref=e497]:
+        - link "Logotipo de Fundación Jawira Fundación JAWIRA" [ref=e498] [cursor=pointer]:
+          - /url: /
+          - img "Logotipo de Fundación Jawira" [ref=e500]
+          - generic [ref=e501]:
+            - generic [ref=e502]: Fundación
+            - generic [ref=e503]: JAWIRA
+        - paragraph [ref=e504]: Tecnología, educación y salud para el desarrollo integral en el Departamento de La Paz, Bolivia.
+      - generic [ref=e505]:
+        - heading "Sobre nosotros" [level=4] [ref=e506]
+        - list [ref=e507]:
+          - listitem [ref=e508]:
+            - link "La Fundación" [ref=e509] [cursor=pointer]:
+              - /url: /fundacion
+          - listitem [ref=e510]:
+            - link "Áreas de trabajo" [ref=e511] [cursor=pointer]:
+              - /url: /areas-de-trabajo
+          - listitem [ref=e512]:
+            - link "Centro Integral" [ref=e513] [cursor=pointer]:
+              - /url: /centro-integral
+      - generic [ref=e514]:
+        - heading "Recursos" [level=4] [ref=e515]
+        - list [ref=e516]:
+          - listitem [ref=e517]:
+            - link "Impacto" [ref=e518] [cursor=pointer]:
+              - /url: /impacto
+          - listitem [ref=e519]:
+            - link "Transparencia" [ref=e520] [cursor=pointer]:
+              - /url: /transparencia
+          - listitem [ref=e521]:
+            - link "Contacto" [ref=e522] [cursor=pointer]:
+              - /url: /contacto
+      - generic [ref=e523]:
+        - heading "Contacto" [level=4] [ref=e524]
+        - list [ref=e525]:
+          - listitem [ref=e526]:
+            - img [ref=e527]
+            - link "fundacion.jawira@gmail.com" [ref=e530] [cursor=pointer]:
+              - /url: mailto:fundacion.jawira@gmail.com
+          - listitem [ref=e531]:
+            - img [ref=e532]
+            - generic [ref=e534]: +591 64208172
+          - listitem [ref=e535]:
+            - img [ref=e536]
+            - generic [ref=e539]:
+              - text: La Paz, Zona Gran Poder
+              - text: Bolivia
+    - generic [ref=e541]:
+      - paragraph [ref=e542]: © 2026 Fundación JAWIRA. Todos los derechos reservados.
+      - generic [ref=e543]:
+        - link "Facebook" [ref=e544] [cursor=pointer]:
+          - /url: "#"
+        - link "Instagram" [ref=e545] [cursor=pointer]:
+          - /url: "#"
+        - link "LinkedIn" [ref=e546] [cursor=pointer]:
+          - /url: "#"
