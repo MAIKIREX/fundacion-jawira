@@ -5,14 +5,23 @@ import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 
-export function ModeToggle() {
+import { cn } from "@/lib/utils"
+
+export interface ModeToggleProps {
+  className?: string
+}
+
+export function ModeToggle({ className }: ModeToggleProps) {
   const { theme, setTheme } = useTheme()
 
   return (
     <Button
       variant="outline"
       size="icon"
-      className="rounded-full bg-transparent border-border text-foreground hover:bg-accent hover:text-accent-foreground transition-all"
+      className={cn(
+        "rounded-full bg-transparent border-border text-foreground hover:bg-accent hover:text-accent-foreground transition-all cursor-pointer",
+        className
+      )}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       title="Cambiar tema"
     >

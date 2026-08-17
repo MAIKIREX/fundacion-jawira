@@ -1,14 +1,39 @@
 'use client'
 
 import { useRef } from 'react'
-import Image from 'next/image'
-import { ArrowDownRight, TrendingUp, Users, Map } from 'lucide-react'
+import { Map, TrendingUp, Users, ArrowDown, Sparkles } from 'lucide-react'
+import { JawiraButton } from '@/components/ui/jawira-button'
+import RiverFlowLines from '@/components/ui/river-flow-lines'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
 import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(useGSAP)
+}
+
+const impactoHeroCards = [
+  {
+    icon: Map,
+    metric: 'LA PAZ',
+    title: 'Foco Territorial',
+    description: 'Cobertura en áreas urbanas, periurbanas y rurales de La Paz.',
+    badgeColor: 'text-[#68CE2B] bg-[#68CE2B]/10 border-[#68CE2B]/30',
+  },
+  {
+    icon: TrendingUp,
+    metric: '3 EJES',
+    title: 'Ejes de Intervención',
+    description: 'Tecnología Productiva, Educación Integral y Salud Preventiva.',
+    badgeColor: 'text-[#FFA826] bg-[#FFA826]/10 border-[#FFA826]/30',
+  },
+  {
+    icon: Users,
+    metric: '2026–2034',
+    title: 'Horizonte Temporal',
+    description: 'Metas a corto, mediano y largo plazo con evaluación periódica.',
+    badgeColor: 'text-sky-400 bg-sky-400/10 border-sky-400/30',
+  },
+]
 
 export default function ImpactoHeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -17,146 +42,160 @@ export default function ImpactoHeroSection() {
     const mm = gsap.matchMedia()
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      const tl = gsap.timeline()
+      const tl = gsap.timeline({ defaults: { ease: 'expo.out' } })
 
-      // 1. Immersive Image Reveal
-      tl.fromTo('.hero-image-wrapper', 
-        { clipPath: 'inset(100% 0% 0% 0%)' },
-        { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'power4.inOut' }
+      tl.fromTo(
+        '.reveal-impacto-title',
+        { y: 30, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 1.1,
+          stagger: 0.08,
+        },
+        0.1
       )
 
-      // Parallax for image
-      gsap.to('.hero-image', {
-        y: 80,
-        scale: 1.1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: true
-        }
-      })
+      tl.fromTo(
+        '.reveal-impacto-desc',
+        { y: 25, autoAlpha: 0 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.9,
+          stagger: 0.1,
+        },
+        0.3
+      )
 
-      // 2. Pre-title
-      tl.from('.hero-pretitle', { y: 20, autoAlpha: 0, duration: 0.6, ease: 'power2.out' }, '-=0.8')
-
-      // 3. SplitText Title
-      SplitText.create('.hero-title', {
-        type: 'chars, words',
-        mask: 'words',
-        autoSplit: true,
-        onSplit(self) {
-          return gsap.from(self.chars, {
-            y: '100%',
-            autoAlpha: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            stagger: 0.02,
-            delay: 1.0 // Sync with image
-          })
-        }
-      })
-
-      // 4. Description and CTA
-      tl.from('.hero-desc', { y: 20, autoAlpha: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-        .from('.hero-cta', { y: 15, autoAlpha: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3')
-
-      // 5. Right Sidebar Metrics
-      tl.from('.hero-metric-title', { y: 20, autoAlpha: 0, duration: 0.5, ease: 'power3.out' }, '-=0.5')
-        .from('.hero-metric-item', { y: 20, autoAlpha: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out' }, '-=0.4')
-
-      // Hover Micro-interactions for Metrics
-      const metrics = gsap.utils.toArray<HTMLElement>('.hero-metric-item')
-      metrics.forEach(metric => {
-        const icon = metric.querySelector('.hero-metric-icon')
-        if (!icon) return
-        metric.addEventListener('mouseenter', () => gsap.to(icon, { scale: 1.15, duration: 0.3, ease: 'back.out(1.5)' }))
-        metric.addEventListener('mouseleave', () => gsap.to(icon, { scale: 1, duration: 0.4, ease: 'power2.out' }))
-      })
+      tl.fromTo(
+        '.impacto-hero-card-item',
+        { x: 40, autoAlpha: 0 },
+        {
+          x: 0,
+          autoAlpha: 1,
+          duration: 0.8,
+          stagger: 0.1,
+        },
+        0.4
+      )
     })
   }, { scope: sectionRef })
 
+  const scrollToContent = () => {
+    const el = document.getElementById('vision-impacto') || document.getElementById('cobertura-territorial')
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
-    <section ref={sectionRef} className="relative pt-32 pb-24 md:pt-40 md:pb-32 bg-background overflow-hidden border-b border-border min-h-[90vh] flex items-center">
-      
-      {/* Immersive Image Background Wrapper */}
-      <div className="hero-image-wrapper absolute inset-0 z-0 overflow-hidden" style={{ willChange: 'clip-path' }}>
-        <div className="absolute inset-0 bg-background/85 md:bg-background/75 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
-        
-        <Image 
-          src="/urban-rural-landscape-bolivia-coverage-areas-map.png"
-          alt="Impacto territorial Fundación Jawira"
-          fill
-          priority
-          className="hero-image object-cover object-center opacity-80 mix-blend-luminosity"
-          style={{ willChange: 'transform' }}
-        />
+    <section
+      ref={sectionRef}
+      data-header-theme="dark"
+      className="relative min-h-[88vh] flex flex-col justify-between overflow-hidden bg-[#1B361F] text-white pt-28 pb-16 md:pt-36 md:pb-24 border-b border-white/10"
+    >
+      {/* Fondo de Resplandor Radial & Líneas de Río */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-radial-[circle_at_30%_30%] from-[#2C5233] via-[#1B361F] to-[#122415]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#122415]/95 via-transparent to-[#1B361F]/40" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-20 items-start">
-          
-          {/* Left: Massive Typography */}
-          <div>
-            <span className="hero-pretitle text-xs font-bold tracking-widest uppercase text-secondary block mb-6">
-              Visión 2026 – 2034
-            </span>
-            <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-bold text-foreground tracking-tighter leading-[1.05]">
-              Impacto y <br className="hidden md:block" />
-              cobertura
-            </h1>
-            <p className="hero-desc text-lg md:text-xl text-foreground/80 mt-8 leading-relaxed max-w-xl font-medium">
-              Trabajamos por el desarrollo integral en el Departamento de La Paz, con una visión de impacto sostenible y equitativo.
-            </p>
+      <RiverFlowLines className="opacity-25 z-0" />
 
-            <div className="hero-cta flex items-center gap-2 text-sm font-bold text-primary/80 uppercase tracking-widest mt-12">
-              <ArrowDownRight className="w-5 h-5" />
-              Conoce los resultados
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-between">
+        
+        {/* Rejilla Principal de Contenido */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center my-auto py-8">
+          
+          {/* Columna Izquierda: Encabezado y Acciones */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* Insignia Monospaciada */}
+            <div className="overflow-hidden">
+              <span className="reveal-impacto-title inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-mono font-bold tracking-widest uppercase text-[#68CE2B]">
+                <span className="w-2 h-2 rounded-full bg-[#50AA1E] animate-pulse" />
+                <span>Visión 2026 – 2034 · Medición & Transparencia</span>
+              </span>
             </div>
+
+            {/* Título Principal H1 */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-sans font-bold leading-[1.05] tracking-[-0.03em] text-white">
+              <div className="overflow-hidden">
+                <span className="reveal-impacto-title block">Impacto y</span>
+              </div>
+              <div className="overflow-hidden">
+                <span className="reveal-impacto-title block text-[#68CE2B]">Cobertura</span>
+              </div>
+            </h1>
+
+            {/* Descripción del Hero */}
+            <div className="overflow-hidden">
+              <p className="reveal-impacto-desc text-base sm:text-lg md:text-xl text-white/85 leading-relaxed font-normal max-w-2xl">
+                Trabajamos por el desarrollo integral medible en el Departamento de La Paz, articulando tecnología, educación y salud con una visión de impacto sostenible y transparente.
+              </p>
+            </div>
+
+            {/* Botones de Acción JawiraButton */}
+            <div className="overflow-hidden pt-3">
+              <div className="reveal-impacto-desc flex flex-wrap items-center gap-4">
+                <JawiraButton variant="secondary" size="lg" onClick={scrollToContent}>
+                  <span>Explorar Metas</span>
+                  <ArrowDown className="w-4 h-4" />
+                </JawiraButton>
+
+                <JawiraButton variant="outline-white" size="lg" href="#cobertura-territorial">
+                  <span>Ver Cobertura</span>
+                </JawiraButton>
+              </div>
+            </div>
+
           </div>
 
-          {/* Right: Data/Metric Grid */}
-          <div className="space-y-6 lg:pt-8">
-            <h3 className="hero-metric-title text-xs font-bold tracking-widest uppercase text-secondary">Proyecciones principales</h3>
-            
-            <div className="grid gap-px bg-border/40 border border-border/40 rounded-2xl overflow-hidden shadow-xl backdrop-blur-md">
-              <div className="hero-metric-item bg-background/60 p-6 flex items-center gap-5 group hover:bg-background/80 transition-colors">
-                <div className="hero-metric-icon w-12 h-12 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg" style={{ willChange: 'transform' }}>
-                  <Map className="w-5 h-5 text-primary-foreground" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground tracking-tight">La Paz</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-1">Foco territorial</p>
-                </div>
-              </div>
+          {/* Columna Derecha: Tarjetas Interactivas de Indicadores */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="overflow-hidden mb-2">
+              <h3 className="reveal-impacto-title text-xs font-mono font-bold tracking-widest uppercase text-[#68CE2B] flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Proyecciones Principales</span>
+              </h3>
+            </div>
 
-              <div className="hero-metric-item bg-background/60 p-6 flex items-center gap-5 group hover:bg-background/80 transition-colors">
-                <div className="hero-metric-icon w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center flex-shrink-0 shadow-lg" style={{ willChange: 'transform' }}>
-                  <TrendingUp className="w-5 h-5 text-secondary-foreground" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground tracking-tight">3 Áreas</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-1">Ejes de intervención</p>
-                </div>
-              </div>
+            <div className="space-y-3.5">
+              {impactoHeroCards.map((card) => {
+                const IconComponent = card.icon
+                return (
+                  <div
+                    key={card.title}
+                    className="impacto-hero-card-item w-full text-left bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 flex items-start gap-4 transition-all duration-300 hover:bg-white/20 hover:border-white/30 group"
+                  >
+                    <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm group-hover:scale-105 transition-transform">
+                      <IconComponent className="w-5 h-5 text-[#68CE2B]" />
+                    </div>
 
-              <div className="hero-metric-item bg-background/60 p-6 flex items-center gap-5 group hover:bg-background/80 transition-colors">
-                <div className="hero-metric-icon w-12 h-12 rounded-2xl bg-accent flex items-center justify-center flex-shrink-0 shadow-lg" style={{ willChange: 'transform' }}>
-                  <Users className="w-5 h-5 text-accent-foreground" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold text-foreground tracking-tight">Largo plazo</p>
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mt-1">Horizonte temporal</p>
-                </div>
-              </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <h4 className="text-base font-bold text-white tracking-tight group-hover:text-[#68CE2B] transition-colors">
+                          {card.title}
+                        </h4>
+                        <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${card.badgeColor}`}>
+                          {card.metric}
+                        </span>
+                      </div>
+                      <p className="text-xs text-white/80 leading-relaxed font-normal">
+                        {card.description}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
         </div>
+
       </div>
     </section>
   )
 }
+

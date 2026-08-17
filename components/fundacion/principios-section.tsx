@@ -1,231 +1,225 @@
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
-import { Shield, Heart } from 'lucide-react'
+import React, { useState, useRef } from 'react'
+import { Plus, Minus, Scale, Shield, Users, Sparkles, Heart, Users2, Waves, Sun } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP)
+}
 
-const tabs = [
+interface PrincipleCard {
+  title: string
+  description: string
+  icon: any
+}
+
+interface LawAccordionItem {
+  id: string
+  title: string
+  description: string
+  principles: PrincipleCard[]
+}
+
+const LAWS_DATA: LawAccordionItem[] = [
   {
     id: 'ley045',
-    icon: Shield,
-    label: 'Ley 045',
-    title: 'Ley Contra el Racismo y Toda Forma de Discriminación',
+    title: 'Ley 045 — Contra el Racismo y Toda Forma de Discriminación',
+    description: 'Marco normativo que garantiza la igualdad de derechos y prohíbe toda forma de distinción en nuestras acciones.',
     principles: [
       {
         title: 'Igualdad',
-        description: 'Garantizamos que todas las personas tienen iguales derechos y oportunidades, sin importar su origen étnico, género, edad o condición social.',
+        description: 'Garantizamos que todas las personas tienen iguales derechos y oportunidades sin distinción alguna.',
+        icon: Scale,
       },
       {
         title: 'No Discriminación',
-        description: 'Rechazamos toda forma de discriminación y trabajamos activamente para eliminar barreras que afecten a poblaciones vulnerables.',
+        description: 'Rechazamos y prevenimos activamente cualquier barrera o prejuicio en nuestras intervenciones.',
+        icon: Shield,
       },
       {
         title: 'Interculturalidad',
-        description: 'Valoramos y respetamos la diversidad cultural, lingüística y de cosmovisiones de los pueblos originarios y comunidades.',
+        description: 'Respetamos y enriquecemos el diálogo con las cosmovisiones de los pueblos originarios.',
+        icon: Users,
       },
       {
-        title: 'Respeto a la Diversidad',
-        description: 'Reconocemos que la diversidad es una fortaleza que enriquece nuestras acciones y visión institucional.',
+        title: 'Diversidad',
+        description: 'Reconocemos la pluralidad cultural como fortaleza fundamental del desarrollo comunitario.',
+        icon: Sparkles,
       },
     ],
   },
   {
     id: 'ley348',
-    icon: Heart,
-    label: 'Ley 348',
-    title: 'Ley Integral contra la Violencia hacia las Mujeres',
+    title: 'Ley 348 — Garantizar a las Mujeres una Vida Libre de Violencia',
+    description: 'Compromiso institucional irrestricto con la protección integral y la equidad de género.',
     principles: [
       {
         title: 'Vida Libre de Violencia',
-        description: 'Trabajamos para garantizar que todas las mujeres puedan vivir sin violencia física, psicológica, sexual o patrimonial.',
+        description: 'Promovemos espacios seguros y libres de violencia física, psicológica o patrimonial.',
+        icon: Heart,
       },
       {
         title: 'Equidad de Género',
-        description: 'Promovemos la igualdad de derechos y oportunidades entre hombres y mujeres en todos nuestros proyectos.',
+        description: 'Fomentamos la igualdad de oportunidades y liderazgo compartido entre hombres y mujeres.',
+        icon: Users2,
       },
       {
         title: 'Cultura de Paz',
-        description: 'Fomentamos relaciones respetuosas, dialógicas y libres de violencia en todas las comunidades con las que trabajamos.',
+        description: 'Impulsamos relaciones dialógicas y armónicas en cada comunidad donde intervenimos.',
+        icon: Waves,
       },
       {
-        title: 'Respeto y Dignidad',
-        description: 'Reconocemos la dignidad inherente de todas las personas y el derecho al trato respetuoso y sin discriminación.',
+        title: 'Dignidad Humana',
+        description: 'Reconocemos el valor inherente de cada persona y el trato con respeto absoluto.',
+        icon: Sun,
       },
     ],
   },
 ]
 
 export default function PrincipiosSection() {
-  const [activeTab, setActiveTab] = useState('ley045')
+  // Estado para controlar qué acordeones están abiertos (por defecto el primero está abierto)
+  const [openItems, setOpenItems] = useState<Record<string, boolean>>({
+    ley045: true,
+    ley348: false,
+  })
+
   const sectionRef = useRef<HTMLElement>(null)
-  const contentRef = useRef<HTMLDivElement>(null)
-  const activeData = tabs.find(t => t.id === activeTab)!
 
   useGSAP(() => {
     const mm = gsap.matchMedia()
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // --- Header reveal ---
-      const headerTl = gsap.timeline({
+      gsap.from('.principios-header', {
+        y: 40,
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: '.principios-header',
           start: 'top 85%',
-          toggleActions: 'play reverse play reverse',
+          once: true,
         },
       })
 
-      headerTl
-        .from('.principios-subtitle', {
-          y: 20,
-          autoAlpha: 0,
-          duration: 0.5,
-          ease: 'power3.out',
-        })
-        .from('.principios-title', {
-          y: 30,
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: 'power3.out',
-        }, '-=0.3')
-        .from('.principios-desc', {
-          y: 20,
-          autoAlpha: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        }, '-=0.2')
-
-      // --- Tab buttons entrance ---
-      gsap.from('.principios-tab-btn', {
-        y: 15,
-        autoAlpha: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: '.principios-tabs',
-          start: 'top 85%',
-          toggleActions: 'play reverse play reverse',
-        },
-      })
-
-      // --- Content block entrance ---
-      gsap.from('.principios-content', {
-        y: 40,
+      gsap.from('.accordion-item', {
+        y: 35,
         autoAlpha: 0,
         duration: 0.7,
-        ease: 'power3.out',
+        stagger: 0.15,
+        ease: 'power2.out',
         scrollTrigger: {
-          trigger: '.principios-content',
+          trigger: '.accordion-list',
           start: 'top 85%',
-          toggleActions: 'play reverse play reverse',
+          once: true,
         },
       })
     })
   }, { scope: sectionRef })
 
-  const handleTabChange = useCallback((tabId: string) => {
-    if (tabId === activeTab || !contentRef.current) return
-
-    const contentEl = contentRef.current
-
-    // Animate out current content
-    gsap.to(contentEl, {
-      autoAlpha: 0,
-      y: -15,
-      duration: 0.25,
-      ease: 'power2.in',
-      onComplete: () => {
-        setActiveTab(tabId)
-        // Animate in new content after state update
-        gsap.fromTo(contentEl,
-          { autoAlpha: 0, y: 15 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.35,
-            ease: 'power3.out',
-            delay: 0.05,
-          }
-        )
-
-        // Stagger principle cards
-        gsap.fromTo('.principle-card',
-          { autoAlpha: 0, y: 20 },
-          {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.4,
-            ease: 'power2.out',
-            stagger: 0.08,
-            delay: 0.15,
-          }
-        )
-      },
-    })
-  }, [activeTab])
+  const toggleItem = (id: string) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="principios-header mb-16 max-w-2xl">
-          <span className="principios-subtitle text-xs font-semibold tracking-widest uppercase text-secondary">
-            Marco normativo
+    <section
+      id="principios"
+      ref={sectionRef}
+      data-header-theme="light"
+      className="relative w-full py-24 sm:py-28 md:py-32 bg-[#F5F2EB] dark:bg-[#0D1524] text-[#1B361F] dark:text-[#F8FAFC] border-b border-[#1B361F]/10 dark:border-white/10"
+    >
+      <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
+        
+        {/* =========================================================
+            1. ENCABEZADO EDITORIAL
+            ========================================================= */}
+        <div className="principios-header max-w-3xl space-y-3 mb-16 sm:mb-20 md:mb-24">
+          <span className="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#50AA1E] dark:text-[#68CE2B] block">
+            MARCO NORMATIVO Y ÉTICO
           </span>
-          <h2 className="principios-title text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
-            Principios institucionales
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-sans font-medium text-[#1B361F] dark:text-white tracking-[-0.03em] leading-[1.08]">
+            Principios Institucionales
           </h2>
-          <p className="principios-desc text-base text-muted-foreground mt-4 leading-relaxed">
-            Alineados con la normativa boliviana y el compromiso con los derechos humanos.
+          <p className="text-base sm:text-lg text-[#4A634E] dark:text-slate-300 max-w-2xl leading-relaxed font-normal pt-1">
+            Nuestras acciones se fundamentan en la legislación boliviana y en la garantía permanente de los derechos humanos.
           </p>
         </div>
 
-        {/* Custom tab switcher */}
-        <div className="principios-tabs flex gap-2 mb-10">
-          {tabs.map((tab) => {
-            const Icon = tab.icon
+        {/* =========================================================
+            2. CONTENEDORES ACCORDION ESTILO EXACTO DE LA IMAGEN DE REFERENCIA
+            ========================================================= */}
+        <div className="accordion-list space-y-6 sm:space-y-8">
+          {LAWS_DATA.map((law) => {
+            const isOpen = openItems[law.id]
+
             return (
-              <button
-                key={tab.id}
-                onClick={() => handleTabChange(tab.id)}
-                className={`principios-tab-btn flex items-center gap-2.5 px-5 py-3 rounded-xl text-sm font-semibold transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'bg-background text-muted-foreground hover:bg-background/80 border border-border/60'
-                }`}
+              <div
+                key={law.id}
+                className="accordion-item bg-[#ECE8DF] dark:bg-[#152033] rounded-3xl p-6 sm:p-8 md:p-10 transition-all duration-300"
               >
-                <Icon className="w-4 h-4" />
-                {tab.label}
-              </button>
+                {/* Accordion Header Button */}
+                <button
+                  onClick={() => toggleItem(law.id)}
+                  className="w-full flex items-center justify-between gap-4 text-left group cursor-pointer focus:outline-none"
+                  aria-expanded={isOpen}
+                >
+                  <span className="text-xl sm:text-2xl md:text-3xl font-sans font-medium text-[#1B361F] dark:text-white tracking-tight group-hover:text-[#50AA1E] dark:group-hover:text-[#68CE2B] transition-colors">
+                    {law.title}
+                  </span>
+
+                  <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/60 dark:bg-white/10 flex items-center justify-center text-[#1B361F] dark:text-white flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
+                    {isOpen ? (
+                      <Minus className="w-5 h-5 stroke-[2]" />
+                    ) : (
+                      <Plus className="w-5 h-5 stroke-[2]" />
+                    )}
+                  </span>
+                </button>
+
+                {/* Accordion Collapsible Body */}
+                {isOpen && (
+                  <div className="pt-6 sm:pt-8 transition-all duration-300">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                      {law.principles.map((principle) => {
+                        const IconComp = principle.icon
+                        return (
+                          <div
+                            key={principle.title}
+                            className="bg-white dark:bg-[#0D1524] rounded-2xl p-6 flex flex-col justify-between min-h-[220px] shadow-sm transition-transform duration-300 hover:-translate-y-1 hover:shadow-md"
+                          >
+                            {/* Card Title */}
+                            <h4 className="text-lg font-bold text-[#1B361F] dark:text-white tracking-tight">
+                              {principle.title}
+                            </h4>
+
+                            {/* Centered Line Art Icon */}
+                            <div className="my-6 w-full flex justify-center text-[#4D6934] dark:text-[#68CE2B]">
+                              <div className="w-12 h-12 rounded-full bg-[#F5F2EB] dark:bg-[#162238] flex items-center justify-center">
+                                <IconComp className="w-6 h-6 stroke-[1.5]" />
+                              </div>
+                            </div>
+
+                            {/* Bottom Concise Description Label */}
+                            <p className="text-xs sm:text-sm text-[#3E5642] dark:text-slate-300 font-normal leading-relaxed">
+                              {principle.description}
+                            </p>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                )}
+              </div>
             )
           })}
         </div>
 
-        {/* Content */}
-        <div ref={contentRef} className="principios-content bg-background rounded-2xl border border-border/60 overflow-hidden">
-          <div className="p-8 md:p-10 border-b border-border/60">
-            <h3 className="text-xl font-bold text-primary tracking-tight">
-              {activeData.title}
-            </h3>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-px bg-border/40">
-            {activeData.principles.map((principle) => (
-              <div key={principle.title} className="principle-card bg-background p-8 md:p-10 space-y-3">
-                <h4 className="text-base font-semibold text-primary tracking-tight">
-                  {principle.title}
-                </h4>
-                <p className="text-sm text-foreground/70 leading-relaxed">
-                  {principle.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )

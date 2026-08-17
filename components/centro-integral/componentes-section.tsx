@@ -1,171 +1,252 @@
 'use client'
 
-import { useRef } from 'react'
-import { Zap, BookOpen, Heart } from 'lucide-react'
+import { useState, useRef } from 'react'
+import {
+  Plus,
+  Minus,
+  Cpu,
+  Code2,
+  Globe,
+  Factory,
+  Laptop,
+  GraduationCap,
+  FileText,
+  Users,
+  Activity,
+  ShieldCheck,
+  UserCheck,
+  PlusCircle,
+  LucideIcon,
+} from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const componentes = [
+interface SubCard {
+  title: string
+  icon: LucideIcon
+  description: string
+}
+
+interface ComponentItem {
+  id: string
+  title: string
+  subtitle: string
+  cards: SubCard[]
+}
+
+const componentesData: ComponentItem[] = [
   {
+    id: 'tecnologia',
     title: 'Tecnología Productiva',
-    description: 'Desarrollo y prueba de soluciones tecnológicas para minería, agropecuaria e industria.',
-    details: [
-      'Laboratorios de innovación y diseño de prototipos',
-      'Herramientas digitales y desarrollo de software',
-      'Aplicaciones y plataformas para educación y salud'
+    subtitle: 'Desarrollo y prueba de soluciones tecnológicas para minería, agropecuaria e industria.',
+    cards: [
+      {
+        title: 'Innovación & Prototipado',
+        icon: Cpu,
+        description: 'Laboratorios de diseño y prototipado rápido',
+      },
+      {
+        title: 'Software & Digital',
+        icon: Code2,
+        description: 'Desarrollo de herramientas y software a medida',
+      },
+      {
+        title: 'Plataformas Sociales',
+        icon: Globe,
+        description: 'Aplicaciones para educación, salud e impacto social',
+      },
+      {
+        title: 'Sectores Clave',
+        icon: Factory,
+        description: 'Minería, agropecuaria e industria sostenible',
+      },
     ],
-    icon: Zap,
-    accent: 'border-primary/30',
   },
   {
-    title: 'Educación',
-    description: 'Aulas TIC y espacios de formación continua para comunidades.',
-    details: [
-      'Programas de alfabetización digital básica y avanzada',
-      'Talleres, cursos y diplomados en competencias del siglo XXI',
-      'Contenidos educativos digitales adaptados'
+    id: 'educacion',
+    title: 'Educación Integral',
+    subtitle: 'Aulas TIC y espacios de formación continua adaptados a la comunidad.',
+    cards: [
+      {
+        title: 'Alfabetización Digital',
+        icon: Laptop,
+        description: 'Programas de inclusión digital básica y avanzada',
+      },
+      {
+        title: 'Competencias Siglo XXI',
+        icon: GraduationCap,
+        description: 'Talleres, cursos y diplomados comunitarios',
+      },
+      {
+        title: 'Contenidos Adaptados',
+        icon: FileText,
+        description: 'Materiales educativos interactivos e inclusivos',
+      },
+      {
+        title: 'Formación Continua',
+        icon: Users,
+        description: 'Capacitación para jóvenes, mujeres y familias',
+      },
     ],
-    icon: BookOpen,
-    accent: 'border-secondary/30',
   },
   {
-    title: 'Salud',
-    description: 'Servicios de salud preventiva y telemedicina para comunidades.',
-    details: [
-      'Consultas presenciales y por telemedicina',
-      'Programas de prevención y promoción de la salud',
-      'Formación de promotores/as de salud comunitaria'
+    id: 'salud',
+    title: 'Salud Preventiva',
+    subtitle: 'Servicios de salud preventiva y telemedicina para la población urbana y rural.',
+    cards: [
+      {
+        title: 'Telemedicina Comunit.',
+        icon: Activity,
+        description: 'Consultas médicas presenciales y a distancia',
+      },
+      {
+        title: 'Promoción & Prevención',
+        icon: ShieldCheck,
+        description: 'Campañas y programas de salud preventiva',
+      },
+      {
+        title: 'Promotores de Salud',
+        icon: UserCheck,
+        description: 'Formación de lideresas y promotores de salud',
+      },
+      {
+        title: 'Cobertura Territorial',
+        icon: PlusCircle,
+        description: 'Atención en comunidades vulnerables de La Paz',
+      },
     ],
-    icon: Heart,
-    accent: 'border-accent/30',
   },
 ]
 
 export default function ComponentesSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
   const sectionRef = useRef<HTMLElement>(null)
 
   useGSAP(() => {
     const mm = gsap.matchMedia()
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // 1. Header Reveal
-      const headerTl = gsap.timeline({
+      gsap.from('.comp-accordion-header', {
+        y: 40,
+        autoAlpha: 0,
+        duration: 1,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.comp-header',
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        },
+      })
+
+      gsap.from('.comp-accordion-item', {
+        y: 30,
+        autoAlpha: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.comp-accordion-list',
           start: 'top 85%',
-          toggleActions: 'play reverse play reverse'
-        }
-      })
-
-      headerTl.from('.comp-subtitle', { y: 20, autoAlpha: 0, duration: 0.5, ease: 'power3.out' })
-              .from('.comp-title', { y: 30, autoAlpha: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
-              .from('.comp-desc', { y: 20, autoAlpha: 0, duration: 0.5, ease: 'power2.out' }, '-=0.4')
-
-      // 2. Batch reveal for component rows
-      gsap.set('.comp-row', { autoAlpha: 0, y: 40 })
-      ScrollTrigger.batch('.comp-row', {
-        onEnter: (elements) => {
-          gsap.to(elements, { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out', overwrite: true })
-          
-          // Animate the huge numbers inside
-          elements.forEach(el => {
-            const num = el.querySelector('.comp-number')
-            if (num) {
-              gsap.fromTo(num, { y: '100%' }, { y: '0%', duration: 0.8, ease: 'expo.out', overwrite: true })
-            }
-          })
         },
-        onLeave: (elements) => {
-          gsap.set(elements, { autoAlpha: 0, y: 40, overwrite: true })
-        },
-        onEnterBack: (elements) => {
-          gsap.to(elements, { autoAlpha: 1, y: 0, duration: 0.8, stagger: -0.15, ease: 'power3.out', overwrite: true })
-          elements.forEach(el => {
-            const num = el.querySelector('.comp-number')
-            if (num) {
-              gsap.fromTo(num, { y: '100%' }, { y: '0%', duration: 0.8, ease: 'expo.out', overwrite: true })
-            }
-          })
-        },
-        onLeaveBack: (elements) => {
-          gsap.set(elements, { autoAlpha: 0, y: 40, overwrite: true })
-        },
-        start: 'top 85%'
-      })
-
-      // Hover Micro-interactions
-      const rows = gsap.utils.toArray<HTMLElement>('.comp-row')
-      rows.forEach(row => {
-        const icon = row.querySelector('.comp-icon')
-        if (!icon) return
-        row.addEventListener('mouseenter', () => gsap.to(icon, { scale: 1.15, rotation: 5, duration: 0.4, ease: 'back.out(2)' }))
-        row.addEventListener('mouseleave', () => gsap.to(icon, { scale: 1, rotation: 0, duration: 0.4, ease: 'power2.out' }))
       })
     })
   }, { scope: sectionRef })
 
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
+
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-muted border-t border-border/50">
+    <section 
+      id="componentes" 
+      ref={sectionRef} 
+      data-header-theme="light"
+      className="py-24 md:py-36 bg-[#F8F8F5] dark:bg-[#0B1322] border-t border-border/40 transition-colors"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
-        <div className="comp-header mb-20 max-w-2xl">
-          <span className="comp-subtitle text-xs font-bold tracking-widest uppercase text-secondary block mb-4">
-            Estructura del centro
+        {/* Encabezado Editorial Minimalista */}
+        <div className="comp-accordion-header mb-14 md:mb-20 max-w-3xl">
+          <span className="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#50AA1E] dark:text-[#68CE2B] block mb-4">
+            Estructura del Centro Integral
           </span>
-          <h2 className="comp-title text-4xl md:text-5xl font-bold text-primary tracking-tighter leading-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-medium text-[#1B361F] dark:text-white tracking-[-0.03em] leading-[1.08]">
             Tres componentes que trabajan juntos
           </h2>
-          <p className="comp-desc text-lg text-foreground/70 mt-6 leading-relaxed font-medium">
-            El Centro Integral JAWIRA se organiza alrededor de tres componentes interconectados que generan impacto integral.
+          <p className="text-base sm:text-lg text-[#2D4A32]/80 dark:text-slate-300 mt-6 leading-relaxed font-sans font-normal">
+            El Centro Integral JAWIRA articula soluciones tecnológicas, educativas y de salud preventiva en un sistema integrado para potenciar el desarrollo comunitario en La Paz.
           </p>
         </div>
 
-        {/* Vertical stack — editorial list */}
-        <div className="space-y-0">
-          {componentes.map((comp, i) => {
-            const Icon = comp.icon
+        {/* Acordeón de Componentes Estilo ElevateFeed */}
+        <div className="comp-accordion-list space-y-4 md:space-y-6">
+          {componentesData.map((item, index) => {
+            const isOpen = openIndex === index
+
             return (
               <div
-                key={comp.title}
-                className={`comp-row group grid lg:grid-cols-[auto_1fr_1.2fr] gap-8 lg:gap-16 items-start py-12 ${
-                  i !== 0 ? 'border-t border-border/60' : ''
-                }`}
+                key={item.id}
+                className="comp-accordion-item bg-[#ECECE5] dark:bg-[#121D2F] rounded-3xl p-6 sm:p-8 md:p-10 transition-all duration-300 border border-black/5 dark:border-white/5"
               >
-                {/* Huge Number with Mask */}
-                <div className="hidden lg:flex items-start pt-1 overflow-hidden h-[80px]">
-                  <span className="comp-number text-7xl font-black text-border group-hover:text-primary transition-colors tracking-tighter leading-none" style={{ willChange: 'transform' }}>
-                    0{i + 1}
-                  </span>
-                </div>
-
-                {/* Title + Description */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="comp-icon w-12 h-12 rounded-xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg" style={{ willChange: 'transform' }}>
-                      <Icon className="w-6 h-6 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-primary tracking-tight">
-                      {comp.title}
+                {/* Cabecera del Ítem */}
+                <button
+                  type="button"
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full flex items-center justify-between text-left focus:outline-none group cursor-pointer"
+                  aria-expanded={isOpen}
+                >
+                  <div className="pr-4 space-y-1">
+                    <h3 className="text-2xl sm:text-3xl font-sans font-medium text-[#1B361F] dark:text-white tracking-tight group-hover:text-[#50AA1E] dark:group-hover:text-[#68CE2B] transition-colors">
+                      {item.title}
                     </h3>
                   </div>
-                  <p className="text-base text-foreground/70 leading-relaxed max-w-md font-medium pt-2">
-                    {comp.description}
-                  </p>
-                </div>
 
-                {/* Details list */}
-                <div className="space-y-4 lg:pt-3">
-                  {comp.details.map((detail, j) => (
-                    <div key={j} className="flex items-start gap-4">
-                      <span className="w-1.5 h-1.5 rounded-full bg-secondary mt-2.5 flex-shrink-0" />
-                      <span className="text-base text-foreground/80 leading-relaxed font-medium">{detail}</span>
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-[#1B361F] dark:text-white bg-black/5 dark:bg-white/10 group-hover:bg-[#50AA1E]/20 transition-all flex-shrink-0">
+                    {isOpen ? (
+                      <Minus className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.75]" />
+                    ) : (
+                      <Plus className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.75]" />
+                    )}
+                  </div>
+                </button>
+
+                {/* Contenido Expandido: Rejilla de 4 Tarjetas */}
+                {isOpen && (
+                  <div className="mt-8 sm:mt-10 pt-6 border-t border-black/10 dark:border-white/10 animate-in fade-in slide-in-from-top-4 duration-300">
+                    <p className="text-sm font-sans text-[#2D4A32]/70 dark:text-slate-400 mb-8 max-w-2xl font-normal">
+                      {item.subtitle}
+                    </p>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                      {item.cards.map((card) => {
+                        const CardIcon = card.icon
+                        return (
+                          <div
+                            key={card.title}
+                            className="bg-white dark:bg-[#0A121E] rounded-2xl p-6 sm:p-7 flex flex-col justify-between border border-black/5 dark:border-white/5 shadow-sm transition-all duration-300 hover:shadow-md hover:-translate-y-1 min-h-[220px] sm:min-h-[240px]"
+                          >
+                            {/* Título Superior */}
+                            <h4 className="text-base sm:text-lg font-sans font-semibold text-[#1B361F] dark:text-white tracking-tight leading-snug">
+                              {card.title}
+                            </h4>
+
+                            {/* Icono Minimalista al Centro */}
+                            <div className="my-6 flex items-center justify-center text-[#50AA1E] dark:text-[#68CE2B]">
+                              <CardIcon className="w-10 h-10 sm:w-12 sm:h-12 stroke-[1.3]" />
+                            </div>
+
+                            {/* Descripción al Pie */}
+                            <p className="text-xs font-mono font-medium tracking-wide uppercase text-muted-foreground leading-relaxed">
+                              {card.description}
+                            </p>
+                          </div>
+                        )
+                      })}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
             )
           })}
@@ -175,3 +256,4 @@ export default function ComponentesSection() {
     </section>
   )
 }
+

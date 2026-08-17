@@ -62,7 +62,11 @@ export default function ContactoHero() {
   }, { scope: container })
 
   return (
-    <section ref={container} className="relative py-24 md:py-32 bg-background overflow-hidden min-h-[50vh] flex items-center border-b border-border/20">
+    <section
+      ref={container}
+      data-header-theme="light"
+      className="relative py-24 md:py-32 bg-background overflow-hidden min-h-[50vh] flex items-center border-b border-border/20"
+    >
       <div className="hero-svg-wrapper absolute inset-0 overflow-hidden pointer-events-none flex items-center justify-end pr-20 opacity-[0.03]">
         <svg
           className="w-[500px] h-[500px] text-primary"

@@ -53,7 +53,7 @@ export default function EnfoqueSection() {
         scrollTrigger: {
           trigger: '.enfoque-header',
           start: 'top 85%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none none',
         },
       })
 
@@ -87,7 +87,7 @@ export default function EnfoqueSection() {
         scrollTrigger: {
           trigger: '.enfoque-grid',
           start: 'top 80%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none none',
         },
       })
 
@@ -100,7 +100,7 @@ export default function EnfoqueSection() {
         scrollTrigger: {
           trigger: '.enfoque-grid',
           start: 'top 78%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none none',
         },
       })
 
@@ -108,12 +108,12 @@ export default function EnfoqueSection() {
       gsap.from('.enfoque-callout', {
         y: 40,
         autoAlpha: 0,
-        duration: 0.8,
+        duration: 0.7,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: '.enfoque-callout',
-          start: 'top 88%',
-          toggleActions: 'play reverse play reverse',
+          start: 'top 85%',
+          toggleActions: 'play none none none',
         },
       })
     })

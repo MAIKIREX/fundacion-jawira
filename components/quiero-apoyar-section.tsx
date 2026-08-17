@@ -1,52 +1,48 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
+import { JawiraButton } from "@/components/ui/jawira-button"
 
 export default function QuieroApoyarSection() {
   return (
-    <section className="relative py-20 md:py-28 overflow-hidden bg-primary">
-      {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/community-development-people-working-together-bolivia.png"
-          alt="Comunidad trabajando junta"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-primary/90" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-2xl mx-auto text-center space-y-6">
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase text-secondary">
-            Haz la diferencia
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight leading-tight">
-            Cada acción cuenta para construir
-            <br className="hidden sm:block" />
-            un futuro más equitativo
+    <section
+      data-header-theme="dark"
+      className="relative w-full bg-[#556837] text-white overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-36 lg:py-44 min-h-[460px] sm:min-h-[520px] md:min-h-[580px] lg:min-h-[620px] flex flex-col justify-between">
+        {/* Titular superior izquierdo */}
+        <div className="max-w-3xl">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] font-sans font-medium text-white tracking-[-0.035em] leading-[1.08]">
+            Cada acción cuenta
+            <br />
+            para construir un
+            <br />
+            futuro más equitativo
           </h2>
-          <p className="text-base text-primary-foreground/60 leading-relaxed max-w-lg mx-auto">
-            Tu participación — como donante, voluntario o aliado — fortalece directamente nuestros programas de tecnología, educación y salud preventiva.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-            <Button asChild variant="cta" size="lg">
-              <Link href="/quiero-apoyar">
-                Quiero apoyar
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              className="border-2 border-primary-foreground/30 bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              <Link href="/contacto">Contactar</Link>
-            </Button>
-          </div>
+        </div>
+
+        {/* Botones inferiores izquierdos con JawiraButton */}
+        <div className="pt-16 sm:pt-20 md:pt-28 flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4">
+          {/* Botón Primario: Blanco Sólido con barrido rotativo negro */}
+          <JawiraButton
+            href="/quiero-apoyar"
+            variant="white"
+            size="default"
+            bullets
+            className="w-full sm:w-auto"
+          >
+            QUIERO APOYAR
+          </JawiraButton>
+
+          {/* Botón Secundario: Negro con borde blanco y barrido rotativo blanco */}
+          <JawiraButton
+            href="/contacto"
+            variant="black"
+            size="default"
+            bullets
+            className="w-full sm:w-auto"
+          >
+            CONTACTAR AL EQUIPO
+          </JawiraButton>
         </div>
       </div>
     </section>

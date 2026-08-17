@@ -1,128 +1,143 @@
 'use client'
 
-import { useRef } from 'react'
-import { Target, Eye } from 'lucide-react'
+import React, { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useGSAP } from '@gsap/react'
+import { NutrientUptakeArt, TankMixingArt } from '@/components/impact-section'
 
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger)
+}
+
+export interface MisionVisionItem {
+  number: string
+  title: string
+  subtitle: string
+  description?: string
+  illustration: 'mision' | 'vision'
+}
+
+const ITEMS: MisionVisionItem[] = [
+  {
+    number: '01',
+    title: 'Nuestra Misión',
+    subtitle: 'Articular tecnología productiva, educación integral y prevención de la salud para comunidades vulnerables, promoviendo desarrollo sostenible en zonas urbanas, periurbanas y rurales del Departamento de La Paz.',
+    illustration: 'mision',
+  },
+  {
+    number: '02',
+    title: 'Nuestra Visión',
+    subtitle: 'Ser una organización no gubernamental referente en Bolivia por la generación de transformaciones sostenibles, impulsando comunidades resilientes con equidad, innovación y justicia social.',
+    illustration: 'vision',
+  },
+]
 
 export default function MisionVisionSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const cardsGridRef = useRef<HTMLDivElement>(null)
 
-  useGSAP(() => {
-    const mm = gsap.matchMedia()
+  useEffect(() => {
+    if (typeof window === 'undefined') return
 
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // --- Header reveal ---
-      const headerTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.mv-header',
-          start: 'top 85%',
-          toggleActions: 'play reverse play reverse',
-        },
-      })
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 200)
 
-      headerTl
-        .from('.mv-subtitle', {
-          y: 20,
-          autoAlpha: 0,
-          duration: 0.5,
-          ease: 'power3.out',
-        })
-        .from('.mv-title', {
-          y: 30,
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: 'power3.out',
-        }, '-=0.3')
-        .from('.mv-description', {
-          y: 20,
-          autoAlpha: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        }, '-=0.2')
+    const cards = cardsGridRef.current?.querySelectorAll('.mv-impact-card')
+    if (cards && cards.length > 0 && sectionRef.current) {
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          cards,
+          { y: 35, opacity: 0.8 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        )
+      }, sectionRef)
 
-      // --- Cards reveal ---
-      gsap.from('.mv-card', {
-        y: 50,
-        autoAlpha: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: '.mv-cards-grid',
-          start: 'top 80%',
-          toggleActions: 'play reverse play reverse',
-        },
-      })
+      return () => {
+        clearTimeout(timer)
+        ctx.revert()
+      }
+    }
 
-      // --- Card icons subtle entrance ---
-      gsap.from('.mv-card-icon', {
-        scale: 0,
-        duration: 0.5,
-        ease: 'back.out(1.7)',
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: '.mv-cards-grid',
-          start: 'top 75%',
-          toggleActions: 'play reverse play reverse',
-        },
-      })
-    })
-  }, { scope: sectionRef })
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-muted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="mv-header mb-16 max-w-2xl">
-          <span className="mv-subtitle text-xs font-semibold tracking-widest uppercase text-secondary">
-            Nuestra brújula
+    <section
+      ref={sectionRef}
+      data-header-theme="light"
+      className="relative w-full py-24 sm:py-28 md:py-32 overflow-hidden bg-[#F5F2EB] dark:bg-[#0D1524] text-[#1B361F] dark:text-[#F8FAFC] border-b border-[#1B361F]/10 dark:border-white/10"
+    >
+      <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
+        
+        {/* =========================================================
+            1. ENCABEZADO EDITORIAL ESTILO IMPACTSECTION
+            ========================================================= */}
+        <div className="max-w-3xl space-y-3 mb-16 sm:mb-20 md:mb-24">
+          <span className="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#50AA1E] dark:text-[#68CE2B] block">
+            NUESTRA BRÚJULA
           </span>
-          <h2 className="mv-title text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-sans font-medium text-[#1B361F] dark:text-white tracking-[-0.03em] leading-[1.08]">
             Misión y Visión
           </h2>
-          <p className="mv-description text-base text-muted-foreground mt-4 leading-relaxed">
-            La brújula que guía nuestro trabajo y compromiso institucional.
+          <p className="text-base sm:text-lg text-[#4A634E] dark:text-slate-300 max-w-2xl leading-relaxed font-normal pt-1">
+            La brújula que guía nuestro trabajo y el compromiso institucional con el desarrollo integral en Bolivia.
           </p>
         </div>
 
-        {/* Two-column split */}
-        <div className="mv-cards-grid grid md:grid-cols-2 gap-px bg-border/50 rounded-2xl overflow-hidden">
-          {/* Misión */}
-          <div className="mv-card bg-background p-8 md:p-10 space-y-5">
-            <div className="flex items-center gap-4">
-              <div className="mv-card-icon w-11 h-11 rounded-xl bg-primary/6 flex items-center justify-center flex-shrink-0">
-                <Target className="w-5 h-5 text-primary" />
-              </div>
-              <h3 className="text-xl font-bold text-primary tracking-tight">Nuestra Misión</h3>
-            </div>
-            <p className="text-base text-foreground/70 leading-relaxed">
-              Promover el desarrollo integral y sostenible de comunidades vulnerables en el Departamento de La Paz,
-              mediante la articulación de tecnología productiva, educación y salud. Buscamos generar oportunidades a
-              través de la investigación, innovación y proyectos participativos que fomenten la equidad, inclusión y
-              empoderamiento con un enfoque interdisciplinario.
-            </p>
-          </div>
+        {/* =========================================================
+            2. GRILLA DE 2 TARJETAS (MISIÓN Y VISIÓN) ESTILO IMPACTSECTION
+            ========================================================= */}
+        <div
+          ref={cardsGridRef}
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-14 md:gap-12 lg:gap-20 items-start max-w-5xl"
+        >
+          {ITEMS.map((item) => (
+            <div
+              key={item.number}
+              className="mv-impact-card group flex flex-col justify-between h-full min-h-[380px] lg:min-h-[420px] p-8 sm:p-10 rounded-3xl bg-white/60 dark:bg-white/5 border border-[#1B361F]/10 dark:border-white/10 backdrop-blur-xs transition-all duration-300 hover:shadow-xl hover:bg-white dark:hover:bg-white/10"
+            >
+              {/* Contenido Superior: Número + Título + Descripción */}
+              <div className="space-y-4">
+                {/* Número Verde Salvia (01, 02) */}
+                <span className="block text-4xl sm:text-5xl font-sans font-normal text-[#8FA382] dark:text-[#A1B694] tracking-tight">
+                  {item.number}
+                </span>
 
-          {/* Visión */}
-          <div className="mv-card bg-background p-8 md:p-10 space-y-5">
-            <div className="flex items-center gap-4">
-              <div className="mv-card-icon w-11 h-11 rounded-xl bg-secondary/8 flex items-center justify-center flex-shrink-0">
-                <Eye className="w-5 h-5 text-secondary" />
+                {/* Título */}
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#1B361F] dark:text-white tracking-tight leading-snug">
+                  {item.title}
+                </h3>
+
+                {/* Subtítulo / Descripción */}
+                <p className="text-sm sm:text-base text-[#3E5642] dark:text-slate-300 font-normal leading-relaxed">
+                  {item.subtitle}
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-primary tracking-tight">Nuestra Visión</h3>
+
+              {/* Ilustración Vectorial en Parte Inferior */}
+              <div className="mt-8 sm:mt-12 w-full flex items-center justify-center text-[#2A482E] dark:text-slate-200 transition-transform duration-500 group-hover:scale-105">
+                {item.illustration === 'mision' ? (
+                  <NutrientUptakeArt />
+                ) : (
+                  <TankMixingArt badgeLabel="2034" />
+                )}
+              </div>
             </div>
-            <p className="text-base text-foreground/70 leading-relaxed">
-              Ser una institución líder en el Departamento de La Paz, reconocida por su innovación integral, impacto
-              social transformador y contribución a la equidad territorial. Aspiramos a ser un modelo de organización
-              inclusiva que articule actores públicos, privados y comunitarios para construir una Bolivia más justa,
-              equitativa y sostenible.
-            </p>
-          </div>
+          ))}
         </div>
+
       </div>
     </section>
   )

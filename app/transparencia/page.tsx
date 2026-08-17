@@ -8,53 +8,26 @@ import InformesDocumentosSection from '@/components/transparencia/informes-docum
 import EvaluacionSeguimientoSection from '@/components/transparencia/evaluacion-seguimiento-section'
 import PoliticasPrincipiosSection from '@/components/transparencia/politicas-principios-section'
 import CtaTransparenciaSection from '@/components/transparencia/cta-transparencia-section'
-import { PinnedSection } from "@/components/ui/pinned-section"
 
 export const metadata = {
-  title: 'Transparencia',
+  title: 'Transparencia | Fundación JAWIRA',
   description: 'Transparencia y rendición de cuentas de la Fundación JAWIRA. Información sobre presupuesto, financiamiento, informes y evaluación.',
 }
 
 export default function TransparenciaPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <main className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      <main className="flex-1">
-        <PinnedSection zIndex={1}>
-          <TransparenciaHeroSection />
-        </PinnedSection>
-
-        <PinnedSection zIndex={2}>
-          <CompromisoSection />
-        </PinnedSection>
-
-        <PinnedSection zIndex={3}>
-          <PresupuestoSection />
-        </PinnedSection>
-
-        <PinnedSection zIndex={4}>
-          <FuentesFinanciamientoSection />
-        </PinnedSection>
-
-        <PinnedSection zIndex={5}>
-          <InformesDocumentosSection />
-        </PinnedSection>
-
-        <PinnedSection zIndex={6}>
-          <EvaluacionSeguimientoSection />
-        </PinnedSection>
-
-        <PinnedSection zIndex={7}>
-          <PoliticasPrincipiosSection />
-        </PinnedSection>
-
-        <PinnedSection zIndex={8}>
-          <CtaTransparenciaSection />
-        </PinnedSection>
-      </main>
-      <div style={{ position: "relative", zIndex: 9 }}>
-        <Footer />
-      </div>
-    </div>
+      <TransparenciaHeroSection />
+      <CompromisoSection />
+      <PresupuestoSection />
+      <FuentesFinanciamientoSection />
+      <InformesDocumentosSection />
+      <EvaluacionSeguimientoSection />
+      <PoliticasPrincipiosSection />
+      <CtaTransparenciaSection />
+      <Footer />
+    </main>
   )
 }
+

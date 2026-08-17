@@ -1,34 +1,40 @@
 'use client'
 
 import { useRef } from 'react'
-import Image from 'next/image'
-import { Cpu, Leaf, Smartphone, Lightbulb } from 'lucide-react'
+import { Cpu, Leaf, Smartphone, Lightbulb, Zap } from 'lucide-react'
+import RiverFlowLines from '@/components/ui/river-flow-lines'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP)
+}
 
 const technologyLines = [
   {
     title: 'Innovación productiva',
-    description: 'Tecnologías limpias para sectores productivos, monitoreo ambiental y trazabilidad.',
-    icon: Leaf
+    description: 'TECNOLOGÍAS LIMPIAS PARA SECTORES PRODUCTIVOS, MONITOREO AMBIENTAL Y TRAZABILIDAD.',
+    icon: Leaf,
+    metric: '01'
   },
   {
     title: 'Soluciones digitales',
-    description: 'Plataformas de gestión, aplicaciones móviles y herramientas de telemedicina.',
-    icon: Smartphone
+    description: 'PLATAFORMAS DE GESTIÓN, APLICACIONES MÓVILES Y HERRAMIENTAS DE TELEMEDICINA.',
+    icon: Smartphone,
+    metric: '02'
   },
   {
     title: 'Capacitación TIC',
-    description: 'Formación en IA, IoT, ciberseguridad y alfabetización digital.',
-    icon: Cpu
+    description: 'FORMACIÓN EN IA, IOT, CIBERSEGURIDAD Y ALFABETIZACIÓN DIGITAL COMUNITARIA.',
+    icon: Cpu,
+    metric: '03'
   },
   {
     title: 'Laboratorios Tech',
-    description: 'Espacios de co-creación, prototipado y experimentación comunitaria.',
-    icon: Lightbulb
+    description: 'ESPACIOS DE CO-CREACIÓN, PROTOTIPADO Y EXPERIMENTACIÓN COMUNITARIA SOSTENIBLE.',
+    icon: Lightbulb,
+    metric: '04'
   }
 ]
 
@@ -39,148 +45,105 @@ export default function TechnologySection() {
     const mm = gsap.matchMedia()
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // 1. Header Reveal
-      const headerTl = gsap.timeline({
+      // Header Entrance
+      gsap.from('.tech-header-item', {
+        y: 30,
+        autoAlpha: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.tech-header',
-          start: 'top 85%',
+          trigger: sectionRef.current,
+          start: 'top 80%',
           toggleActions: 'play none none none'
         }
       })
 
-      headerTl.from('.tech-badge', { scale: 0.8, autoAlpha: 0, duration: 0.5, ease: 'back.out(1.5)' })
-              .from('.tech-title', { y: 30, autoAlpha: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
-              .from('.tech-desc', { y: 20, autoAlpha: 0, duration: 0.5, stagger: 0.15, ease: 'power2.out' }, '-=0.4')
-
-      // 2. Immersive Image Reveal with Parallax
-      gsap.fromTo('.tech-image-wrapper', 
-        { clipPath: 'inset(100% 0% 0% 0%)' },
-        {
-          clipPath: 'inset(0% 0% 0% 0%)',
-          duration: 1.2,
-          ease: 'power3.inOut',
-          scrollTrigger: {
-            trigger: '.tech-image-container',
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          }
-        }
-      )
-
-      gsap.to('.tech-image', {
+      // Cards Grid Entrance
+      gsap.from('.tech-green-card', {
         y: 40,
-        scale: 1.1,
-        ease: 'none',
+        autoAlpha: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
         scrollTrigger: {
-          trigger: '.tech-image-container',
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true
+          trigger: '.tech-cards-grid',
+          start: 'top 85%',
+          toggleActions: 'play none none none'
         }
-      })
-
-      // 3. Bento Grid Batch Reveal
-      gsap.set('.tech-bento-card', { y: 40, autoAlpha: 0 })
-      ScrollTrigger.batch('.tech-bento-card', {
-        onEnter: (elements) => {
-          gsap.to(elements, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.1,
-            ease: 'power3.out',
-            overwrite: true
-          })
-        },
-        onLeave: (elements) => {
-          gsap.set(elements, { autoAlpha: 0, y: 40, overwrite: true })
-        },
-        onEnterBack: (elements) => {
-          gsap.to(elements, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: -0.1,
-            ease: 'power3.out',
-            overwrite: true
-          })
-        },
-        onLeaveBack: (elements) => {
-          gsap.set(elements, { autoAlpha: 0, y: 40, overwrite: true })
-        },
-        start: 'top 85%',
-      })
-
-      // Icon hover micro-animations
-      gsap.utils.toArray<HTMLElement>('.tech-bento-card').forEach(card => {
-        const icon = card.querySelector('.tech-icon')
-        if (!icon) return
-        card.addEventListener('mouseenter', () => gsap.to(icon, { scale: 1.15, duration: 0.3, ease: 'back.out(1.5)' }))
-        card.addEventListener('mouseleave', () => gsap.to(icon, { scale: 1, duration: 0.3, ease: 'power2.out' }))
       })
     })
   }, { scope: sectionRef })
 
   return (
-    <section id="tecnologia" ref={sectionRef} className="py-24 md:py-32 bg-muted border-t border-border/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="tecnologia" 
+      ref={sectionRef} 
+      data-header-theme="dark"
+      className="py-24 md:py-36 bg-[#637547] text-white relative z-10 overflow-hidden border-t border-white/10"
+    >
+      {/* Background Lighting Glow */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-radial-[circle_at_50%_30%] from-[#768A57] via-[#637547] to-[#4F5E38]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#4F5E38]/40 via-transparent to-[#3E4B2B]/60" />
+      </div>
+
+      {/* Background River Lines Flow */}
+      <RiverFlowLines className="opacity-20 z-0" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
-        {/* Section Header */}
-        <div className="tech-header mb-16 md:mb-20 grid lg:grid-cols-[1fr_1.2fr] gap-10 items-end">
+        {/* Section Header (White Text on Green Surface) */}
+        <div className="mb-16 md:mb-20 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-end">
           <div>
-            <div className="tech-badge flex items-center gap-4 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg">
-                <Cpu className="w-6 h-6 text-primary-foreground" />
-              </div>
-              <span className="text-xs font-semibold tracking-widest uppercase text-primary">
-                Eje de Acción 01
-              </span>
+            <div className="tech-header-item inline-flex items-center gap-2 mb-6 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-mono text-xs font-bold tracking-widest uppercase text-white">
+              <Zap className="w-4 h-4 text-[#A8F074]" />
+              <span>Eje de Acción 01 — Tecnología</span>
             </div>
             
-            <h2 className="tech-title text-4xl md:text-5xl lg:text-6xl font-bold text-primary tracking-tighter leading-[1.05]">
-              Tecnología productiva <br className="hidden sm:block" />y digital
+            <h2 className="tech-header-item text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.05]">
+              Tecnología productiva <br className="hidden sm:block" />y digital.
             </h2>
           </div>
 
-          <div className="space-y-5 text-lg text-foreground/70 leading-relaxed font-medium">
-            <p className="tech-desc">
-              Soluciones tecnológicas para impulsar la producción, proteger el medio ambiente y cerrar la brecha digital. Este eje se enfoca en desarrollar e implementar tecnologías innovadoras para sectores productivos.
+          <div className="space-y-4 text-base sm:text-lg text-white/90 leading-relaxed font-medium">
+            <p className="tech-header-item">
+              Desarrollamos e implementamos soluciones tecnológicas limpias para sectores productivos, monitoreo ambiental y reducción de la brecha digital en el Departamento de La Paz.
             </p>
-            <p className="tech-desc text-base text-muted-foreground">
-              Buscamos reducir el impacto ambiental de las actividades productivas y promover modelos de producción sostenible, generando ecosistemas de innovación.
+            <p className="tech-header-item text-white/70 text-sm font-mono uppercase tracking-wider">
+              * MODELO DE INNOVACIÓN Y SOSTENIBILIDAD JAWIRA
             </p>
           </div>
         </div>
 
-        {/* Immersive Image */}
-        <div className="tech-image-container w-full h-[40vh] md:h-[50vh] relative mb-16 overflow-hidden rounded-3xl border border-border/50 shadow-2xl">
-          <div className="tech-image-wrapper absolute inset-0" style={{ willChange: 'clip-path' }}>
-            <Image 
-              src="/technology-innovation-computers-lab-digitalv.png"
-              alt="Innovación Tecnológica"
-              fill
-              className="tech-image object-cover opacity-90"
-              style={{ willChange: 'transform' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
-          </div>
-        </div>
-
-        {/* Bento Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* 4 Cards Grid (Matching Reference Image Style: Warm Cream Card with Dark Olive Text) */}
+        <div className="tech-cards-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {technologyLines.map((line, index) => {
             const Icon = line.icon
             return (
-              <div key={index} className="tech-bento-card bg-background p-8 rounded-2xl border border-border/60 shadow-sm hover:shadow-md transition-shadow">
-                <div className="tech-icon w-12 h-12 rounded-xl bg-primary/6 flex items-center justify-center mb-6" style={{ willChange: 'transform' }}>
-                  <Icon className="w-5 h-5 text-primary" />
+              <div 
+                key={index} 
+                className="tech-green-card bg-[#F4F1EA] text-[#213014] p-8 sm:p-9 rounded-2xl border border-[#E0DACB] flex flex-col justify-between min-h-[310px] shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group"
+              >
+                {/* Top Row: Icon Symbol */}
+                <div className="flex items-center justify-between">
+                  <div className="w-10 h-10 rounded-xl bg-[#4A5B30]/10 flex items-center justify-center group-hover:bg-[#4A5B30] group-hover:text-white transition-colors">
+                    <Icon className="w-5 h-5 text-[#354522] group-hover:text-white transition-colors" />
+                  </div>
+                  <span className="font-mono text-xs font-bold text-[#4A5A38]/50 uppercase tracking-widest">
+                    {line.metric}
+                  </span>
                 </div>
-                <h3 className="text-lg font-bold text-primary tracking-tight mb-3">
-                  {line.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {line.description}
-                </p>
+
+                {/* Bottom Content: Large Title + Monospaced Description */}
+                <div className="mt-10 space-y-3">
+                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#213014] leading-tight font-sans group-hover:text-[#4A5B30] transition-colors">
+                    {line.title}
+                  </h3>
+                  <p className="font-mono text-xs sm:text-sm font-semibold text-[#455534]/90 uppercase tracking-wider leading-relaxed">
+                    {line.description}
+                  </p>
+                </div>
               </div>
             )
           })}

@@ -1,119 +1,118 @@
 'use client'
 
-import { useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
-import { useGSAP } from '@gsap/react'
-
-gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin, useGSAP)
+import React from 'react'
+import { Zap, BookOpen, Sparkles } from 'lucide-react'
 
 export default function IntegratedApproachSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-
-  const benefits = [
-    'Mayor impacto y sostenibilidad',
-    'Sinergia inter-disciplinaria',
-    'Participación comunitaria activa',
-    'Respuesta multidimensional',
-    'Mejora de indicadores base',
-    'Ecosistemas de innovación'
-  ]
-
-  useGSAP(() => {
-    const mm = gsap.matchMedia()
-
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // 1. Header Reveal
-      const headerTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.integrated-header',
-          start: 'top 85%',
-          toggleActions: 'play reverse play reverse'
-        }
-      })
-
-      headerTl.from('.integrated-subtitle', { y: 20, autoAlpha: 0, duration: 0.5, ease: 'power3.out' })
-              .from('.integrated-title', { y: 30, autoAlpha: 0, duration: 0.7, ease: 'power3.out' }, '-=0.3')
-              .from('.integrated-desc', { y: 20, autoAlpha: 0, duration: 0.6, ease: 'power2.out' }, '-=0.4')
-
-      // 2. Abstract Geometry DrawSVG with Scrub
-      const svgTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.integrated-svg-container',
-          start: 'top 75%',
-          end: 'bottom 40%',
-          scrub: 1
-        }
-      })
-
-      svgTl.from('.integ-circle', { drawSVG: '0%', duration: 1, ease: 'none', stagger: 0.2 })
-           .from('.integ-line', { drawSVG: '0%', duration: 0.5, ease: 'none', stagger: 0.1 }, '-=0.5')
-           .from('.integ-dot', { scale: 0, transformOrigin: 'center center', duration: 0.3, ease: 'back.out(2)' }, '-=0.2')
-
-      // 3. Benefits Stagger Reveal
-      gsap.from('.integrated-benefit', {
-        x: -20,
-        autoAlpha: 0,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.integrated-benefits-grid',
-          start: 'top 85%',
-          toggleActions: 'play reverse play reverse'
-        }
-      })
-    })
-  }, { scope: sectionRef })
-
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-primary overflow-hidden relative min-h-[80vh] flex flex-col justify-center">
-      {/* Abstract Architectural SVG Background */}
-      <div className="integrated-svg-container absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none z-0">
-        <svg viewBox="0 0 800 800" className="w-[800px] h-[800px] md:w-[1000px] md:h-[1000px] text-primary-foreground max-w-none">
-          <circle className="integ-circle" cx="400" cy="300" r="200" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="6 6" />
-          <circle className="integ-circle" cx="250" cy="500" r="200" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="6 6" />
-          <circle className="integ-circle" cx="550" cy="500" r="200" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="6 6" />
-          
-          {/* Connection lines to center */}
-          <line className="integ-line" x1="400" y1="300" x2="400" y2="440" stroke="currentColor" strokeWidth="2" />
-          <line className="integ-line" x1="250" y1="500" x2="380" y2="460" stroke="currentColor" strokeWidth="2" />
-          <line className="integ-line" x1="550" y1="500" x2="420" y2="460" stroke="currentColor" strokeWidth="2" />
-          
-          {/* Center core */}
-          <circle className="integ-dot" cx="400" cy="450" r="12" fill="currentColor" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="integrated-header max-w-3xl mx-auto text-center">
-          <span className="integrated-subtitle text-xs font-semibold tracking-widest uppercase text-secondary">
-            Punto de convergencia
-          </span>
-          <h2 className="integrated-title text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground tracking-tight leading-tight mt-4 mb-8">
+    <section 
+      id="enfoque-integrado"
+      data-header-theme="light"
+      className="py-24 md:py-32 bg-[#FAF9F5] dark:bg-background border-t border-border/50 relative z-10 overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="max-w-4xl mb-16 space-y-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#253517] dark:text-foreground leading-[1.05]">
             Un enfoque estructuralmente integrado
           </h2>
-          <p className="integrated-desc text-lg md:text-xl text-primary-foreground/70 leading-relaxed font-light">
-            Los tres ejes no funcionan de manera aislada. Su intersección crea espacios de innovación donde cada área fortalece y potencia a las otras, generando soluciones sistémicas, efectivas y sostenibles.
-          </p>
-        </div>
 
-        {/* Benefits Grid */}
-        <div className="integrated-benefits-grid mt-20 max-w-4xl mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-12">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="integrated-benefit flex items-center gap-4 py-4 border-b border-primary-foreground/10">
-                <span className="text-sm font-black text-secondary tracking-tighter">
-                  0{index + 1}
-                </span>
-                <span className="text-base font-medium text-primary-foreground/90">
-                  {benefit}
-                </span>
-              </div>
-            ))}
+          <div className="space-y-4 text-base sm:text-lg text-foreground/80 font-medium leading-relaxed max-w-3xl">
+            <p>
+              Fundación JAWIRA articula tecnología productiva, educación integral y salud de forma coordinada, no como áreas aisladas. La intersección de estos tres ejes genera un modelo de desarrollo sostenible y replicable.
+            </p>
+            <p className="text-sm sm:text-base text-foreground/70">
+              Los indicadores respaldan la efectividad de nuestro enfoque en comunidades urbanas, periurbanas y rurales del Departamento de La Paz, multiplicando el alcance y la resiliencia territorial.
+            </p>
           </div>
         </div>
+
+        {/* 3-Column Card Modules (Matching Attached Reference Image) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          
+          {/* Card 1: Tecnología Productiva (3 Green Tiles) */}
+          <div className="bg-[#F3EFEC] dark:bg-[#111827] p-8 sm:p-9 rounded-2xl border border-[#E0DBCF] dark:border-border/60 flex flex-col justify-between shadow-sm">
+            {/* Top Category Icon & Title */}
+            <div className="text-center mb-8">
+              <Zap className="w-8 h-8 text-[#516337] mx-auto mb-3" />
+              <h3 className="text-2xl font-bold text-[#233215] dark:text-foreground tracking-tight">
+                Tecnología Productiva
+              </h3>
+            </div>
+
+            {/* 3 Green Metric Square Boxes */}
+            <div className="grid grid-cols-3 gap-3 my-auto">
+              <div className="flex flex-col items-center">
+                <div className="w-full bg-[#627446] text-white p-4 rounded-xl text-center shadow-sm">
+                  <span className="text-xl sm:text-2xl font-bold font-mono block">↑3.5x</span>
+                </div>
+                <span className="text-[11px] sm:text-xs font-mono font-medium text-foreground/75 text-center mt-2.5 leading-tight">
+                  Eficiencia productiva
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="w-full bg-[#627446] text-white p-4 rounded-xl text-center shadow-sm">
+                  <span className="text-xl sm:text-2xl font-bold font-mono block">↑85%</span>
+                </div>
+                <span className="text-[11px] sm:text-xs font-mono font-medium text-foreground/75 text-center mt-2.5 leading-tight">
+                  Adopción digital
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center">
+                <div className="w-full bg-[#627446] text-white p-4 rounded-xl text-center shadow-sm">
+                  <span className="text-xl sm:text-2xl font-bold font-mono block">↓40%</span>
+                </div>
+                <span className="text-[11px] sm:text-xs font-mono font-medium text-foreground/75 text-center mt-2.5 leading-tight">
+                  Huella ambiental
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Card 2: Educación & Salud (1 Big Green Tile) */}
+          <div className="bg-[#F3EFEC] dark:bg-[#111827] p-8 sm:p-9 rounded-2xl border border-[#E0DBCF] dark:border-border/60 flex flex-col justify-between shadow-sm">
+            {/* Top Category Icon & Title */}
+            <div className="text-center mb-8">
+              <BookOpen className="w-8 h-8 text-[#516337] mx-auto mb-3" />
+              <h3 className="text-2xl font-bold text-[#233215] dark:text-foreground tracking-tight">
+                Educación & Salud
+              </h3>
+            </div>
+
+            {/* 1 Big Green Metric Box & Description */}
+            <div className="my-auto space-y-4 flex flex-col items-center">
+              <div className="w-full bg-[#627446] text-white p-6 rounded-xl text-center shadow-sm">
+                <span className="text-3xl sm:text-4xl font-bold font-mono block">↑100%</span>
+              </div>
+              <p className="text-xs sm:text-sm font-mono font-medium text-foreground/75 text-center leading-relaxed max-w-xs">
+                Cobertura e integración continua en escuelas, centros comunitarios y telemedicina regional.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 3: Resultados Compartidos (Editorial Text Box) */}
+          <div className="bg-[#F3EFEC] dark:bg-[#111827] p-8 sm:p-9 rounded-2xl border border-[#E0DBCF] dark:border-border/60 flex flex-col justify-between shadow-sm">
+            {/* Top Category Icon & Title */}
+            <div className="text-center mb-8">
+              <Sparkles className="w-8 h-8 text-[#516337] mx-auto mb-3" />
+              <h3 className="text-2xl font-bold text-[#233215] dark:text-foreground tracking-tight">
+                Resultados Compartidos
+              </h3>
+            </div>
+
+            {/* Editorial Summary Content */}
+            <div className="my-auto p-4 text-center">
+              <p className="text-sm sm:text-base text-foreground/85 font-medium leading-relaxed">
+                Desarrollo territorial equitativo, mayor resiliencia comunitaria y fortalecimiento continuo de capacidades locales en La Paz sin asistencialismo pasivo.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
   )

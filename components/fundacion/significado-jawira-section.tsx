@@ -1,256 +1,132 @@
 'use client'
 
-import { useRef } from 'react'
-import { Monitor, BookOpen, HeartPulse } from 'lucide-react'
+import React, { useRef } from 'react'
+import Image from 'next/image'
+import { JawiraButton } from '@/components/ui/jawira-button'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
 import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin, useGSAP)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP)
+}
 
 export default function SignificadoJawiraSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
     const mm = gsap.matchMedia()
 
-    mm.add(
-      {
-        isDesktop: '(min-width: 768px)',
-        isMobile: '(max-width: 767px)',
-        reduceMotion: '(prefers-reduced-motion: reduce)',
-      },
-      (context) => {
-        const { reduceMotion } = context.conditions!
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // Parallax sutil de la imagen al hacer scroll
+      gsap.to(imageRef.current, {
+        scale: 1.06,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      })
 
-        if (reduceMotion) return
+      // Revelación elegante del encabezado superior
+      gsap.from('.significado-headline', {
+        y: 50,
+        autoAlpha: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 75%',
+        },
+      })
 
-        // --- Title SplitText ---
-        SplitText.create('.significado-title', {
-          type: 'words',
-          mask: 'words',
-          autoSplit: true,
-          onSplit(self) {
-            return gsap.from(self.words, {
-              y: '100%',
-              duration: 0.8,
-              ease: 'power3.out',
-              stagger: 0.06,
-              scrollTrigger: {
-                trigger: '.significado-title',
-                start: 'top 85%',
-                toggleActions: 'play reverse play reverse',
-              },
-            })
-          },
-        })
-
-        // --- Subtitle ---
-        gsap.from('.significado-subtitle', {
-          y: 20,
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: '.significado-subtitle',
-            start: 'top 90%',
-            toggleActions: 'play reverse play reverse',
-          },
-        })
-
-        // --- Paragraphs stagger ---
-        gsap.from('.significado-paragraph', {
-          y: 30,
-          autoAlpha: 0,
-          duration: 0.7,
-          ease: 'power3.out',
-          stagger: 0.15,
-          scrollTrigger: {
-            trigger: '.significado-text-block',
-            start: 'top 80%',
-            toggleActions: 'play reverse play reverse',
-          },
-        })
-
-        // --- River SVG DrawSVG with scrub ---
-        const riverTl = gsap.timeline({
-          scrollTrigger: {
-            trigger: '.river-svg-container',
-            start: 'top 75%',
-            end: 'bottom 30%',
-            scrub: 1,
-          },
-        })
-
-        riverTl
-          .from('.river-main-stream', { drawSVG: '0%', duration: 1, ease: 'none' })
-          .from('.river-branch-1', { drawSVG: '0%', duration: 0.5, ease: 'none' }, 0.3)
-          .from('.river-branch-2', { drawSVG: '0%', duration: 0.5, ease: 'none' }, 0.5)
-          .from('.river-branch-3', { drawSVG: '0%', duration: 0.5, ease: 'none' }, 0.7)
-
-        // --- Node icons scale in ---
-        gsap.from('.river-node', {
-          scale: 0,
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: 'back.out(1.7)',
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: '.river-svg-container',
-            start: 'top 60%',
-            toggleActions: 'play reverse play reverse',
-          },
-        })
-
-        // --- Flow particles pulse ---
-        gsap.to('.river-particle', {
-          autoAlpha: 0.8,
-          scale: 1.5,
-          duration: 1.5,
-          ease: 'sine.inOut',
-          stagger: { each: 0.4, repeat: -1, yoyo: true },
-        })
-      }
-    )
+      // Revelación de los bloques de texto inferiores
+      gsap.from('.significado-details', {
+        y: 40,
+        autoAlpha: 0,
+        duration: 1,
+        delay: 0.15,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 75%',
+        },
+      })
+    })
   }, { scope: sectionRef })
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-20 items-center">
-          {/* Left: Text */}
-          <div className="space-y-6">
-            <div className="space-y-3">
-              <span className="significado-subtitle text-xs font-semibold tracking-widest uppercase text-secondary">
-                Nuestro nombre
-              </span>
-              <h2 className="significado-title text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight">
-                ¿Qué significa JAWIRA?
-              </h2>
-            </div>
-
-            <div className="significado-text-block space-y-4 text-base text-foreground/70 leading-relaxed">
-              <p className="significado-paragraph">
-                <span className="font-semibold text-primary">JAWIRA</span> significa{" "}
-                <span className="italic">&ldquo;río&rdquo;</span> en aymara, uno de los idiomas originarios de Bolivia.
-                Esta palabra no es solo una etiqueta, sino una metáfora profunda de nuestra filosofía institucional.
-              </p>
-              <p className="significado-paragraph">
-                Un río representa el <span className="font-medium text-foreground">flujo de vida</span>, la{" "}
-                <span className="font-medium text-foreground">conexión continua</span> entre diferentes espacios, y la
-                capacidad de <span className="font-medium text-foreground">generar oportunidades</span> a su paso. De la
-                misma manera, la Fundación JAWIRA actúa como un cauce que canaliza tecnología productiva, educación y
-                salud hacia comunidades vulnerables.
-              </p>
-              <p className="significado-paragraph">
-                Así como el río nutre la tierra y conecta ecosistemas, nuestra fundación busca nutrir el potencial
-                humano, conectar actores institucionales y crear caminos hacia el desarrollo sostenible e integral.
-              </p>
-            </div>
+    <section
+      id="significado-jawira"
+      ref={sectionRef}
+      data-header-theme="light"
+      className="relative w-full min-h-[100dvh] bg-[#F5F2EB] dark:bg-[#0D1524] overflow-hidden"
+    >
+      <div className="grid grid-cols-1 lg:grid-cols-2 w-full min-h-[100dvh]">
+        
+        {/* =========================================================
+            COLUMNA DE CONTENIDO EDITORIAL (IZQUIERDA)
+            ========================================================= */}
+        <div 
+          ref={contentRef}
+          className="flex flex-col justify-between p-8 sm:p-14 md:p-18 lg:p-20 xl:p-24 bg-[#F5F2EB] dark:bg-[#0D1524] text-[#1B361F] dark:text-[#F8FAFC] min-h-[500px] lg:min-h-[100dvh] order-2 lg:order-1"
+        >
+          {/* 1. Título Superior Masivo */}
+          <div className="max-w-xl space-y-4">
+            <span className="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#50AA1E] dark:text-[#68CE2B] block">
+              NUESTRO NOMBRE · FILOSOFÍA INSTITUCIONAL
+            </span>
+            <h2 className="significado-headline text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.75rem] font-sans font-medium leading-[1.08] tracking-[-0.03em] text-[#1B361F] dark:text-white">
+              ¿Qué significa JAWIRA?
+            </h2>
           </div>
 
-          {/* Right: Animated river visualization */}
-          <div className="river-svg-container relative h-[420px] flex items-center justify-center">
-            <svg viewBox="0 0 320 420" className="w-full h-full max-w-[280px]" aria-hidden="true">
-              {/* Main river stream — sinuous path */}
-              <path
-                d="M160 10 Q170 50 145 90 Q155 130 140 170 Q160 210 145 250 Q155 300 150 340 Q155 380 160 410"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="6"
-                strokeLinecap="round"
-                className="river-main-stream text-primary/30"
-                style={{ willChange: 'stroke-dashoffset' }}
-              />
+          {/* 2. Textos Inferiores Estructurados & Botón Minimalista */}
+          <div className="max-w-xl space-y-6 pt-10 sm:pt-16">
+            <p className="significado-details text-xs sm:text-[13px] md:text-sm font-mono tracking-wider uppercase text-[#2D4A32] dark:text-slate-300 leading-relaxed">
+              JAWIRA SIGNIFICA &ldquo;RÍO&rdquo; EN AYMARA, UN IDIOMA ORIGINARIO DE BOLIVIA. UN RÍO REPRESENTA EL FLUJO CONTINUO DE VIDA, LA CONEXIÓN ENTRE COMUNIDADES Y LA CAPACIDAD DE GENERAR OPORTUNIDADES A SU PASO.
+            </p>
+            
+            <p className="significado-details text-xs sm:text-[13px] md:text-sm font-mono tracking-wider uppercase text-[#4A634E] dark:text-slate-400 leading-relaxed">
+              DE LA MISMA MANERA, NUESTRA FUNDACIÓN ACTÚA COMO UN CAUCE QUE CANALIZA TECNOLOGÍA PRODUCTIVA, EDUCACIÓN INTEGRAL Y SALUD PREVENTIVA PARA NUTRIR EL POTENCIAL HUMANO Y CREAR CAMINOS HACIA EL DESARROLLO SOSTENIBLE.
+            </p>
 
-              {/* Secondary stream — slightly offset */}
-              <path
-                d="M168 20 Q178 60 153 100 Q163 140 148 180 Q168 220 153 260 Q163 310 158 350 Q163 390 168 415"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                className="river-main-stream text-secondary/20"
-                style={{ willChange: 'stroke-dashoffset' }}
-              />
-
-              {/* Branch 1: Technology — curves right */}
-              <path
-                d="M153 95 Q180 80 220 70 Q250 65 275 72"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                className="river-branch-1 text-primary/25"
-                style={{ willChange: 'stroke-dashoffset' }}
-              />
-
-              {/* Branch 2: Education — curves left */}
-              <path
-                d="M148 195 Q120 180 80 175 Q55 172 35 178"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                className="river-branch-2 text-secondary/25"
-                style={{ willChange: 'stroke-dashoffset' }}
-              />
-
-              {/* Branch 3: Health — curves right */}
-              <path
-                d="M153 300 Q185 290 225 285 Q255 282 280 290"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                className="river-branch-3 text-accent/25"
-                style={{ willChange: 'stroke-dashoffset' }}
-              />
-
-              {/* Flow particles along the river */}
-              <circle cx="155" cy="50" r="2.5" className="river-particle fill-primary/40" />
-              <circle cx="148" cy="130" r="2" className="river-particle fill-secondary/40" />
-              <circle cx="152" cy="220" r="2.5" className="river-particle fill-primary/40" />
-              <circle cx="155" cy="330" r="2" className="river-particle fill-secondary/40" />
-              <circle cx="158" cy="390" r="2.5" className="river-particle fill-accent/40" />
-            </svg>
-
-            {/* Node 1: Technology */}
-            <div className="river-node absolute flex items-center gap-2.5" style={{ top: '14%', right: '2%' }}>
-              <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
-                <Monitor className="w-4 h-4 text-primary" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-primary tracking-tight">Tecnología</p>
-                <p className="text-[10px] text-muted-foreground">Innovación digital</p>
-              </div>
-            </div>
-
-            {/* Node 2: Education */}
-            <div className="river-node absolute flex items-center gap-2.5" style={{ top: '42%', left: '0%' }}>
-              <div className="w-9 h-9 rounded-full bg-secondary/10 flex items-center justify-center border border-secondary/20">
-                <BookOpen className="w-4 h-4 text-secondary" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-primary tracking-tight">Educación</p>
-                <p className="text-[10px] text-muted-foreground">Formación integral</p>
-              </div>
-            </div>
-
-            {/* Node 3: Health */}
-            <div className="river-node absolute flex items-center gap-2.5" style={{ top: '68%', right: '0%' }}>
-              <div className="w-9 h-9 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20">
-                <HeartPulse className="w-4 h-4 text-accent" />
-              </div>
-              <div>
-                <p className="text-xs font-bold text-primary tracking-tight">Salud</p>
-                <p className="text-[10px] text-muted-foreground">Prevención y bienestar</p>
-              </div>
+            {/* Botón de Acción Estilo JawiraButton */}
+            <div className="significado-details pt-2">
+              <JawiraButton
+                href="/areas-de-trabajo"
+                variant="outline-dark"
+                size="default"
+                bullets
+                className="w-fit"
+              >
+                CONOCE NUESTROS EJES
+              </JawiraButton>
             </div>
           </div>
         </div>
+
+        {/* =========================================================
+            COLUMNA DE IMAGEN A SANGRE COMPLETA A LA DERECHA
+            ========================================================= */}
+        <div className="relative w-full h-[50vh] sm:h-[60vh] lg:h-full min-h-[420px] lg:min-h-[100dvh] overflow-hidden order-1 lg:order-2">
+          <div ref={imageRef} className="absolute inset-0 w-full h-full will-change-transform">
+            <Image
+              src="/community-development-people-working-together-bolivia.png"
+              alt="Comunidad en Bolivia trabajando unida por el desarrollo integral"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover w-full h-full"
+              priority
+            />
+          </div>
+        </div>
+
       </div>
     </section>
   )

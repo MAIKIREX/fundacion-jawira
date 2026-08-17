@@ -42,7 +42,7 @@ export default function DondeTrabajamoSection() {
         scrollTrigger: {
           trigger: '.donde-header',
           start: 'top 85%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none none',
         },
       })
 
@@ -76,7 +76,7 @@ export default function DondeTrabajamoSection() {
         scrollTrigger: {
           trigger: '.locations-list',
           start: 'top 80%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none none',
         },
       })
 
@@ -89,7 +89,7 @@ export default function DondeTrabajamoSection() {
         scrollTrigger: {
           trigger: '.map-image-container',
           start: 'top 85%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions: 'play none none none',
         },
       })
 

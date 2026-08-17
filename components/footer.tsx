@@ -2,138 +2,195 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Mail, MapPin, Phone } from "lucide-react"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
-  const footerLinks = {
-    about: [
-      { label: "La Fundación", href: "/fundacion" },
-      { label: "Áreas de trabajo", href: "/areas-de-trabajo" },
-      { label: "Centro Integral", href: "/centro-integral" },
-    ],
-    resources: [
-      { label: "Impacto", href: "/impacto" },
-      { label: "Transparencia", href: "/transparencia" },
-      { label: "Contacto", href: "/contacto" },
-    ],
-  }
-
   return (
-    <footer className="bg-primary text-primary-foreground">
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 md:pt-20 md:pb-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-          {/* Column 1: Branding */}
-          <div className="sm:col-span-2 lg:col-span-1 space-y-5">
-            <Link href="/" className="flex items-center gap-3 group w-fit">
-              <div className="relative w-11 h-11 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-primary-foreground/20">
-                <Image
-                  src="/logo/logo.jpeg"
-                  alt="Logotipo de Fundación Jawira"
-                  fill
-                  sizes="44px"
-                  className="object-contain"
-                />
-              </div>
-              <div className="flex flex-col leading-tight">
-                <span className="text-xs font-medium tracking-widest uppercase text-primary-foreground/60">Fundación</span>
-                <span className="text-base font-bold tracking-tight">JAWIRA</span>
-              </div>
+    <footer
+      data-header-theme="light"
+      className="bg-[#F5F2EB] dark:bg-[#0D1524] text-[#1B361F] dark:text-[#F8FAFC] border-t border-[#1B361F]/10 dark:border-white/10 pt-16 pb-8 md:pt-20 md:pb-10 transition-colors duration-300"
+    >
+      <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20 space-y-14 sm:space-y-16">
+        
+        {/* Top Section: Links & Contact Info */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 items-start">
+          
+          {/* Columns 1 to 4 (8 cols total in md) */}
+          <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
+            
+            {/* Col 1: Ejes */}
+            <div className="space-y-3">
+              <h4 className="text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#1B361F]/50 dark:text-white/50">
+                EJES DE TRABAJO
+              </h4>
+              <ul className="space-y-2 font-mono text-xs uppercase tracking-wider font-semibold">
+                <li>
+                  <Link href="/areas-de-trabajo#tecnologia" className="hover:opacity-70 transition-opacity">
+                    TECNOLOGÍA
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/areas-de-trabajo#educacion" className="hover:opacity-70 transition-opacity">
+                    EDUCACIÓN
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/areas-de-trabajo#salud" className="hover:opacity-70 transition-opacity">
+                    PREVENCIÓN SALUD
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 2: Institucional */}
+            <div className="space-y-3">
+              <h4 className="text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#1B361F]/50 dark:text-white/50">
+                INSTITUCIONAL
+              </h4>
+              <ul className="space-y-2 font-mono text-xs uppercase tracking-wider font-semibold">
+                <li>
+                  <Link href="/fundacion" className="hover:opacity-70 transition-opacity">
+                    LA FUNDACIÓN
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/centro-integral" className="hover:opacity-70 transition-opacity">
+                    CENTRO INTEGRAL
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/impacto" className="hover:opacity-70 transition-opacity">
+                    IMPACTO
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/transparencia" className="hover:opacity-70 transition-opacity">
+                    TRANSPARENCIA
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 3: Apoyar */}
+            <div className="space-y-3">
+              <h4 className="text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#1B361F]/50 dark:text-white/50">
+                APOYAR
+              </h4>
+              <ul className="space-y-2 font-mono text-xs uppercase tracking-wider font-semibold">
+                <li>
+                  <Link href="/quiero-apoyar" className="hover:opacity-70 transition-opacity">
+                    DONAR
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contacto" className="hover:opacity-70 transition-opacity">
+                    VOLUNTARIADO
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contacto" className="hover:opacity-70 transition-opacity">
+                    ALIANZAS
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Col 4: Contacto */}
+            <div className="space-y-3">
+              <h4 className="text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#1B361F]/50 dark:text-white/50">
+                CONTACTO
+              </h4>
+              <ul className="space-y-2 font-mono text-xs uppercase tracking-wider font-semibold">
+                <li>
+                  <Link href="/contacto" className="hover:opacity-70 transition-opacity">
+                    FORMULARIO
+                  </Link>
+                </li>
+                <li className="text-[#1B361F]/70 dark:text-white/70">
+                  LA PAZ, BOLIVIA
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          {/* Right side: Questions & Main Contact Email */}
+          <div className="md:col-span-4 flex flex-col md:items-end space-y-4 md:text-right">
+            <div className="space-y-1">
+              <p className="text-[10px] font-mono font-semibold tracking-[0.2em] uppercase text-[#1B361F]/60 dark:text-white/60">
+                SI TIENES ALGUNA PREGUNTA NO DUDES EN CONTACTARNOS:
+              </p>
+              <a 
+                href="mailto:fundacion.jawira@gmail.com" 
+                className="font-mono text-base sm:text-lg lg:text-xl font-bold tracking-tight uppercase hover:opacity-75 transition-opacity block"
+              >
+                FUNDACION.JAWIRA@GMAIL.COM
+              </a>
+            </div>
+
+            <div className="pt-2 flex items-center gap-4 font-mono text-xs font-bold tracking-widest uppercase text-[#1B361F]/80 dark:text-white/80">
+              <a 
+                href="https://linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:underline transition-all"
+              >
+                LINKEDIN
+              </a>
+              <span>·</span>
+              <a 
+                href="https://facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:underline transition-all"
+              >
+                FACEBOOK
+              </a>
+              <span>·</span>
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:underline transition-all"
+              >
+                INSTAGRAM
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Center Emblem / Logo */}
+        <div className="flex flex-col items-center justify-center pt-6 pb-2">
+          <Link href="/" className="group block transition-transform duration-300 hover:scale-105">
+            <Image
+              src="/logo/logo-rio.png"
+              alt="Fundación Jawira"
+              width={220}
+              height={100}
+              className="h-16 sm:h-20 w-auto object-contain dark:brightness-110"
+              priority
+            />
+          </Link>
+        </div>
+
+        {/* Bottom copyright bar matching reference */}
+        <div className="pt-6 border-t border-[#1B361F]/10 dark:border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-wider text-[#1B361F]/60 dark:text-white/60">
+          <p>© {currentYear} FUNDACIÓN JAWIRA INC.</p>
+          
+          <div className="flex items-center gap-6">
+            <Link href="/transparencia" className="hover:text-[#1B361F] dark:hover:text-white transition-colors">
+              POLÍTICA DE PRIVACIDAD
             </Link>
-            <p className="text-sm text-primary-foreground/60 leading-relaxed max-w-[280px]">
-              Tecnología, educación y salud para el desarrollo integral en el Departamento de La Paz, Bolivia.
-            </p>
-          </div>
-
-          {/* Column 2: About Links */}
-          <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/50 mb-5">
-              Sobre nosotros
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.about.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Resources */}
-          <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/50 mb-5">
-              Recursos
-            </h4>
-            <ul className="space-y-3">
-              {footerLinks.resources.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 4: Contact */}
-          <div>
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-primary-foreground/50 mb-5">
-              Contacto
-            </h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/50" />
-                <a
-                  href="mailto:fundacion.jawira@gmail.com"
-                  className="text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-                >
-                  fundacion.jawira@gmail.com
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/50" />
-                <span className="text-primary-foreground/70">+591 64208172</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-primary-foreground/50" />
-                <span className="text-primary-foreground/70">
-                  La Paz, Zona Gran Poder
-                  <br />
-                  Bolivia
-                </span>
-              </li>
-            </ul>
+            <Link href="/transparencia" className="hover:text-[#1B361F] dark:hover:text-white transition-colors">
+              TÉRMINOS DE USO
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-primary-foreground/50">
-          <p>&copy; {currentYear} Fundación JAWIRA. Todos los derechos reservados.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-primary-foreground transition-colors">
-              Facebook
-            </a>
-            <a href="#" className="hover:text-primary-foreground transition-colors">
-              Instagram
-            </a>
-            <a href="#" className="hover:text-primary-foreground transition-colors">
-              LinkedIn
-            </a>
-          </div>
-        </div>
       </div>
     </footer>
   )
 }
+

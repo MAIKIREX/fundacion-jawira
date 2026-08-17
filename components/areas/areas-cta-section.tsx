@@ -1,8 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { JawiraButton } from '@/components/ui/jawira-button'
 import { ArrowRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -21,7 +20,7 @@ export default function AreasCtaSection() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
-          toggleActions: 'play reverse play reverse'
+          toggleActions: 'play none none none'
         }
       })
 
@@ -39,14 +38,18 @@ export default function AreasCtaSection() {
   }, { scope: sectionRef })
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-background border-t border-border/40 overflow-hidden relative">
+    <section
+      ref={sectionRef}
+      data-header-theme="light"
+      className="py-24 md:py-32 bg-background border-t border-border/40 overflow-hidden relative"
+    >
       {/* Decorative gradient blur */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10 relative z-10">
         
         <div className="space-y-6">
-          <span className="cta-badge inline-block px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-xs font-semibold tracking-widest uppercase text-secondary">
+          <span className="cta-badge inline-block px-4 py-1.5 rounded-full bg-secondary/10 border border-secondary/20 text-xs font-semibold tracking-widest uppercase text-secondary font-mono">
             Colaboración
           </span>
           <h2 className="cta-title text-4xl md:text-5xl lg:text-7xl font-bold text-primary tracking-tighter leading-[1.05]">
@@ -59,22 +62,18 @@ export default function AreasCtaSection() {
           Somos una organización abierta a la colaboración. Si eres voluntario, aliado institucional o donante interesado en potenciar alguno de estos ejes, conversemos.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-5 justify-center pt-6">
+        <div className="flex flex-col sm:flex-row gap-5 justify-center pt-6 items-center">
           <div className="cta-button">
-            <Button asChild variant="cta" size="lg" className="w-full sm:w-auto text-base h-14 px-8 rounded-xl">
-              <Link href="/contacto">
-                Contactar ahora
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </Button>
+            <JawiraButton href="/contacto" variant="green" size="lg" className="inline-flex items-center gap-2">
+              Contactar ahora
+              <ArrowRight className="w-4 h-4 ml-1 inline-block" />
+            </JawiraButton>
           </div>
           
           <div className="cta-button">
-            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-base h-14 px-8 rounded-xl border-2 hover:bg-muted/50">
-              <Link href="/fundacion">
-                Conocer la fundación
-              </Link>
-            </Button>
+            <JawiraButton href="/fundacion" variant="outline-dark" size="lg">
+              Conocer la fundación
+            </JawiraButton>
           </div>
         </div>
         
@@ -82,3 +81,4 @@ export default function AreasCtaSection() {
     </section>
   )
 }
+

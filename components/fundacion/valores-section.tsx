@@ -1,26 +1,56 @@
 'use client'
 
-import { useRef } from 'react'
-import { Heart, Hand as Hands, Lightbulb, Users, Scale, Leaf, Shield, BookOpen, Smile, Anchor, Target } from 'lucide-react'
+import React, { useRef } from 'react'
+import { Heart, Hand as Hands, Smile, Target, Scale, Lightbulb, Shield, Leaf } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
-gsap.registerPlugin(ScrollTrigger, useGSAP)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, useGSAP)
+}
 
 const valores = [
-  { icon: Heart, title: 'Esperanza', descripcion: 'Creemos en el potencial transformador de cada persona y comunidad.' },
-  { icon: Hands, title: 'Solidaridad', descripcion: 'Trabajamos unidos en la construcción de un futuro compartido.' },
-  { icon: Smile, title: 'Empatía', descripcion: 'Escuchamos y comprendemos las necesidades de las comunidades.' },
-  { icon: Target, title: 'Compromiso', descripcion: 'Nos responsabilizamos de nuestras acciones y resultados.' },
-  { icon: Scale, title: 'Integridad', descripcion: 'Actuamos con transparencia, honestidad y coherencia ética.' },
-  { icon: Users, title: 'Servicio', descripcion: 'Ponemos al servicio de otros nuestros talentos y recursos.' },
-  { icon: Anchor, title: 'Humildad', descripcion: 'Reconocemos que tenemos mucho por aprender.' },
-  { icon: Lightbulb, title: 'Innovación', descripcion: 'Buscamos soluciones creativas a problemas complejos.' },
-  { icon: Shield, title: 'Inclusión', descripcion: 'Valoramos la diversidad y garantizamos participación equitativa.' },
-  { icon: Hands, title: 'Colaboración', descripcion: 'Reconocemos que los retos se resuelven en alianza.' },
-  { icon: BookOpen, title: 'Aprendizaje Continuo', descripcion: 'Nos adaptamos y mejoramos constantemente.' },
-  { icon: Leaf, title: 'Sostenibilidad', descripcion: 'Pensamos en el impacto a largo plazo en personas y planeta.' },
+  {
+    icon: Heart,
+    title: 'Esperanza',
+    descripcion: 'Creemos firmemente en el potencial transformador de cada persona y comunidad en Bolivia.',
+  },
+  {
+    icon: Hands,
+    title: 'Solidaridad',
+    descripcion: 'Trabajamos unidos en la construcción de un futuro compartido con equidad y apoyo mutuo.',
+  },
+  {
+    icon: Smile,
+    title: 'Empatía',
+    descripcion: 'Escuchamos y comprendemos a profundidad las verdaderas necesidades de las familias.',
+  },
+  {
+    icon: Target,
+    title: 'Compromiso',
+    descripcion: 'Nos responsabilizamos éticamente de nuestras acciones y resultados de alto impacto.',
+  },
+  {
+    icon: Scale,
+    title: 'Integridad',
+    descripcion: 'Actuamos con transparencia absoluta, honestidad y coherencia en cada territorio.',
+  },
+  {
+    icon: Lightbulb,
+    title: 'Innovación',
+    descripcion: 'Buscamos soluciones creativas y tecnológicas a problemas sociales complejos.',
+  },
+  {
+    icon: Shield,
+    title: 'Inclusión',
+    descripcion: 'Valoramos la diversidad cultural y garantizamos participación justa sin discriminación.',
+  },
+  {
+    icon: Leaf,
+    title: 'Sostenibilidad',
+    descripcion: 'Generamos proyectos con impacto duradero para las generaciones presentes y futuras.',
+  },
 ]
 
 export default function ValoresSection() {
@@ -30,133 +60,86 @@ export default function ValoresSection() {
     const mm = gsap.matchMedia()
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // --- Header reveal ---
-      const headerTl = gsap.timeline({
+      // Reveal del encabezado
+      gsap.from('.valores-header', {
+        y: 40,
+        autoAlpha: 0,
+        duration: 0.8,
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: '.valores-header',
           start: 'top 85%',
-          toggleActions: 'play none none none',
+          once: true,
         },
       })
 
-      headerTl
-        .from('.valores-subtitle', {
-          y: 20,
-          autoAlpha: 0,
-          duration: 0.5,
-          ease: 'power3.out',
-        })
-        .from('.valores-title', {
-          y: 30,
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: 'power3.out',
-        }, '-=0.3')
-        .from('.valores-desc', {
-          y: 20,
-          autoAlpha: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        }, '-=0.2')
-
-      // --- Batch reveal for value cards ---
-      gsap.set('.valor-card', { autoAlpha: 0, y: 40 })
-
-      ScrollTrigger.batch('.valor-card', {
-        onEnter: (elements) => {
-          gsap.to(elements, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power3.out',
-            stagger: 0.08,
-            overwrite: true,
-          })
+      // Reveal escalonado de los ítems de valores
+      gsap.from('.valor-item', {
+        y: 35,
+        autoAlpha: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.valores-grid',
+          start: 'top 85%',
+          once: true,
         },
-        onLeave: (elements) => {
-          gsap.set(elements, { autoAlpha: 0, y: 40, overwrite: true })
-        },
-        onEnterBack: (elements) => {
-          gsap.to(elements, {
-            autoAlpha: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power3.out',
-            stagger: -0.08,
-            overwrite: true,
-          })
-        },
-        onLeaveBack: (elements) => {
-          gsap.set(elements, { autoAlpha: 0, y: 40, overwrite: true })
-        },
-        start: 'top 88%',
-      })
-
-      // --- Icon hover micro-animation setup ---
-      const cards = gsap.utils.toArray<HTMLElement>('.valor-card')
-      cards.forEach((card) => {
-        const icon = card.querySelector('.valor-icon')
-        if (!icon) return
-
-        card.addEventListener('mouseenter', () => {
-          gsap.to(icon, {
-            scale: 1.15,
-            duration: 0.3,
-            ease: 'back.out(1.7)',
-            overwrite: true,
-          })
-        })
-
-        card.addEventListener('mouseleave', () => {
-          gsap.to(icon, {
-            scale: 1,
-            duration: 0.25,
-            ease: 'power2.out',
-            overwrite: true,
-          })
-        })
       })
     })
   }, { scope: sectionRef })
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="valores-header mb-16 max-w-2xl">
-          <span className="valores-subtitle text-xs font-semibold tracking-widest uppercase text-secondary">
-            Lo que nos define
+    <section
+      id="valores"
+      ref={sectionRef}
+      data-header-theme="light"
+      className="relative w-full py-24 sm:py-28 md:py-32 bg-[#F5F2EB] dark:bg-[#0D1524] text-[#1B361F] dark:text-[#F8FAFC] border-b border-[#1B361F]/10 dark:border-white/10"
+    >
+      <div className="w-full px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20">
+        
+        {/* =========================================================
+            1. ENCABEZADO EDITORIAL
+            ========================================================= */}
+        <div className="valores-header max-w-3xl space-y-3 mb-16 sm:mb-20 md:mb-24">
+          <span className="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#50AA1E] dark:text-[#68CE2B] block">
+            NUESTRO ADN INSTITUCIONAL
           </span>
-          <h2 className="valores-title text-3xl md:text-4xl font-bold text-primary tracking-tight leading-tight mt-3">
-            Nuestros valores
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-sans font-medium text-[#1B361F] dark:text-white tracking-[-0.03em] leading-[1.08]">
+            Valores que mueven nuestro cauce
           </h2>
-          <p className="valores-desc text-base text-muted-foreground mt-4 leading-relaxed">
-            Los principios fundamentales que guían cada decisión y acción en la Fundación JAWIRA.
+          <p className="text-base sm:text-lg text-[#4A634E] dark:text-slate-300 max-w-2xl leading-relaxed font-normal pt-1">
+            Los pilares éticos y humanos que guían cada proyecto, alianza y decisión en la Fundación JAWIRA.
           </p>
         </div>
 
-        {/* Values grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/40 rounded-2xl overflow-hidden">
-          {valores.map((valor) => {
-            const IconComponent = valor.icon
+        {/* =========================================================
+            2. GRILLA MINIMALISTA DE VALORES (ESTILO EXACTO DE LA REFERENCIA)
+            ========================================================= */}
+        <div className="valores-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 lg:gap-x-12 lg:gap-y-16">
+          {valores.map((item) => {
+            const IconComponent = item.icon
             return (
-              <div
-                key={valor.title}
-                className="valor-card bg-background p-6 md:p-7 space-y-3 group hover:bg-muted/30 transition-colors cursor-default"
-              >
-                <div className="valor-icon w-10 h-10 rounded-xl bg-primary/6 flex items-center justify-center group-hover:bg-primary/10 transition-colors" style={{ willChange: 'transform' }}>
-                  <IconComponent className="w-5 h-5 text-primary/70" />
+              <div key={item.title} className="valor-item space-y-3.5 group">
+                {/* Icono circular lineal de precisión */}
+                <div className="w-9 h-9 rounded-full border border-[#4A634E]/50 dark:border-[#68CE2B]/60 flex items-center justify-center text-[#2D4A32] dark:text-[#68CE2B] transition-transform duration-300 group-hover:scale-110">
+                  <IconComponent className="w-4 h-4 stroke-[1.6]" />
                 </div>
-                <h3 className="font-semibold text-base text-primary tracking-tight">
-                  {valor.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {valor.descripcion}
-                </p>
+
+                {/* Título en negrita con dos puntos + descripción continua */}
+                <div className="text-sm sm:text-base leading-relaxed font-sans">
+                  <span className="font-bold text-[#1B361F] dark:text-white block mb-1">
+                    {item.title}:
+                  </span>
+                  <span className="text-[#3E5642] dark:text-slate-300 font-normal">
+                    {item.descripcion}
+                  </span>
+                </div>
               </div>
             )
           })}
         </div>
+
       </div>
     </section>
   )
