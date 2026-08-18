@@ -1,146 +1,163 @@
 'use client'
 
-import { useRef } from 'react'
-import { Cpu, Leaf, Smartphone, Lightbulb, Zap } from 'lucide-react'
-import RiverFlowLines from '@/components/ui/river-flow-lines'
+import React, { useRef } from 'react'
+import { Cpu, Leaf, Smartphone, Lightbulb, Zap, ArrowUpRight } from 'lucide-react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
-if (typeof window !== "undefined") {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, useGSAP)
 }
 
-const technologyLines = [
+interface TechnologyLine {
+  metric: string
+  title: string
+  description: string
+  icon: React.ComponentType<{ className?: string }>
+}
+
+const technologyLines: TechnologyLine[] = [
   {
+    metric: '01',
     title: 'Innovación productiva',
     description: 'TECNOLOGÍAS LIMPIAS PARA SECTORES PRODUCTIVOS, MONITOREO AMBIENTAL Y TRAZABILIDAD.',
     icon: Leaf,
-    metric: '01'
   },
   {
+    metric: '02',
     title: 'Soluciones digitales',
     description: 'PLATAFORMAS DE GESTIÓN, APLICACIONES MÓVILES Y HERRAMIENTAS DE TELEMEDICINA.',
     icon: Smartphone,
-    metric: '02'
   },
   {
+    metric: '03',
     title: 'Capacitación TIC',
     description: 'FORMACIÓN EN IA, IOT, CIBERSEGURIDAD Y ALFABETIZACIÓN DIGITAL COMUNITARIA.',
     icon: Cpu,
-    metric: '03'
   },
   {
+    metric: '04',
     title: 'Laboratorios Tech',
     description: 'ESPACIOS DE CO-CREACIÓN, PROTOTIPADO Y EXPERIMENTACIÓN COMUNITARIA SOSTENIBLE.',
     icon: Lightbulb,
-    metric: '04'
-  }
+  },
 ]
 
 export default function TechnologySection() {
   const sectionRef = useRef<HTMLElement>(null)
 
-  useGSAP(() => {
-    const mm = gsap.matchMedia()
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
 
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      // Header Entrance
-      gsap.from('.tech-header-item', {
-        y: 30,
-        autoAlpha: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none'
-        }
-      })
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.fromTo(
+          '.tech-header-block',
+          { y: 30, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        )
 
-      // Cards Grid Entrance
-      gsap.from('.tech-green-card', {
-        y: 40,
-        autoAlpha: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.tech-cards-grid',
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        }
+        gsap.fromTo(
+          '.tech-card-item',
+          { y: 35, autoAlpha: 0 },
+          {
+            y: 0,
+            autoAlpha: 1,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 80%',
+              once: true,
+            },
+          }
+        )
       })
-    })
-  }, { scope: sectionRef })
+    },
+    { scope: sectionRef, dependencies: [] }
+  )
 
   return (
     <section 
       id="tecnologia" 
       ref={sectionRef} 
       data-header-theme="dark"
-      className="py-24 md:py-36 bg-[#637547] text-white relative z-10 overflow-hidden border-t border-white/10"
+      className="py-24 md:py-32 bg-[#4D6033] text-white relative z-10 overflow-hidden border-t border-white/10"
     >
-      {/* Background Lighting Glow */}
+      {/* Atmósfera de Fondo con Resplandor Orgánico */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-radial-[circle_at_50%_30%] from-[#768A57] via-[#637547] to-[#4F5E38]" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#4F5E38]/40 via-transparent to-[#3E4B2B]/60" />
+        <div className="absolute inset-0 bg-radial-[circle_at_50%_20%] from-[#667E44] via-[#4D6033] to-[#3B4A27]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#3B4A27]/40 via-transparent to-[#2E3A1E]/70" />
       </div>
-
-      {/* Background River Lines Flow */}
-      <RiverFlowLines className="opacity-20 z-0" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
-        {/* Section Header (White Text on Green Surface) */}
-        <div className="mb-16 md:mb-20 grid lg:grid-cols-[1.2fr_1fr] gap-10 items-end">
-          <div>
-            <div className="tech-header-item inline-flex items-center gap-2 mb-6 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-mono text-xs font-bold tracking-widest uppercase text-white">
-              <Zap className="w-4 h-4 text-[#A8F074]" />
+        {/* Encabezado Principal */}
+        <div className="tech-header-block mb-14 md:mb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
+          <div className="lg:col-span-7 space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 font-mono text-xs font-bold tracking-widest uppercase text-white">
+              <Zap className="w-4 h-4 text-[#C2FF6B]" />
               <span>Eje de Acción 01 — Tecnología</span>
             </div>
             
-            <h2 className="tech-header-item text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.05]">
-              Tecnología productiva <br className="hidden sm:block" />y digital.
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-white leading-[1.05] font-sans">
+              Tecnología productiva <br />
+              y digital.
             </h2>
           </div>
 
-          <div className="space-y-4 text-base sm:text-lg text-white/90 leading-relaxed font-medium">
-            <p className="tech-header-item">
+          <div className="lg:col-span-5 space-y-4">
+            <p className="text-base sm:text-lg text-white/90 leading-relaxed font-normal">
               Desarrollamos e implementamos soluciones tecnológicas limpias para sectores productivos, monitoreo ambiental y reducción de la brecha digital en el Departamento de La Paz.
             </p>
-            <p className="tech-header-item text-white/70 text-sm font-mono uppercase tracking-wider">
+            <p className="text-xs font-mono font-bold uppercase tracking-wider text-white/70">
               * MODELO DE INNOVACIÓN Y SOSTENIBILIDAD JAWIRA
             </p>
           </div>
         </div>
 
-        {/* 4 Cards Grid (Matching Reference Image Style: Warm Cream Card with Dark Olive Text) */}
-        <div className="tech-cards-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Rejilla de 4 Tarjetas */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {technologyLines.map((line, index) => {
-            const Icon = line.icon
+            const IconComponent = line.icon
+
             return (
               <div 
                 key={index} 
-                className="tech-green-card bg-[#F4F1EA] text-[#213014] p-8 sm:p-9 rounded-2xl border border-[#E0DACB] flex flex-col justify-between min-h-[310px] shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group"
+                className="tech-card-item bg-[#F5F2EA] text-[#1E2D15] p-7 sm:p-8 rounded-3xl border border-[#E3DDCF] flex flex-col justify-between min-h-[320px] shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group cursor-default"
               >
-                {/* Top Row: Icon Symbol */}
+                {/* Fila Superior: Icono y Métrica */}
                 <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-[#4A5B30]/10 flex items-center justify-center group-hover:bg-[#4A5B30] group-hover:text-white transition-colors">
-                    <Icon className="w-5 h-5 text-[#354522] group-hover:text-white transition-colors" />
+                  <div className="w-12 h-12 rounded-2xl bg-[#4D6033]/15 text-[#354522] flex items-center justify-center group-hover:bg-[#4D6033] group-hover:text-white transition-all duration-300 shadow-sm">
+                    <IconComponent className="w-6 h-6 stroke-[1.75]" />
                   </div>
-                  <span className="font-mono text-xs font-bold text-[#4A5A38]/50 uppercase tracking-widest">
-                    {line.metric}
-                  </span>
+                  
+                  <div className="flex items-center gap-1">
+                    <span className="font-mono text-xs font-bold text-[#4D6033]/60 uppercase tracking-widest">
+                      {line.metric}
+                    </span>
+                    <ArrowUpRight className="w-4 h-4 text-[#4D6033]/40 group-hover:text-[#4D6033] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  </div>
                 </div>
 
-                {/* Bottom Content: Large Title + Monospaced Description */}
-                <div className="mt-10 space-y-3">
-                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#213014] leading-tight font-sans group-hover:text-[#4A5B30] transition-colors">
+                {/* Contenido Inferior: Título y Descripción */}
+                <div className="mt-8 space-y-3">
+                  <h3 className="text-2xl sm:text-[1.7rem] font-bold tracking-tight text-[#1A2813] leading-tight font-sans group-hover:text-[#3B4C25] transition-colors">
                     {line.title}
                   </h3>
-                  <p className="font-mono text-xs sm:text-sm font-semibold text-[#455534]/90 uppercase tracking-wider leading-relaxed">
+                  <p className="font-mono text-xs font-semibold text-[#445532]/90 uppercase tracking-wider leading-relaxed">
                     {line.description}
                   </p>
                 </div>

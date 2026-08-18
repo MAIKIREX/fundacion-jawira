@@ -8,31 +8,36 @@ export default function IntegratedApproachSection() {
     <section 
       id="enfoque-integrado"
       data-header-theme="light"
-      className="py-24 md:py-32 bg-[#FAF9F5] dark:bg-background border-t border-border/50 relative z-10 overflow-hidden"
+      className="py-20 md:py-28 lg:py-32 bg-[#FAF8F5] dark:bg-background border-t border-border/50 relative z-10 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-4xl mb-16 space-y-6">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#253517] dark:text-foreground leading-[1.05]">
+        <div className="max-w-3xl mb-12 md:mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-xs font-mono font-bold tracking-widest uppercase text-secondary">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Sinergia Territorial</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#1B361F] dark:text-foreground leading-[1.05] font-sans">
             Un enfoque estructuralmente integrado
           </h2>
 
-          <div className="space-y-4 text-base sm:text-lg text-foreground/80 font-medium leading-relaxed max-w-3xl">
+          <div className="space-y-3 text-base sm:text-lg text-foreground/80 font-normal leading-relaxed pt-1">
             <p>
               Fundación JAWIRA articula tecnología productiva, educación integral y salud de forma coordinada, no como áreas aisladas. La intersección de estos tres ejes genera un modelo de desarrollo sostenible y replicable.
             </p>
-            <p className="text-sm sm:text-base text-foreground/70">
+            <p className="text-sm sm:text-base text-foreground/70 font-normal">
               Los indicadores respaldan la efectividad de nuestro enfoque en comunidades urbanas, periurbanas y rurales del Departamento de La Paz, multiplicando el alcance y la resiliencia territorial.
             </p>
           </div>
         </div>
 
-        {/* 3-Column Card Modules (Matching Attached Reference Image) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+        {/* 3-Column Card Modules */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
           
-          {/* Card 1: Tecnología Productiva (3 Green Tiles) */}
-          <div className="bg-[#F3EFEC] dark:bg-[#111827] p-8 sm:p-9 rounded-2xl border border-[#E0DBCF] dark:border-border/60 flex flex-col justify-between shadow-sm">
+          {/* Card 1: Tecnología Productiva */}
+          <div className="bg-[#F3EFE9] dark:bg-[#111827] p-7 sm:p-8 md:p-9 rounded-3xl border border-[#E0DBCF] dark:border-border/60 flex flex-col justify-between shadow-sm">
             {/* Top Category Icon & Title */}
             <div className="text-center mb-8">
               <Zap className="w-8 h-8 text-[#516337] mx-auto mb-3" />

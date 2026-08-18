@@ -25,7 +25,7 @@ const teamMembers = [
     nombre: "Lic. Jose Tambo",
     rol: "Director Ejecutivo",
     area: "Presidente Ejecutivo",
-    image: "/images/jose_tambo.png",
+    image: "/images/jose_tambo.jpeg",
     bio: "LIDERAZGO INSTITUCIONAL Y DIRECCIÓN DE PROYECTOS INTEGRALES DE IMPACTO SOCIAL EN BOLIVIA.",
   },
   {
@@ -39,7 +39,7 @@ const teamMembers = [
     nombre: "Ing. Tupac Lima Chuquimia",
     rol: "Coordinador en Desarrollo Productivo",
     area: "Tecnología Productiva",
-    image: "/images/tupac_lima.png",
+    image: "/images/tupac_lima.jpeg",
     bio: "INNOVACIÓN Y ARTICULACIÓN DE TECNOLOGÍAS PRODUCTIVAS EN COMUNIDADES URBANAS Y RURALES.",
   },
   {
@@ -57,30 +57,35 @@ const teamMembers = [
     bio: "ASISTENCIA Y MARCO REGULATORIO NORMATIVO EN PROYECTOS SOCIALES E INSTITUCIONALES.",
   },
   {
-    nombre: "Dra. Ana Ramos",
-    rol: "Responsable de Investigación",
-    area: "Investigación",
-    image: "/community-development-people-working-together-bolivia.png",
-    bio: "DIAGNÓSTICOS TÉCNICOS Y ESTUDIOS DE IMPACTO TERRITORIAL EN EL DEPARTAMENTO DE LA PAZ.",
+    nombre: "Lic. Gabriel Vera",
+    rol: "Responsable de la Red de Voluntarios",
+    area: "Red de Voluntarios",
+    image: "/images/Gabriel_Vera.jpeg",
+    bio: "COORDINACIÓN, ARTICULACIÓN Y GESTIÓN ACTIVA DE LA RED DE VOLUNTARIOS EN ACCIONES COMUNITARIAS.",
   },
   {
-    nombre: "Lic. Carlos Pinto",
-    rol: "Coordinador Territorial",
-    area: "Desarrollo Territorial",
-    image: "/diverse-community-people-bolivia-population-group.png",
-    bio: "VINCULACIÓN DIRECTA CON LÍDERES COMUNITARIOS Y AUTORIDADES LOCALES EN CAMPO.",
+    nombre: "Lic. Paola Guachalla",
+    rol: "Coordinadora de Comunicaciones y Difusión",
+    area: "Comunicaciones y Difusión",
+    image: "/images/Paola_Guachalla.jpeg",
+    bio: "ESTRATEGIAS DE COMUNICACIÓN, DIFUSIÓN INSTITUCIONAL Y COBERTURA DE PROYECTOS TERRITORIALES.",
   },
 ]
 
 const allies = [
-
-  { nombre: "Aliado Institucional 1", image: "/aliados/WhatsApp Image 2026-07-16 at 8.39.31 PM.jpeg" },
-  { nombre: "Aliado Institucional 2", image: "/aliados/WhatsApp Image 2026-07-16 at 9.01.03 PM.jpeg" },
-  { nombre: "Aliado Institucional 3", image: "/aliados/WhatsApp Image 2026-07-16 at 8.39.24 PM.jpeg" },
-  { nombre: "Aliado 1", image: "/aliados/aliado-1.jpeg" },
-  { nombre: "Aliado 2", image: "/aliados/aliado-2.jpeg" },
-  { nombre: "Aliado 3", image: "/aliados/aliado-3.jpeg" },
-  { nombre: "Aliado 4", image: "/aliados/aliado-4.jpeg" },
+  { nombre: "Aliado Institucional 1", image: "/aliados/aliado-1.jpeg" },
+  { nombre: "Aliado Institucional 2", image: "/aliados/aliado-2.jpeg" },
+  { nombre: "Aliado Institucional 3", image: "/aliados/aliado-3.jpeg" },
+  { nombre: "Aliado Institucional 4", image: "/aliados/aliado-4.jpeg" },
+  { nombre: "Aliado Estratégico 5", image: "/aliados/WhatsApp Image 2026-07-16 at 8.39.31 PM.jpeg" },
+  { nombre: "Aliado Estratégico 6", image: "/aliados/WhatsApp Image 2026-07-16 at 9.01.03 PM.jpeg" },
+  { nombre: "Aliado Estratégico 7", image: "/aliados/WhatsApp Image 2026-08-16 at 9.49.40 PM.jpeg" },
+  { nombre: "Aliado Estratégico 8", image: "/aliados/WhatsApp Image 2026-08-16 at 9.49.51 PM.jpeg" },
+  { nombre: "Aliado Estratégico 9", image: "/aliados/WhatsApp Image 2026-08-16 at 9.50.00 PM.jpeg" },
+  { nombre: "Aliado Estratégico 10", image: "/aliados/WhatsApp Image 2026-08-16 at 9.51.13 PM.jpeg" },
+  { nombre: "Aliado Estratégico 11", image: "/aliados/WhatsApp Image 2026-08-16 at 9.51.24 PM.jpeg" },
+  { nombre: "Aliado Estratégico 12", image: "/aliados/WhatsApp Image 2026-08-16 at 9.51.42 PM.jpeg" },
+  { nombre: "Aliado Estratégico 13", image: "/aliados/WhatsApp Image 2026-08-16 at 9.51.53 PM.jpeg" },
 ]
 
 const marqueeAllies = [...allies, ...allies]
@@ -305,7 +310,7 @@ export default function EquipoAliadosSection() {
             </div>
             <style jsx>{`
               .ally-marquee-track {
-                animation: ally-marquee 28s linear infinite;
+                animation: ally-marquee 40s linear infinite;
               }
               .group\\/marquee:hover .ally-marquee-track {
                 animation-play-state: paused;

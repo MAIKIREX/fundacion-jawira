@@ -3,7 +3,6 @@
 import { useRef } from 'react'
 import { ShieldCheck, CheckCircle2, FileSearch, ArrowDown, Sparkles } from 'lucide-react'
 import { JawiraButton } from '@/components/ui/jawira-button'
-import RiverFlowLines from '@/components/ui/river-flow-lines'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 
@@ -95,13 +94,11 @@ export default function TransparenciaHeroSection() {
       data-header-theme="dark"
       className="relative min-h-[88vh] flex flex-col justify-between overflow-hidden bg-[#1B361F] text-white pt-28 pb-16 md:pt-36 md:pb-24 border-b border-white/10"
     >
-      {/* Fondo de Resplandor Radial & Líneas de Río */}
+      {/* Fondo de Resplandor Radial */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-radial-[circle_at_30%_30%] from-[#2C5233] via-[#1B361F] to-[#122415]" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#122415]/95 via-transparent to-[#1B361F]/40" />
       </div>
-
-      <RiverFlowLines className="opacity-25 z-0" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-between">
         
